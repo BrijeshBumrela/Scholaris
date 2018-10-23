@@ -2,6 +2,5 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('Result_Analysis.urls')),
+    path('', views.index, name='index'),
 ]
