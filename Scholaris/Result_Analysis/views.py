@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import UserLoginForm
+from .forms import UserLoginForm, UserRegistrationForm
 from django.contrib.auth import authenticate,login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -39,3 +39,22 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('index')
+
+
+def user_register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST or None)
+        if form.is_valid():
+            new_user = form.save()
+            new_user.save()
+            return redirect('index')
+    else:
+        form = UserRegistrationForm()
+
+    context = {
+        'form':form,
+    }
+    return render(request, 'base.html', context)
+
+
+
