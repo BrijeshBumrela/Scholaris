@@ -30,3 +30,4 @@ class UserRegistrationForm(forms.ModelForm):
         if password != confirm_password:
             self.add_error('password', 'Password Did Not Match')
 
+

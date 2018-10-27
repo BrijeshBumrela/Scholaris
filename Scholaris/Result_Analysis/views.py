@@ -31,7 +31,7 @@ def user_login(request):
         'form':form
     }
 
-    return render(request, 'login.html', context)
+    return render(request, 'register.html', context)
 
 
 
@@ -45,6 +45,7 @@ def user_register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST or None)
         if form.is_valid():
+            print('is it going here?')
             new_user = form.save()
             new_user.save()
             return redirect('index')
@@ -54,7 +55,7 @@ def user_register(request):
     context = {
         'form':form,
     }
-    return render(request, 'base.html', context)
+    return render(request, 'register.html', context)
 
 
 
