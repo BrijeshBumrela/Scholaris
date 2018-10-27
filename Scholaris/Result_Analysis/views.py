@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import UserLoginForm
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 
@@ -32,3 +32,10 @@ def user_login(request):
     }
 
     return render(request, 'login.html', context)
+
+
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('index')

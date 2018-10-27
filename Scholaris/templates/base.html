@@ -5,7 +5,11 @@
     </head>
     <body>
         <h2>Hi My Name is Brijesh</h2>
+        {% if req.user %}
 
+            <h2>Hi {{ req.user.username }}}</h2>
+
+        {% endif %}
         {% block content %}
 
         {% endblock %}
