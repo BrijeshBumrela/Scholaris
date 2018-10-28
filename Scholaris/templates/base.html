@@ -6,12 +6,15 @@
         <title>Hey There</title>
     </head>
     <body>
-        <h2>Hi My Name is Brijesh</h2>
-        {% if req.user %}
+        <p>
 
-            <h2>Hi {{ req.user.username }}}</h2>
-
+        {% if user.is_authenticated %}
+            {{ user.username }}
+        {% else %}
+            No One
         {% endif %}
+        </p>
+        <h1></h1>
         {% block content %}
 
         {% endblock %}

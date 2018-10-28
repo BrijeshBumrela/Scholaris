@@ -3,66 +3,59 @@ from .forms import UserLoginForm, UserRegistrationForm
 from django.contrib.auth import authenticate,login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from .models import Student
+from .models import Student, Teacher
 
 
 
 def index(request):
-    return render(request, 'base.html')
+    return render(request, 'landing.html')
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
 
 
-def user_login(request):
-    if request.method == 'POST':
-        form = UserLoginForm(request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-
-            user = authenticate(username=username, password=password)
-            if user:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponseRedirect(reverse('index'))
-                else:
-                    HttpResponse("User is not active")
-            else:
-                HttpResponse("User Not Found")
-    else:
-        form = UserLoginForm()
-
-    context = {
-        'form':form
-    }
-
-    return render(request, 'register.html', context)
-
-
-
-
-def user_logout(request):
-    logout(request)
-    return redirect('index')
-
-
-def _register(request, form):
-    if form.is_valid():
-        new_user = form.save()
-        new_student = Student(student=new_user)
-        new_user.save()
-        new_student.save()
-        return redirect('index')
-
-def user_register(request):
+def student_register(request):
     form = UserRegistrationForm(request.POST or None)
     if request.method == 'POST':
-        _register(request, form)
+        if form.is_valid():
+            new_user = form.save()
+            print(form)
+            new_student = Student(student=new_user)
+            new_user.save()
+            new_student.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username,password=raw_password)
+            login(request, user)
+            return redirect('dashboard')
     else:
         form = UserRegistrationForm()
 
     context = {
-        'form':form,
+        'form': form,
     }
-    return render(request, 'register.html', context)
+    return render(request, 'registration/register.html', context)
 
 
+def register(request):
+    form = UserRegistrationForm()
+    context = {'form': form}
+    return render(request, 'registration/register.html', context)
+
+def teacher_register(request):
+    form = UserRegistrationForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            new_user = form.save()
+            new_student = Teacher(teacher=new_user)
+            new_user.save()
+            new_student.save()
+            return redirect('index')
+    else:
+        form = UserRegistrationForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'registration/register.html', context)
 

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style>
+        .control-label {
+            display: none;
+        }
+    </style>
+
+    {% load widget_tweaks %}
+
+
+    <form action="{% url 'student_register' %}" method="POST">
+        {% csrf_token %}
+
+        <div>
+            {{ form.as_p }}
+        </div>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <br><br><br><br>
+
+{% endblock %}
