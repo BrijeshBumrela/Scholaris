@@ -3,6 +3,9 @@ from .forms import UserLoginForm, UserRegistrationForm
 from django.contrib.auth import authenticate,login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from .models import Student
+
+
 
 def index(request):
     return render(request, 'base.html')
