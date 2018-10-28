@@ -1,4 +1,4 @@
-#!/home/brijesh/Desktop/WebDev Projects/Scholaris/Scholaris/scholaris-env/bin/python
+#!/home/brijesh/Desktop/WebDevProjects/Scholaris/Scholaris/scholaris-env/bin/python
 
 import sys
 import getopt

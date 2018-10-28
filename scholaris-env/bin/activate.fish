@@ -36,7 +36,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/brijesh/Desktop/WebDev Projects/Scholaris/Scholaris/scholaris-env"
+set -gx VIRTUAL_ENV "/home/brijesh/Desktop/WebDevProjects/Scholaris/Scholaris/scholaris-env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

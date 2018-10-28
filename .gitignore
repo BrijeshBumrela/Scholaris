@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# env
+scholaris-env/
+
+
 # C extensions
 *.so
 
