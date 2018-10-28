@@ -44,14 +44,18 @@ def user_logout(request):
     return redirect('index')
 
 
+def _register(request, form):
+    if form.is_valid():
+        new_user = form.save()
+        new_student = Student(student=new_user)
+        new_user.save()
+        new_student.save()
+        return redirect('index')
+
 def user_register(request):
+    form = UserRegistrationForm(request.POST or None)
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST or None)
-        if form.is_valid():
-            print('is it going here?')
-            new_user = form.save()
-            new_user.save()
-            return redirect('index')
+        _register(request, form)
     else:
         form = UserRegistrationForm()
 

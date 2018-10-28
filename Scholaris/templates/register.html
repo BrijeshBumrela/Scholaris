@@ -1,10 +1,56 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="" method="POST">
+
+    <style>
+        .control-label {
+            display: none;
+        }
+    </style>
+
+    {% load widget_tweaks %}
+
+
+    <form action="{% url 'user_register' %}" method="POST">
         {% csrf_token %}
 
-        {{ form.as_p }}
+        <div>
+            <ul style="list-style:none;>
+                <li>
+                    {{ form.username }}
+                </li>
+                <li>{{ form.first_name }}</li>
+                <li>{{ form.last_name }}</li>
+                <li>{{ form.email }}</li>
+                <li>{{ form.password }}</li>
+                <li>{{ form.confirm_password }}</li>
+                <li>{{ form.admin_id }}</li>
+            </ul>
+        </div>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <br><br><br><br>
+
+
+    <form action="{% url 'user_register' %}" method="POST">
+        {% csrf_token %}
+
+        <div>
+            <ul style="list-style:none;">
+                <li>
+                    {{ form.username }}
+                </li>
+                <li>{{ form.first_name }}</li>
+                <li>{{ form.last_name }}</li>
+                <li>{{ form.email }}</li>
+                <li>{{ form.password }}</li>
+                <li>{{ form.confirm_password }}</li>
+                <li>{{ form.admin_id|add_class:'control-label'}}</li>
+            </ul>
+        </div>
+
         <input type="submit" value="Submit">
     </form>
 {% endblock %}

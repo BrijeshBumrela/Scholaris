@@ -8,9 +8,9 @@ class UserLoginForm(forms.Form):
 
 class UserRegistrationForm(forms.ModelForm):
 
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Enter Password'}))
-    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password'}))
-
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password'}))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}))
+    admin_id = forms.CharField()
 
     class Meta:
         model = User
@@ -29,5 +29,6 @@ class UserRegistrationForm(forms.ModelForm):
 
         if password != confirm_password:
             self.add_error('password', 'Password Did Not Match')
+
 
 
