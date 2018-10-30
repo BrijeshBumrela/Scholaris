@@ -1,1 +1,17 @@
 {% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        This is dashboard. You will get this page when you log in
+        <br>
+        Your name is
+        {% if user.is_authenticated %}
+            {{ user.username }}
+
+            <a href="{% url 'logout' %}">Logout</a>
+
+        {% else %}
+        {% endif %}
+    </div>
+
+{% endblock %}
