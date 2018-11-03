@@ -7,7 +7,7 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(label="", widget=forms.PasswordInput)
 
 
-class UserRegistrationForm(UserCreationForm):
+class TeacherRegistrationForm(UserCreationForm):
 
     first_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=False)
@@ -26,7 +26,6 @@ class UserRegistrationForm(UserCreationForm):
             'admin_id'
         )
 
-
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get('password')
@@ -42,4 +41,34 @@ class UserRegistrationForm(UserCreationForm):
         if admin_id != '12345':
             print('Yes it is right')
             self.add_error('admin_id', 'Admin id does not match')
+
+
+class StudentRegistrationForm(UserCreationForm):
+
+    first_name = forms.CharField(max_length=30, required=False)
+    last_name = forms.CharField(max_length=30, required=False)
+    email = forms.EmailField(max_length=254,required=True)
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password1',
+            'password2',
+        )
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        confirm_password = cleaned_data.get('confirm_password')
+
+        print('did clean run?')
+
+        if password != confirm_password:
+            print('are password not equal?')
+            self.add_error('password', 'Password Did Not Match')
 

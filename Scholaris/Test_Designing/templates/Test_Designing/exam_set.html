@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+<div>
+    <form method="post" action="{% url 'submit' %}">
+        {% csrf_token %}
+          <fieldset>
+          <legend>Question Details</legend>
+
+          <div>
+            {{ question_form.management_form }}...........1
+
+            {% for question in question_form %}............2
+                <div class="link-formset">...................3
+                    {{ question.as_p }}..........................4
+                </div>
+            {% endfor %}
+
+          </div>
+
+
+        </fieldset>
+
+     <script>..........................5
+    $('.link-formset').formset({
+        addText: 'Add Contact',
+        deleteText: 'Remove Contact'
+    });
+</script>

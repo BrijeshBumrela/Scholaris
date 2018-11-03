@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -18,10 +19,11 @@
 {#    {% endif %}#}
 
 
-    <form action="{% url 'student_register' %}" method="POST">
+    <form action="{% url 'result:teacher_register' %}" method="POST">
         {% csrf_token %}
 
         <div>
+            <h3>For Teacher</h3>
             {{ form.as_p }}
         </div>
 
@@ -32,10 +34,11 @@
     <br><br><br><br>
     <br><br><br><br>
 
-     <form action="{% url 'teacher_register' %}" method="POST">
+     <form action="{% url 'result:student_register' %}" method="POST">
         {% csrf_token %}
 
         <div>
+            <h3>For Student</h3>
             {{ form1.as_p }}
         </div>
 

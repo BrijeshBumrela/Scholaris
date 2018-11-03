@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import UserLoginForm, UserRegistrationForm
-from django.contrib.auth import authenticate,login, logout
+from .forms import StudentRegistrationForm, TeacherRegistrationForm
+from django.contrib.auth import authenticate,login
 from .models import Student, Teacher
 
 
@@ -13,14 +13,13 @@ def dashboard(request):
 
 
 def student_register(request):
-    form = UserRegistrationForm(request.POST or None)
-    form1 = UserRegistrationForm(request.POST or None)
+    form = TeacherRegistrationForm(request.POST or None)
+    form1 = StudentRegistrationForm(request.POST or None)
 
     if request.method == 'POST':
 
-        if form.is_valid():
-            new_user = form.save()
-            print(form)
+        if form1.is_valid():
+            new_user = form1.save()
             new_student = Student(student=new_user)
             new_user.save()
             new_student.save()
@@ -30,8 +29,8 @@ def student_register(request):
             login(request, user)
             return redirect('result:dashboard')
     else:
-        form = UserRegistrationForm()
-        form1 = UserRegistrationForm()
+        form = TeacherRegistrationForm()
+        form1 = StudentRegistrationForm()
 
     context = {
         'form': form,
@@ -41,29 +40,32 @@ def student_register(request):
 
 
 def register(request):
-    form = UserRegistrationForm()
-    form1 = UserRegistrationForm()
-    context = {'form': form, 'form1': form1}
+    form = TeacherRegistrationForm()
+    form1 = StudentRegistrationForm()
+    context = {
+        'form': form,
+        'form1': form1
+    }
     return render(request, 'registration/register.html', context)
 
 def teacher_register(request):
-    form1 = UserRegistrationForm(request.POST or None)
-    form = UserRegistrationForm()
+    form = TeacherRegistrationForm(request.POST or None)
+    form1 = StudentRegistrationForm()
     if request.method == 'POST':
 
-        if form1.is_valid():
-            new_user = form1.save()
-            new_student = Teacher(teacher=new_user)
+        if form.is_valid():
+            new_user = form.save()
+            new_teacher = Teacher(teacher=new_user)
             new_user.save()
-            new_student.save()
-            username = form1.cleaned_data.get('username')
-            raw_password = form1.cleaned_data.get('password1')
+            new_teacher.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('result:dashboard')
     else:
-        form = UserRegistrationForm()
-        form1 = UserRegistrationForm()
+        form = TeacherRegistrationForm()
+        form1 = StudentRegistrationForm()
 
     context = {
         'form1': form1,
