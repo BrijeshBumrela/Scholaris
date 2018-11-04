@@ -1,31 +1,62 @@
-{% extends "base.html" %}
-{% load static from staticfiles %}
+{% load static %}
 
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/jquery.formset.js' %}"></script>
-<div>
-    <form method="post" action="{% url 'submit' %}">
-        {% csrf_token %}
-          <fieldset>
-          <legend>Question Details</legend>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Test</title>
+</head>
 
-          <div>
-            {{ question_form.management_form }}...........1
+<body>
 
-            {% for question in question_form %}............2
-                <div class="link-formset">...................3
-                    {{ question.as_p }}..........................4
-                </div>
+    {% if test_form.errorr or question_formset.errors %}
+        <p>NOT VALID</p>
+            {% for error in test_form.errors %}
+                {{ error }}
             {% endfor %}
+    {% endif %}
+    <br>
+    <br>
+    <form method="POST" action="{% url 'exam:design' %}">
+        <!-- Create A drop down containing all categories (hardcode it) -->
+        {% csrf_token %}
+        {{ test_form.as_p }}
+        <div>
+            {{ question_formset.management_form }}
+            {% for question in question_formset%}
+             <div class="link-formset">
+             <h3>Question No <span class="question_no">1</span></h3>
 
-          </div>
+             {% for error in question.errors %}
+                {{ error }}
+             {% endfor %}
+              {{ question.as_p }}
+            </div>
+            {% endfor %}
+        </div>
+        <input type="submit" value="CreateTest">
+    </form>
+</body>
 
-
-        </fieldset>
-
-     <script>..........................5
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
+<script type="text/javascript">
     $('.link-formset').formset({
-        addText: 'Add Contact',
-        deleteText: 'Remove Contact'
+        addText: 'Add Question',
+        deleteText: ' Remove Question',
+    });
+
+    document.querySelector('.add-row').addEventListener('click', function() {
+
+        console.log('Hi There');
+        let question_counter = 1;
+        questions = document.querySelectorAll('.question_no');
+        for (question of questions) {
+            console.log(question);
+            question.innerText = question_counter;
+            question_counter += 1;
+        }
     });
 </script>
+
+
+</html>
