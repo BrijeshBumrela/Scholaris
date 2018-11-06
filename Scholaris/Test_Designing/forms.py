@@ -1,9 +1,6 @@
 from django import forms
 from .models import *
 
-
-
-
 class QuestionForm(forms.ModelForm):
 
     class Meta:
@@ -17,9 +14,6 @@ class QuestionForm(forms.ModelForm):
             'text': forms.Textarea(attrs={'required':True}),
             'answer':forms.Select(attrs={'required':True})
         }
-
-
-
 
 
 class TestCreateForm(forms.ModelForm):

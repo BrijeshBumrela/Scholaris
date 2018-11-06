@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if request.user.student %}
+        {% for teacher in teacher_list %}
+            <li>{{ teacher.teacher.username }}</li>
+        {% endfor %}
+    {% else %}
+        <li>Chal Nikal</li>
+    {% endif %}
+{% endblock %}

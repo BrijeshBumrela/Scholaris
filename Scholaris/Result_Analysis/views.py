@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import StudentRegistrationForm, TeacherRegistrationForm
 from django.contrib.auth import authenticate,login
-from .models import Student, Teacher
+from .models import Student, Teacher, Course
 
 
 
@@ -23,11 +23,11 @@ def student_register(request):
             new_student = Student(student=new_user)
             new_user.save()
             new_student.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
+            username = form1.cleaned_data.get('username')
+            raw_password = form1.cleaned_data.get('password1')
             user = authenticate(username=username,password=raw_password)
             login(request, user)
-            return redirect('result:dashboard')
+            return redirect('result:course_list')
     else:
         form = TeacherRegistrationForm()
         form1 = StudentRegistrationForm()
@@ -62,7 +62,7 @@ def teacher_register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('result:dashboard')
+            return redirect('result:course_list')
     else:
         form = TeacherRegistrationForm()
         form1 = StudentRegistrationForm()
@@ -73,3 +73,10 @@ def teacher_register(request):
     }
     return render(request, 'registration/register.html', context)
 
+
+def course_list(request):
+    teacher_list = Teacher.objects.all()
+    context = {
+        'teacher_list':teacher_list
+    }
+    return render(request, 'Result_Analysis/course_list.html', context)
