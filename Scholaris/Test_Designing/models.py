@@ -1,12 +1,11 @@
 from django.db import models
 from Result_Analysis.models import Teacher
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
-from django.utils.text import slugify
 
 class Test(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
     exam_time = models.DateTimeField()
+    exam_duration = models.IntegerField(default=0)
+    total_marks = models.IntegerField()
 
 
 
@@ -37,6 +36,7 @@ class Question(models.Model):
     )
 
     answer = models.CharField(max_length=200, choices=OPTIONS)
+    mark = models.IntegerField()
 
     def __str__(self):
         return self.text

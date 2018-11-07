@@ -80,3 +80,21 @@ def course_list(request):
         'teacher_list':teacher_list
     }
     return render(request, 'Result_Analysis/course_list.html', context)
+
+def course(request):
+    if request.method == 'POST':
+        courses = request.POST.getlist('course')
+        student = Student.objects.get(student=request.user)
+
+        for course in courses:
+            get_course = Course.objects.get(name=course)
+            student.course.add(get_course)
+        student.save()
+
+
+        return redirect('result:dashboard')
+    course_list = Course.objects.all()
+    context = {
+        'course_list': course_list
+    }
+    return render(request, "Result_Analysis/course_set.html", context)
