@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import StudentRegistrationForm, TeacherRegistrationForm
 from django.contrib.auth import authenticate,login
 from .models import Student, Teacher, Course
+from django.http import HttpResponse
 
 
 
@@ -74,23 +75,36 @@ def teacher_register(request):
     return render(request, 'registration/register.html', context)
 
 
-def course_list(request):
-    teacher_list = Teacher.objects.all()
+def choose_course(request):
+    course_list = Course.objects.all()
     context = {
-        'teacher_list':teacher_list
+        'course_list':course_list
     }
     return render(request, 'Result_Analysis/course_list.html', context)
 
+def set_course_teacher(request):
+    if request.method == "POST":
+
+        selected_course = request.POST.get('course')
+        print(selected_course + ' jafhhjkasdhflksahfkljsahfdlkjsahdflkjhasldkfjhsakljdfhjsalkfhlfsdalk')
+        get_course = Course.objects.get(name=selected_course)
+        return HttpResponse('Done')
+    else:
+        print('Not freaking running')
+        return HttpResponse('Not done')
+
+
 def course(request):
     if request.method == 'POST':
-        courses = request.POST.getlist('course')
+        selected_courses = request.POST.getlist('course')
         student = Student.objects.get(student=request.user)
 
-        for course in courses:
-            get_course = Course.objects.get(name=course)
-            student.course.add(get_course)
+        for course in Course.objects.all:
+            if course in selected_courses:
+                student.course.add(get_course)
+            else:
+                student.course.remove(course)
         student.save()
-
 
         return redirect('result:dashboard')
     course_list = Course.objects.all()

@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if request.user.student %}
-        {% for teacher in teacher_list %}
-            <li>{{ teacher.teacher.username }}</li>
+    <form action="{% url 'result:set_course_teacher' %}" method="POST">
+    {% csrf_token %}
+        {% for course in course_list %}
+            <input type="radio" name="course" value="{{ course.name }}">{{ course.name }}
         {% endfor %}
-    {% else %}
-        <li>Chal Nikal</li>
-    {% endif %}
+        <input type="submit" value="Select">
+    </form>
+
 {% endblock %}

@@ -17,7 +17,7 @@
     <div>
 
         {% if not request.user.teacher.course %}
-            <a href="{% url 'result:course' %}">Set Course</a>
+            <a href="{% url 'result:choose_course' %}">Choose Course</a>
         {% elif request.user.student %}
             <a href="{% url 'result:course' %}">Select Course</a>
         {% else %}
