@@ -3,11 +3,29 @@ from .forms import QuestionForm, TestCreateForm
 from .models import *
 from Result_Analysis.models import Teacher
 from django.forms import formset_factory
+from django.contrib.auth.decorators import user_passes_test, login_required
+
+
+
+'''  Utility Functions   '''
+def check_teacher(user):
+    try:
+        Teacher.objects.get(teacher=user)
+        print('jflsfs')
+        return True
+    except:
+        print('lkjsdflsjflksjf')
+        return False
 
 def index(request):
     return render(request,'Test_Designing/exam.html')
 
 
+def exam_error(request):
+    return render(request, 'Test_Designing/exam/exam_error.html')
+
+@login_required(login_url='result:login')
+@user_passes_test(check_teacher, login_url='/test/error')
 def design(request):
     test_form = TestCreateForm()
     question_formset = formset_factory(QuestionForm)

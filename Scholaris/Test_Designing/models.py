@@ -1,5 +1,5 @@
 from django.db import models
-from Result_Analysis.models import Teacher
+from Result_Analysis.models import Teacher, Student
 
 class Test(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
@@ -40,6 +40,14 @@ class Question(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class StudentResult(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    test = models.ForeignKey(Test, on_delete=models.DO_NOTHING)
+    correct_ans = models.IntegerField(default=0)
+    wrong_ans = models.IntegerField(default=0)
+    marks = models.IntegerField(default=0)
 
 # @receiver(pre_save, sender=Question)
 # def pre_save_connection(sender, **kwargs):
