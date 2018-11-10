@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import StudentRegistrationForm, TeacherRegistrationForm
 from django.contrib.auth import authenticate,login
 from .models import Student, Teacher, Course
@@ -86,7 +86,6 @@ def set_course_teacher(request):
     if request.method == "POST":
 
         selected_course = request.POST.get('course')
-        print(selected_course + ' jafhhjkasdhflksahfkljsahfdlkjsahdflkjhasldkfjhsakljdfhjsalkfhlfsdalk')
         get_course = Course.objects.get(name=selected_course)
         return HttpResponse('Done')
     else:
@@ -112,3 +111,12 @@ def course(request):
         'course_list': course_list
     }
     return render(request, "Result_Analysis/course_set.html", context)
+
+def student_list_teacher(request):
+    teacherInstance = get_object_or_404(Teacher, pk=request.user.teacher.id)
+    getStudents = teacherInstance.followers.all()
+
+    context = {
+        'students': getStudents
+    }
+    return render(request, "Result_Analysis/my_students.html", context)

@@ -11,10 +11,8 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 def check_teacher(user):
     try:
         Teacher.objects.get(teacher=user)
-        print('jflsfs')
         return True
     except:
-        print('lkjsdflsjflksjf')
         return False
 
 def index(request):
@@ -23,6 +21,7 @@ def index(request):
 
 def exam_error(request):
     return render(request, 'Test_Designing/exam/exam_error.html')
+
 
 @login_required(login_url='result:login')
 @user_passes_test(check_teacher, login_url='/test/error')

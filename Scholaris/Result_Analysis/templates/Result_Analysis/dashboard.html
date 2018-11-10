@@ -3,13 +3,11 @@
 {% block content %}
     <div>
         This is dashboard. You will get this page when you log in
-        <br>
-        Your name is
-        {% if user.is_authenticated %}
-            {{ user.username }}
-
-            <a href="{% url 'result:logout' %}">Logout</a>
-
+        {% if request.user.teacher %}
+            <div class="container" style="border: 2px solid blue">
+                <p><a href="{% url 'result:student_list_teacher' %}">Your Tests</a></p>
+            </div>
+        {% elif request.user.student %}
         {% else %}
         {% endif %}
     </div>
