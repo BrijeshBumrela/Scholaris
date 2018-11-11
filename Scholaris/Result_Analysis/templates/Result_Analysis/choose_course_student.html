@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{% url 'result:course' %}" method="POST">
+        {% csrf_token %}
+{#        {% for course in course_list %}#}
+            <div>
+                <ul>
+                {% for course in course_list %}
+                   {% if course in request.user.student.course.all %}
+                        <input type="checkbox" name="course" value="{{ course.name }}" checked> - {{ course.name }}
+                   {% else %}
+                        <input type="checkbox" name="course" value="{{ course.name }}"> - {{ course.name }}
+                   {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+{#        {% endfor %}#}
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}

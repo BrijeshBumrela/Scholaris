@@ -16,12 +16,15 @@
     </ul>
     <div>
 
-        {% if not request.user.teacher.course %}
-            <a href="{% url 'result:choose_course' %}">Choose Course</a>
+        {% if request.user.teacher %}
+            <a href="{% url 'result:choose_course_teacher' %}">Choose Your Course</a>
+            <br><a href="{% url 'result:list_all_students' %}">List of All The Students</a>
+
         {% elif request.user.student %}
-            <a href="{% url 'result:course' %}">Select Course</a>
-        {% else %}
-            Your course is {{ request.user.teacher.course }}
+            <a href="{% url 'result:choose_course_student' %}">Choose Course</a>
+            <br><a href="{% url 'result:list_all_teachers' %}">List all the teachers</a>
+            <br><a href="{% url 'result:list_all_teachers_to_follow' %}">List all the teachers to follow</a>
+
         {% endif %}
 
 

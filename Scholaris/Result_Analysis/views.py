@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import StudentRegistrationForm, TeacherRegistrationForm
 from django.contrib.auth import authenticate,login
 from .models import Student, Teacher, Course
@@ -75,12 +75,48 @@ def teacher_register(request):
     return render(request, 'registration/register.html', context)
 
 
-def choose_course(request):
+def choose_course_student(request):
     course_list = Course.objects.all()
     context = {
         'course_list':course_list
     }
-    return render(request, 'Result_Analysis/course_list.html', context)
+    return render(request, 'Result_Analysis/choose_course_student.html', context)
+
+def choose_course_teacher(request):
+    course_list = Course.objects.all()
+    context = {
+        'course_list': course_list
+    }
+    return render(request, 'Result_Analysis/choose_course_teacher.html', context)
+
+def list_all_students(request):
+    std2 = Student.objects.all()
+    stud_list = []
+    for stud in std2:
+        stud_list.append(stud.student.username)
+    context = {
+        'all_students': stud_list
+    }
+    print(stud_list)
+    return render(request, 'Result_Analysis/list_all_students.html', context)
+
+def list_all_teachers(request):
+    teachers = Teacher.objects.all()
+    tea_list = []
+    for teacher in teachers:
+        tea_list.append(teacher.teacher.username)
+    context = {
+        'all_teachers': tea_list
+    }
+    return render(request, 'Result_Analysis/list_all_teachers.html', context)
+
+def list_all_teachers_to_follow(request):
+    teachers = Teacher.objects.all()
+    context = {
+        'all_teachers': teachers
+    }
+    return render(request, 'Result_Analysis/follow.html', context)
+
 
 def set_course_teacher(request):
     if request.method == "POST":
@@ -88,6 +124,9 @@ def set_course_teacher(request):
         selected_course = request.POST.get('course')
         print(selected_course + ' jafhhjkasdhflksahfkljsahfdlkjsahdflkjhasldkfjhsakljdfhjsalkfhlfsdalk')
         get_course = Course.objects.get(name=selected_course)
+        teacher = get_object_or_404(Teacher, pk=request.user.teacher.id)
+        teacher.course = get_course
+        teacher.save()
         return HttpResponse('Done')
     else:
         print('Not freaking running')
@@ -101,7 +140,7 @@ def course(request):
 
         for course in Course.objects.all:
             if course in selected_courses:
-                student.course.add(get_course)
+                student.course.add(course)
             else:
                 student.course.remove(course)
         student.save()
@@ -112,3 +151,18 @@ def course(request):
         'course_list': course_list
     }
     return render(request, "Result_Analysis/course_set.html", context)
+
+
+def follow(request):
+    if request.method == 'POST':
+        selected_teacher = request.POST.getlist('teacher')
+        student = Student.objects.get(student=request.user)
+        for teacher in Teacher.objects.all():
+            if teacher.teacher.username in selected_teacher:
+                teacher.followers.add(student)
+            else:
+                teacher.followers.remove(student)
+            teacher.save()
+        return HttpResponse('Done')
+
+    return HttpResponse('Nothing Found')
