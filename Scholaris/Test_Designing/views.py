@@ -17,6 +17,14 @@ def check_teacher(user):
         print('lkjsdflsjflksjf')
         return False
 
+def check_student(user):
+    try:
+        Student.objects.get(student=user)
+        return True
+    except:
+        return False
+
+
 def index(request):
     return render(request,'Test_Designing/exam.html')
 
@@ -72,3 +80,14 @@ def design(request):
     }
     return render(request, 'Test_Designing/exam_set.html', context)
 
+@login_required()
+@user_passes_test(check_student, login_url='/test/error')
+def list_all_test(request):
+    teacher_list = Teacher.objects.filter(followers=request.user.student)
+    test_list = []
+    for teacher in teacher_list:
+        test_list.extend(teacher.test_set.all())
+    context = {
+        'test_list':test_list
+    }
+    return render(request, 'Test_Designing/test_list.html', context)

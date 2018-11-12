@@ -19,7 +19,6 @@ urlpatterns = [
     path('course/',views.course, name='course'),
     path('set_course_teacher/', views.set_course_teacher, name='set_course_teacher'),
     path('list_all_students/', views.list_all_students, name='list_all_students'),
-    path('list_all_teachers/', views.list_all_teachers, name='list_all_teachers'),
     path('follow/', views.follow, name='follow'),
     path('list_all_teachers_to_follow/', views.list_all_teachers_to_follow, name='list_all_teachers_to_follow')
 ]

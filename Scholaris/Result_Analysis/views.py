@@ -100,16 +100,6 @@ def list_all_students(request):
     print(stud_list)
     return render(request, 'Result_Analysis/list_all_students.html', context)
 
-def list_all_teachers(request):
-    teachers = Teacher.objects.all()
-    tea_list = []
-    for teacher in teachers:
-        tea_list.append(teacher.teacher.username)
-    context = {
-        'all_teachers': tea_list
-    }
-    return render(request, 'Result_Analysis/list_all_teachers.html', context)
-
 def list_all_teachers_to_follow(request):
     teachers = Teacher.objects.all()
     context = {
