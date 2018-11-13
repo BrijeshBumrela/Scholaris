@@ -1,0 +1,20 @@
+{% extends "forum/question.html"  %}
+{% block title %} {{ post.title }} | Discussion Forum {% endblock %}
+{% block content %}
+
+
+    <div class="card">
+        <div class="card-body" >
+            <h3 class="card-title text-capitalize ">
+                    {{ post.title }}
+            </h3>
+            {{ post.body }}
+            <div class="card-text text-secondary">
+                By {{ post.author }} updated on {{ post.updated }}
+                <span class="text-right text-danger float-right">Answer </span>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
