@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+        .control-label {
+            display: none;
+        }
+    </style>
+
+    {% load widget_tweaks %}
+
+
+{#    {% if form.errors %}#}
+{#        {% for error in form.errors %}#}
+{#            {{ error }}#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+
+
+    <form action="{% url 'result:teacher_register' %}" method="POST">
+        {% csrf_token %}
+
+        <div>
+            <h3>For Teacher</h3>
+            {{ form.as_p }}
+        </div>
+
+        <input type="submit" value="Student">
+    </form>
+
+    <br><br><br><br>
+    <br><br><br><br>
+    <br><br><br><br>
+
+     <form action="{% url 'result:student_register' %}" method="POST">
+        {% csrf_token %}
+
+        <div>
+            <h3>For Student</h3>
+            {{ form1.as_p }}
+        </div>
+
+        <input type="submit" value="Teacher">
+    </form>
+
+    <br><br><br><br>
+
+{% endblock %}
