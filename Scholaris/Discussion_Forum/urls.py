@@ -7,5 +7,5 @@ urlpatterns = [
 
     path('', views.post_list, name="forum-post-list"),
     re_path('^question/(?P<id>\d+)/(?P<slug>[\w-]+)/$', views.question, name="forum-question"),
-
+    path('post_create/', views.post_create, name="post_create"),
 ]

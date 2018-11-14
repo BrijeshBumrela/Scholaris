@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from datetime import datetime
 from .models import Post
+from .forms import PostCreateForm
+
 
 # Create your views here.
 def post_list(request):
@@ -20,3 +22,19 @@ def question(request, id, slug):
         'post': post,
     }
     return render(request, "Discussion_Forum/question_view.html", context)
+
+def post_create(request):
+
+    if request.method == 'POST':
+        form = PostCreateForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+    else:
+        form = PostCreateForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'Discussion_Forum/post_create.html', context)

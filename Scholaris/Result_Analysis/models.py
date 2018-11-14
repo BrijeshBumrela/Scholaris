@@ -15,7 +15,7 @@ class Student(models.Model):
 class Teacher(models.Model):
     teacher = models.OneToOneField(User, on_delete=models.CASCADE)
     dob = models.DateField(blank=True, null=True)
-    photo= models.ImageField(blank=True, null=True)
+    photo = models.ImageField(blank=True, null=True)
 
 
     def __str__(self):
