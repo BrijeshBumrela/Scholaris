@@ -1,7 +1,33 @@
 <div>
     <ul>
         <li><a href="{% url 'forum:forum-post-list' %}">forum</a></li>
+        {% if request.user.teacher %}
+            <li>Hey Teacher</li>
+        {% elif request.user.student %}
+            <li>Hey Student</li>
+        {% else %}
+            <li>Hey UnLogged</li>
+        {% endif %}
+    </ul>
+
+    <ul>
+        <li><a href="{% url 'forum:index' %}">forum</a></li>
         <li><a href="{% url 'result:dashboard' %}">Dashboard</a></li>
         <li><a href="{% url 'exam:index' %}">Test</a></li>
     </ul>
+    <div>
+
+        {% if request.user.teacher %}
+            <a href="{% url 'result:choose_course_teacher' %}">Choose Your Course</a>
+            <br><a href="{% url 'result:list_all_students' %}">List of All The Students</a>
+
+        {% elif request.user.student %}
+            <br><a href="{% url 'exam:list_all_test' %}">List all the test</a>
+            <br><a href="{% url 'result:list_all_teachers_to_follow' %}">List all the teachers to follow</a>
+
+        {% endif %}
+
+
+    </div>
+
 </div>

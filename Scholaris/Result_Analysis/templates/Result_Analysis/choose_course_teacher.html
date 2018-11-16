@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{% url 'result:set_course_teacher' %}" method="POST">
+    {% csrf_token %}
+        {% for course in course_list %}
+            <input type="radio" name="course" value="{{ course.name }}">{{ course.name }}
+        {% endfor %}
+        <input type="submit" value="Select">
+    </form>
+
+{% endblock %}
