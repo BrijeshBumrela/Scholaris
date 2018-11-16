@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import QuestionForm, TestCreateForm
 from .models import *
 from Result_Analysis.models import Teacher
@@ -42,6 +42,8 @@ def design(request):
 
     if request.method == 'POST':
 
+        total_marks = 0
+
         test_form = TestCreateForm(request.POST)
         question_formset_post = question_formset(request.POST)
 
@@ -62,6 +64,11 @@ def design(request):
                 questionInstance = question.save(commit=False)
                 questionInstance.question = questionList
                 questionInstance.save()
+
+                total_marks = total_marks + questionInstance.mark
+
+            testList.total_marks = total_marks
+            testList.save()
 
 
 
@@ -91,3 +98,14 @@ def list_all_test(request):
         'test_list':test_list
     }
     return render(request, 'Test_Designing/test_list.html', context)
+
+
+def detail(request, id):
+    get_test = get_object_or_404(Test, id=id)
+    question_list = get_test.questionset.question_set.all()
+
+    context = {
+        'question_list':question_list
+    }
+
+    return render(request, 'Test_Designing/test_detail.html', context)

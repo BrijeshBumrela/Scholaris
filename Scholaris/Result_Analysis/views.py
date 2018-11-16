@@ -74,14 +74,6 @@ def teacher_register(request):
     }
     return render(request, 'registration/register.html', context)
 
-
-def choose_course_student(request):
-    course_list = Course.objects.all()
-    context = {
-        'course_list':course_list
-    }
-    return render(request, 'Result_Analysis/choose_course_student.html', context)
-
 def choose_course_teacher(request):
     course_list = Course.objects.all()
     context = {
@@ -121,27 +113,6 @@ def set_course_teacher(request):
     else:
         print('Not freaking running')
         return HttpResponse('Not done')
-
-
-def course(request):
-    if request.method == 'POST':
-        selected_courses = request.POST.getlist('course')
-        student = Student.objects.get(student=request.user)
-
-        for course in Course.objects.all:
-            if course in selected_courses:
-                student.course.add(course)
-            else:
-                student.course.remove(course)
-        student.save()
-
-        return redirect('result:dashboard')
-    course_list = Course.objects.all()
-    context = {
-        'course_list': course_list
-    }
-    return render(request, "Result_Analysis/course_set.html", context)
-
 
 def follow(request):
     if request.method == 'POST':

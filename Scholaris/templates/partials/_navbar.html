@@ -21,7 +21,6 @@
             <br><a href="{% url 'result:list_all_students' %}">List of All The Students</a>
 
         {% elif request.user.student %}
-            <a href="{% url 'result:choose_course_student' %}">Choose Course</a>
             <br><a href="{% url 'exam:list_all_test' %}">List all the test</a>
             <br><a href="{% url 'result:list_all_teachers_to_follow' %}">List all the teachers to follow</a>
 

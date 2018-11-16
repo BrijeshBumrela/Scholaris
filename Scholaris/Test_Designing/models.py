@@ -5,7 +5,7 @@ class Test(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
     time = models.DateTimeField()
     duration = models.IntegerField(default=0)
-    total_marks = models.IntegerField()
+    total_marks = models.IntegerField(default=0)
 
 
 
