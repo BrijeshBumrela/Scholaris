@@ -52,44 +52,34 @@
         <div class="row">
 
 
-            <div class="col col-md-2 bg-light text-dark p-md-4">
+            <div class="col-md-3 order-1 mb-5 mb-md-0 bg-light text-dark p-md-4">
+              <!-- refine by starts here-->
 
-            <p class="text ">Refine by:</p>
-            <!-- refine by starts here-->
-            <form action="" class="my-md-4">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
-                    Math
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                    <label class="form-check-label" for="defaultCheck2">
-                    Chemistry
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                    <label class="form-check-label" for="defaultCheck2">
-                    English
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                    <label class="form-check-label" for="defaultCheck2">
-                    History
-                    </label>
-                </div>
-                <br>
-                <button type="submit" class="btn btn-outline-dark">Submit</button>
-            </form>
+
+              <div class="border p-4 rounded mb-4">
+                    <div class="mb-4">
+                      <h3 class="mb-3 h6 text-uppercase text-black d-block">Refine by:</h3>
+                      <label for="s_sm" class="d-flex">
+                        <input type="checkbox" id="s_sm" class="mr-2 mt-1"> <span class="text-black">Math(5)</span>
+                      </label>
+                      <label for="s_md" class="d-flex">
+                        <input type="checkbox" id="s_md" class="mr-2 mt-1"> <span class="text-black">Chemistry(6)</span>
+                      </label>
+                      <label for="s_lg" class="d-flex">
+                        <input type="checkbox" id="s_lg" class="mr-2 mt-1"> <span class="text-black">English(4)</span>
+                      </label>
+                      <label for="s_lg" class="d-flex">
+                        <input type="checkbox" id="s_lg" class="mr-2 mt-1"> <span class="text-black">History(3)</span>
+                      </label>
+                    </div>
+                    <button type="submit" class="btn btn-outline-dark">Submit</button>
+                  </div>
                 <!-- refine by ends here-->
             </div>
 
 
 
-            <div class="col col-md-9">
+            <div class="col-md-9 order-2">
             <!-- buttons for post your question & search starts here-->
             <div class="row mt-md-3 mx-md-3">
 				<div class="mx-md-5">
@@ -101,17 +91,6 @@
 			</div>
             <!-- buttons for post your question & search ends here-->
 
-			<!---
-			<div class="card collapse" style="border:0px" >
-                <form action="/action_page.php">
-                    <div class="form-group">
-                      <label for="question">Post your Question:</label>
-                      <textarea class="form-control" rows="5" id="question" name="text" placeholder="What is your question?"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-			-->
             <!-- search block -->
 			<div class="input-group mb-3 collapse m-md-5" id="search-card">
 			  <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -131,34 +110,24 @@
             </div>
 
 
-			<!-- sort by starts here -->
-                <div class="card sort_by" style="">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="mr-auto p-2">
-                                <span class="text-right float-left">Your feed </span>
-                            </div>
-
-                            <div class="p-2">
-                                <span class="text-right "> Answers &nbsp;</span>
-                            </div>
-
-                            <div class="p-2">
-                                <div class="dropdown ">
-                                  <button type="button" class="btn btn-secodary dropdown-toggle" data-toggle="dropdown">
-                                    Sort By
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Name</a>
-                                    <a class="dropdown-item" href="#">Date</a>
-                                    <a class="dropdown-item" href="#">Relevance</a>
-                                  </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+      			<!-- sort by starts here -->
+            <div class="row m-5">
+              <div class="col-md-12">
+                <div class="float-md-left  pt-2"><h2 class="text-black h5">Your feed </h2></div>
+                <div class="d-flex">
+                  <div class="dropdown mr-1 ml-md-auto">
+                    <button type="button" class="btn btn-secodary dropdown-toggle" data-toggle="dropdown">
+                        Sort By
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Name</a>
+                        <a class="dropdown-item" href="#">Date</a>
+                        <a class="dropdown-item" href="#">Relevance</a>
+                      </div>
+                  </div>
                 </div>
+              </div>
+            </div>
             <!-- sort by ends here -->
 
             <!-- cards for post starts here -->
