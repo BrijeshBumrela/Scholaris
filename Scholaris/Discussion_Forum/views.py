@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
 from .models import Post
-from .forms import PostCreateForm
+from .forms import *
 from django.template.loader import render_to_string
 
 
@@ -14,8 +14,18 @@ def post_list(request):
     posts = Post.published.all()
     query = request.GET.get('q')
     print(query)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(posts, 5)
+    try:
+        numbers = paginator.page(page)
+    except PageNotAnInteger:
+        numbers = paginator.page(1)
+    except EmptyPage:
+        numbers = paginator.page(paginator.num_pages)
+
     context = {
         'posts':posts,
+        'numbers': numbers,
     }
 
     return render(request, 'Discussion_Forum/post_view.html', context)
@@ -72,6 +82,21 @@ def post_create(request):
         'form': form,
     }
     return render(request, 'Discussion_Forum/post_create.html', context)
+
+def post_edit(request, id):
+    post = get_object_or_404(Post, id)
+    if request.method == "POST":
+        form = PostEditForm(request.POST or None, instance=post)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(post.get_absolute_url())
+    else:
+        form = PostEditForm(instance=post)
+    context = {
+        'form': form,
+        'post': post,
+        }
+    return render(request, 'Discussion_Forum/post_edit.html', context)
 
 class PostsView(ListView):
     model = Post
