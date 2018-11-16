@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
 from .models import Post
 from .forms import PostCreateForm
+from django.template.loader import render_to_string
 
 
 # Create your views here.
@@ -33,7 +34,8 @@ def question(request, id, slug):
     return render(request, "Discussion_Forum/question_view.html", context)
 
 def upvote_post(request):
-    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    #post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post = get_object_or_404(Post, id=request.POST.get('id'))
 
     #is_upvoted = False
     if post.upvotes.filter(id=request.user.id).exists():
@@ -42,6 +44,16 @@ def upvote_post(request):
     else:
         post.upvotes.add(request.user)
         is_upvoted = True
+
+    context = {
+        'post': post,
+        'is_upvoted': is_upvoted,
+        'total_upvotes': post.total_upvotes(),
+    }
+
+    if request.is_ajax():
+        html = render_to_string('Discussion_Forum/upvotepost_section.html', context, request=request)
+        return JsonResponse({'form': html})
 
     return HttpResponseRedirect(post.get_absolute_url())
 
