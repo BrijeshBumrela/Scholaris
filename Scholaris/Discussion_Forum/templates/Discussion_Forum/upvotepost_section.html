@@ -1,0 +1,16 @@
+{{total_upvotes }} Upvote{{ total_upvotes|pluralize }}
+
+            <br><br>
+
+            {% if request.user.is_authenticated %}
+
+            <form action="{% url 'forum:upvote_post' %}" method = "post">
+                {% csrf_token %}
+                {% if is_upvoted %}
+                    <button type="submit" id="upvote" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-success mr-md-0">Upvoted!</button>
+                {% else %}
+                    <button type="submit" id="upvote" name="post_id" value="{{ post.id }}" class="btn btn-primary mr-md-0">Upvote</button>
+                {% endif %}
+
+            </form>
+            {% endif %}
