@@ -1,24 +1,46 @@
 {% extends "Discussion_Forum/post_list.html"  %}
 {% block content %}
-     {% for post in posts %}
 
-         <div class="card">
-            <div class="card-body" >
-                <h3 class="card-title text-capitalize ">
-                    <a href="{{ post.get_absolute_url }}" class="text-dark">
-                        {{ post.title }}
-                    </a>
+    <div class="infinite-container">
+         {% for post in posts %}
 
-                </h3>
-                {{ post.body }}
-                <div class="card-text text-secondary">
-                    By {{ post.author }} updated on {{ post.updated }}
-                    <span class="text-right text-danger float-right">Answer </span>
+             <div class="card">
+                <div class="card-body infinite-item" >
+                    <h3 class="card-title text-capitalize ">
+                        <a href="{{ post.get_absolute_url }}" class="text-dark">
+                            {{ post.title }}
+                        </a>
+
+                    </h3>
+                    {{ post.body }}
+                    <div class="card-text text-secondary">
+                        By {{ post.author }} updated on {{ post.updated }}
+                        <span class="text-right text-danger float-right">Answer </span>
+                    </div>
                 </div>
-            </div>
-         </div>
+             </div>
 
-     {% endfor %}
+         {% endfor %}
+    </div>
+
+    <div class="loading" style="display: none;">
+    Loading...
+    </div>
+
+  {% if page_obj.has_next %}
+    <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
+  {% endif %}
+
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+  </script>
 {% endblock content %}
-
 

@@ -6,9 +6,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('Result_Analysis.urls')),
+    #path('', include('Result_Analysis.urls')),
     path('forum/',include('Discussion_Forum.urls')),
-    path('test/', include('Test_Designing.urls'))
+    #path('test/', include('Test_Designing.urls'))
 ]
 
 if settings.DEBUG:

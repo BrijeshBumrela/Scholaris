@@ -3,7 +3,7 @@
 {% block content %}
 
 
-    <div class="card">
+     <div class="card">
         <div class="card-body" >
             <h3 class="card-title text-capitalize ">
                     {{ post.title }}
@@ -13,7 +13,21 @@
                 By {{ post.author }} updated on {{ post.updated }}
                 <span class="text-right text-danger float-right">Answer </span>
             </div>
+
+            <br>
+
+            <form action="{% url 'forum:upvote_post' %}" method = "post">
+                {% csrf_token %}
+                {% if is_upvoted %}
+                    <button type="submit" name="post_id" value="{{ post.id }}"class="btn btn-primary mr-md-0">Upvoted!</button>
+                {% else %}
+                    <button type="submit" name="post_id" value="{{ post.id }}"class="btn btn-primary mr-md-0">Upvote</button>
+                {% endif %}
+
+            </form>
         </div>
+
+
     </div>
 
 
