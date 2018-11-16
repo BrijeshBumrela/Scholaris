@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'Result_Analysis',
+    'Result_Analysis',
     'Discussion_Forum',
-    #'Test_Designing',
+    'Test_Designing',
     'widget_tweaks',
 ]
 
