@@ -1,12 +1,11 @@
 from django.db import models
-from Result_Analysis.models import Teacher
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
-from django.utils.text import slugify
+from Result_Analysis.models import Teacher, Student
 
 class Test(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
-    exam_time = models.DateTimeField()
+    time = models.DateTimeField()
+    duration = models.IntegerField(default=0)
+    total_marks = models.IntegerField(default=0)
 
 class QuestionSet(models.Model):
     question_list = models.OneToOneField(Test, on_delete=models.CASCADE)
@@ -35,9 +34,18 @@ class Question(models.Model):
     )
 
     answer = models.CharField(max_length=200, choices=OPTIONS)
+    mark = models.IntegerField(default=0)
 
     def __str__(self):
         return self.text
+
+
+class StudentResult(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    test = models.ForeignKey(Test, on_delete=models.DO_NOTHING)
+    correct_ans = models.IntegerField(default=0)
+    wrong_ans = models.IntegerField(default=0)
+    marks = models.IntegerField(default=0)
 
 # @receiver(pre_save, sender=Question)
 # def pre_save_connection(sender, **kwargs):
