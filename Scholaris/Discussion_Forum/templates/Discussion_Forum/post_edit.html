@@ -1,11 +1,9 @@
-{%  extends 'blog/base.html' %}
-{% block title %}{{ post.title }} |Edit{% end block %}
+{%  extends 'Discussion_Forum/base.html' %}
+{% block title %}{{ post.title }} |Edit{% endblock %}
 {% block content %}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="update" class="btn btn-success">
-
-
     </form>
 {% endblock %}

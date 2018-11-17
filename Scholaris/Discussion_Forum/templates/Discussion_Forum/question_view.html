@@ -11,20 +11,71 @@
             {{ post.body }}
             <div class="card-text text-secondary">
                 By {{ post.author }} updated on {{ post.updated }}
-                <span class="text-right text-danger float-right">Answer </span>
             </div>
             <br>
+
 
             <div id="upvote-section">
                 {% include 'Discussion_Forum/upvotepost_section.html' %}
             </div>
 
+            <div style="float: left;">
+                <button data-toggle="collapse" data-target="#ans-card" class="btn btn-outline-info justify-content-center" >Answer</button>
+            </div>
+            <div class="card collapse card-answer" id="ans-card">
+                <form action="">
+                    <div class="form-group">
+                        <label for="question">Answer:</label>
+                        <textarea class="form-control" rows="5" id="question" name="text" placeholder="Answer is"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+            {% if post.author == request.user %}
+                <div class="section1" style="float:right;">
+                    <a href="{% url 'forum:post_edit' id=post.id %}">
+                        <button type="button" class="btn btn-outline-success">Edit</button>
+                    </a>
+                    <a href="{% url 'forum:post_delete' id=post.id %}">
+                        <button type="button" class="btn btn-outline-danger" id="delete">Delete </button>
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+            <br><br>
+
+            <hr>
+                <h4 class="text ml-5">{{ comments.count }} Answer{{ comments|pluralize }}</h4>
+            <hr>
+
+            {% for comment in comments %}
+                <div class="card">
+                  <!-- Left-aligned media object -->
+                  <div class="media">
+
+                    <div class="media-body">
+                      <blockquote class="blockquote">
+                          <p class "mb-0"> {{ comment.content }} </p>
+                          <footer class="blockquote-footer">by <cite title="Source Title"> {{ comment.user | capfirst }}</cite></footer>
+                      </blockquote>
+                    </div>
+                  </div>
+
+                  <div id="updownvote-section">
+                     {% include 'Discussion_Forum/answerup-downvote.html' %}
+                  </div>
+
+                  <hr>
+                </div>
 
 
-        </div>
 
-
-    </div>
+                </div>
+                </div>
+            {% endfor %}
 
 
 {% endblock content %}

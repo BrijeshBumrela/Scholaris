@@ -1,0 +1,52 @@
+
+{% if request.user.is_authenticated %}
+
+    <div class="row">
+         <br><br><br>
+
+         <form action="{% url 'forum:updown_comment' comment.id %}" method="post">
+             {% csrf_token %}
+
+             {% if is_comment_upvoted %}
+                 {% if is_comment_downvoted %}
+                     <div class="ml-md-4">
+                         <button type="submit" id="comment_downvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
+                         <div  class="btn btn-general mx-md-0">{{ total_comment_downvotes }}</div>
+                     </div>
+                 {% endif %}
+                 <div class="ml-md-4">
+                     <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-success mr-md-0" ><i class="fas fa-thumbs-up"></i></button>
+                     <div  class="btn btn-success mx-md-0">{{ total_comment_upvotes }}</div>
+                 </div>
+
+             {% elif is_comment_downvoted %}
+                 {% if is_comment_upvoted %}
+                     <div class="ml-md-4">
+                         <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-up"></i></button>
+                         <div  class="btn btn-general mx-md-0">{{ total_comment_upvotes }}</div>
+                     </div>
+                 {% endif %}
+                 <div class="ml-md-4">
+                     <button type="submit" id="comment_downvote" name="comment_id" value="{{ comment.id }}" class="btn btn-danger mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
+                     <div  class="btn btn-general mx-md-0">{{ total_comment_downvotes }}</div>
+                 </div>
+
+             {% else %}
+
+                 <div class="ml-md-4">
+                         <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-up"></i></button>
+                         <div  class="btn btn-general mx-md-0">{{ total_comment_upvotes }}</div>
+                 </div>
+                 <div class="ml-md-4">
+                     <button type="submit" id="comment_downvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
+                     <div  class="btn btn-general mx-md-0">{{ total_comment_downvotes }}</div>
+                 </div>
+
+
+             {% endif %}
+
+         </form>
+    </div>
+
+
+{% endif %}
