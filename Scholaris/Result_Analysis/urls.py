@@ -9,7 +9,7 @@ app_name = 'result'
 urlpatterns = [
     path('', views.index, name='index'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('login/', auth_views.LoginView.as_view(template_name="registration/login.html  "), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), {'next_page': 'result:index'} , name='logout'),
     path('register/', views.register, name='register'),
     path('student_register/', views.student_register, name='student_register'),

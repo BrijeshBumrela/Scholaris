@@ -34,7 +34,7 @@ class Question(models.Model):
     )
 
     answer = models.CharField(max_length=200, choices=OPTIONS)
-    mark = models.IntegerField(default=0)
+    mark = models.IntegerField(default=1)
 
     def __str__(self):
         return self.text

@@ -100,7 +100,6 @@ def exam_form(request):
 @login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
 def exam(request):
-    #posts = User.objects.all()
     testid = request.POST['exam-name']
     posts = Question.objects.filter(question__question_list__id=testid)
     if posts.count() is 0:
@@ -116,33 +115,37 @@ def exam(request):
 
 @login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
-def result(request):
-    testid = 1
-    test = Test.objects.get(pk=testid)
-    posts = Question.objects.filter(question__question_list__id=testid)
-    total_questions = posts.count()
+def result(request, id):
+    test = Test.objects.get(id=id)
     student = Student.objects.get(student=request.user)
+    questions = test.questionset.question_set.all()
+
     correct = 0
     marks = 0
-    for p in posts:
-        ans = request.POST['qs-{}'.format(p.id)]
-        true_ans = p.answer
-        mark = p.mark
-        if ans is true_ans:
-            correct +=1
-            marks += 1*mark
+
+    for question in questions:
+        try:
+
+            ans = request.POST['qs-{}'.format(question.id)]
+            if ans == question.answer:
+                correct += 1
+                marks += question.mark
+        except:
+            pass
 
 
-    if(marks<0):
-        marks =0
-    wrong = total_questions-correct
+    print(correct)
+    print(marks)
+
+    wrong = len(questions) - correct
     StudentResult.objects.create(student=student, test=test, correct_ans=correct, wrong_ans=wrong, marks=marks)
+
     context = {
         'marks':marks,
         'correct_ans':correct,
-        'wrong_ans':wrong,
+        'wrong_ans':wrong
     }
-    return render(request,'Test_Designing/result.html',context)
+    return render(request,'Test_Designing/result.html', context)
 
 
 
@@ -164,9 +167,10 @@ def list_all_test(request):
 def detail(request, id):
     get_test = get_object_or_404(Test, id=id)
     question_list = get_test.questionset.question_set.all()
-
+    print(question_list)
     context = {
-        'question_list':question_list
+        'que_list':question_list,
+        'test':get_test
     }
 
-    return render(request, 'Test_Designing/test_detail.html', context)
+    return render(request, 'Test_Designing/test.html', context)

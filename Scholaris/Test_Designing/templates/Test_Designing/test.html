@@ -1,29 +1,29 @@
 {% extends 'Test_Designing/base.html'%}
 
 {% block exam %}
-    <form action="{% url 'exam:exam-result' %}" method="post">
+    <form action="{% url 'exam:result' test.id %}" method="post">
     {% csrf_token %}
     <h1>Test name</h1>
 
-    {% for post in posts %}
-        <h4>{{post.text}}</h4>
+    {% for que in que_list %}
+        <h4>{{que.text}}</h4>
 
         <ul style="list-style: none">
             <li>
-                <input type="radio" name="qs-{{post.id}}" value="1">
-                <label>{{post.option1}}</label>
+                <input type="radio" name="qs-{{que.id}}" value="1">
+                <label>{{que.option1}}</label>
             </li>
             <li>
-                <input type="radio" name="qs-{{post.id}}" value="2">
-                <label>{{post.option2}}</label>
+                <input type="radio" name="qs-{{que.id}}" value="2">
+                <label>{{que.option2}}</label>
             </li>
             <li>
-                <input type="radio" name="qs-{{post.id}}" value="3">
-                <label>{{post.option3}}</label>
+                <input type="radio" name="qs-{{que.id}}" value="3">
+                <label>{{que.option3}}</label>
             </li>
             <li>
-                <input type="radio" name="qs-{{post.id}}" value="4">
-                <label>{{post.option4}}</label>
+                <input type="radio" name="qs-{{que.id}}" value="4">
+                <label>{{que.option4}}</label>
             </li>
         </ul>
 
