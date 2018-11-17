@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from .forms import QuestionForm, TestCreateForm
-from .models import *
-from Result_Analysis.models import Teacher
+from Test_Designing.models import Test,QuestionSet,Question
+from Result_Analysis.models import Teacher,Student
+from django.contrib.auth.models import User
 from django.forms import formset_factory
+from django.http import HttpResponse
+
+import random
 
 def index(request):
     return render(request,'Test_Designing/exam.html')
@@ -54,3 +58,36 @@ def design(request):
     }
     return render(request, 'Test_Designing/exam_set.html', context)
 
+#exam_taking views starts here
+
+def exam(request):
+    #posts = User.objects.all()
+    testid = request.POST['exam-name']
+    posts = Question.objects.filter(question__question_list__id=testid)
+    if posts.count() is 0:
+        return HttpResponse('exam not found!')
+    else:
+        test = list(posts)
+        random.shuffle(test)
+        context = {
+            'posts': test,
+        }
+        return render(request,'Test_Designing/test.html',context)
+    #return HttpResponse('exam')
+
+
+def result(request):
+    testid = 1
+    posts = Question.objects.filter(question__question_list__id=testid)
+    correct = 0
+    for p in posts:
+        ans = request.POST['qs-{}'.format(p.id)]
+        true_ans = p.answer
+        if ans is true_ans:
+            correct +=1
+
+    return render(request,'Test_Designing/result.html',{'score':correct})
+
+
+def exam_form(request):
+    return render(request,'Test_Designing/quiz-form.html')

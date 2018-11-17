@@ -8,8 +8,6 @@ class Test(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
     exam_time = models.DateTimeField()
 
-
-
 class QuestionSet(models.Model):
     question_list = models.OneToOneField(Test, on_delete=models.CASCADE)
 
