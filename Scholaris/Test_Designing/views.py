@@ -167,7 +167,6 @@ def list_all_test(request):
 def detail(request, id):
     get_test = get_object_or_404(Test, id=id)
     question_list = get_test.questionset.question_set.all()
-    print(question_list)
     context = {
         'que_list':question_list,
         'test':get_test
