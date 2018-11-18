@@ -49,16 +49,12 @@ class Comment(models.Model):
     content   = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     upvotes   = models.ManyToManyField(User, related_name='comment_upvotes', blank=True)
-    downvotes = models.ManyToManyField(User, related_name='comment_downvotes', blank=True)
 
     def __str__(self):
         return '{}-{}'.format(self.post.title, str(self.user.username))
 
     def total_comment_upvotes(self):
         return self.upvotes.count()
-
-    def total_comment_downvotes(self):
-        return self.downvotes.count()
 
 
 

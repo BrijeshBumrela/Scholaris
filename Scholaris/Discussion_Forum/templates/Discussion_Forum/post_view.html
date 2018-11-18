@@ -13,13 +13,20 @@
                         </a>
 
                     </h3>
-                    {{ post.body }}
-                    <div class="card-text text-secondary">
-                        By {{ post.author }} updated on {{ post.updated }}
-                        <span class="text-right text-danger float-right">Answer </span>
+                    {{ post.body }}<br><br>
+
+                    <div class="card-text text-secondary float-right">
+                        By {{ post.author }} <br> updated on {{ post.updated }}
                     </div>
+                     <br><i class="fas fa-thumbs-up "></i>  {{ post.total_upvotes }} Upvote{{ post.total_upvotes|pluralize }}
                 </div>
              </div>
+
+            {% empty %}
+            <div class="container-fluid">
+                <br><br>
+                <h3>No Posts Found having search query "{{ request.GET.q }}"</h3>
+            </div>
 
         {% endfor %}
     </div>

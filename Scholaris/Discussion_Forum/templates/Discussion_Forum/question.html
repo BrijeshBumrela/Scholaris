@@ -20,7 +20,7 @@
         }
     </style>
   </head>
-  <body>
+  <body style="background-color: #f4f4f4">
 
     <header>
         <nav class="navbar navbar-expand-sm bg-info navbar-dark">
@@ -41,7 +41,7 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container" style="background-color: #f4f4f4">
 
     <div>
     {% block content %}{% endblock %}
@@ -82,7 +82,42 @@
                   },
               });
           });
+
+          $(document).on('submit', '.comment-form', function(event){
+              event.preventDefault();
+              console.log($(this).serialize());
+              $.ajax({
+                  type: 'POST',
+                  url: $(this).attr('action'),
+                  data: $(this).serialize(),
+                  dataType: 'json',
+                  success: function (response){
+                      $('.comment-section').html(response['form']);
+                  }, error: function(rs, e){
+                      console.log(rs,responseText);
+                  },
+              });
+          });
+
+
+
+
+
+
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
   </body>
 </html>

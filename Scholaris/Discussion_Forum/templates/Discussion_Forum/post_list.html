@@ -11,6 +11,7 @@
 	<link href="{% static 'Discussion_Forum/posts.css' %}" rel="stylesheet">
     <!-- animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <title>{%  block title %}Discussion Forum {%  endblock %}</title>
     <style>
@@ -45,38 +46,13 @@
         <div class="row">
 
 
-            <div class="col-md-3 order-1 mb-5 mb-md-0 bg-light text-dark p-md-4">
-              <!-- refine by starts here-->
 
-
-              <div class="border p-4 rounded mb-4">
-                    <div class="mb-4">
-                      <h3 class="mb-3 h6 text-uppercase text-black d-block">Refine by:</h3>
-                      <label for="s_sm" class="d-flex">
-                        <input type="checkbox" id="s_sm" class="mr-2 mt-1"> <span class="text-black">Math(5)</span>
-                      </label>
-                      <label for="s_md" class="d-flex">
-                        <input type="checkbox" id="s_md" class="mr-2 mt-1"> <span class="text-black">Chemistry(6)</span>
-                      </label>
-                      <label for="s_lg" class="d-flex">
-                        <input type="checkbox" id="s_lg" class="mr-2 mt-1"> <span class="text-black">English(4)</span>
-                      </label>
-                      <label for="s_lg" class="d-flex">
-                        <input type="checkbox" id="s_lg" class="mr-2 mt-1"> <span class="text-black">History(3)</span>
-                      </label>
-                    </div>
-                    <button type="submit" class="btn btn-outline-dark">Submit</button>
-                  </div>
-                <!-- refine by ends here-->
-            </div>
-
-
-
-            <div class="col-md-9 order-2">
+            <div class="col-md-12 order-2">
             <!-- buttons for post your question & search starts here-->
+
             <div class="row mt-md-3 mx-md-3">
-				<div class="mx-md-5">
-					<button data-toggle="collapse" data-target="#qs-card" class="btn btn-primary justify-content-center" >Post your question</button>
+                <div class="mx-md-5">
+                    <a href="{% url 'forum:post_create' %}" class="btn btn-primary justify-content-center" >Post your question</a>
 				</div>
 				<div class="mx-md-5">
 					<button data-toggle="collapse" data-target="#search-card" class="btn btn-primary justify-content-center" >search</button>
@@ -85,12 +61,14 @@
             <!-- buttons for post your question & search ends here-->
 
             <!-- search block -->
-			<div class="input-group mb-3 collapse m-md-5" id="search-card">
-			  <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <form>
+			<div class="input-group mb-3 collapse m-md-2" id="search-card">
+			  <input  class="form-control" type="search" placeholder="Search" aria-label="Search" name='q' aria-describedby="button-addon2">
 			  <div class="input-group-append">
-				<button class="btn btn-outline-secondary" type="button" id="button-addon2">Go</button>
+				<button class="btn btn-outline-secondary" type="submit" id="button-addon2">Go</button>
 			  </div>
 			</div>
+            </form>
 			<!-- post your question -->
             <div class="card collapse" id="qs-card">
                 <form action="">
@@ -104,6 +82,7 @@
 
 
       			<!-- sort by starts here -->
+            <!--
             <div class="row m-5">
               <div class="col-md-12">
                 <div class="float-md-left  pt-2"><h2 class="text-black h5">Your feed </h2></div>
@@ -120,7 +99,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- sort by ends here -->
 
             <!-- cards for post starts here -->
