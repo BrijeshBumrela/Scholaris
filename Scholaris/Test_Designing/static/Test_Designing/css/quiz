@@ -43,7 +43,7 @@
 .checkmark {
     position: absolute;
     top: 5px;
-    left: -18px;
+    left: 0;
     height: 25px;
     width: 25px;
     background-color: #eee;

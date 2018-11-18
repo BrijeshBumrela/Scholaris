@@ -28,7 +28,7 @@ def student_register(request):
             raw_password = form1.cleaned_data.get('password1')
             user = authenticate(username=username,password=raw_password)
             login(request, user)
-            return redirect('result:course_list')
+            return redirect('result:dashboard')
     else:
         form = TeacherRegistrationForm()
         form1 = StudentRegistrationForm()
@@ -63,7 +63,7 @@ def teacher_register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('result:course_list')
+            return redirect('result:dashboard')
     else:
         form = TeacherRegistrationForm()
         form1 = StudentRegistrationForm()

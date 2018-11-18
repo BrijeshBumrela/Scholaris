@@ -7,8 +7,6 @@ class Test(models.Model):
     duration = models.IntegerField(default=0)
     total_marks = models.IntegerField(default=0)
 
-
-
 class QuestionSet(models.Model):
     question_list = models.OneToOneField(Test, on_delete=models.CASCADE)
 
@@ -36,7 +34,7 @@ class Question(models.Model):
     )
 
     answer = models.CharField(max_length=200, choices=OPTIONS)
-    mark = models.IntegerField(default=0)
+    mark = models.IntegerField(default=1)
 
     def __str__(self):
         return self.text
