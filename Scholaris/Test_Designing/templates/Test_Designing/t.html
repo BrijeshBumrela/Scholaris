@@ -3,7 +3,7 @@
 {% block exam %}
     <script>
     var number = {{ no_of_qs }};
-    var timer_no = {{ timer }}*60;
+    var timer_no = {{ timer }};
     $(function(){
         text_qs(number);
         create(number);
@@ -18,13 +18,13 @@
     <div class="col-9">
         <h1 class="test-name">Test name</h1>
     </div>
-    <div class="col-3 m-auto">
+    <div class="col-3">
         <p id="demo1"></p>
     </div>
 </div>
 <div class="container-fluid mt-5 mb-5" >
     <div class="row">
-        <div class="col-3 order-2 mx-2 p-4 main ">
+        <div class="col-3 order-2 mx-2 p-4 main">
 			<div class="bg-secondary text-white pl-2 py-2 mb-5 mt-3" >
                 <h3>Progress Panel</h3>
             </div>
