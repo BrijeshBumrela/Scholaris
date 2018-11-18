@@ -1,0 +1,31 @@
+
+{% load static %}
+{% load widget_tweaks %}
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/navbar.css' %}">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+	<div class="body">
+	<nav>
+		<div>
+		<div class="menu">
+			<ul>
+				<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
+				<li ><a href="http://localhost:8000/#" class="menu-item">HOME</a></li>
+		 		<li><a href="http://localhost:8000/#about" class="menu-item">ABOUT</a></li>
+				<li><a href="http://localhost:8000/#contact" class="menu-item">CONTACT</a></li>
+				<li><a href="http://localhost:8000/#about-023" class="menu-item">DISCUSSION</a></li>
+				<li><a href="{% url 'result:login' %}" class="menu-item">lOGIN</a></li>
+				<li><a href="{% url 'result:register' %}" class="menu-item">REGISTER</a></li>
+				
+			</ul>
+			
+		</div>
+		</div>
+	</nav>
+</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+	

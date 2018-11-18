@@ -1,15 +1,40 @@
-<div>
-    <ul>
 
-        {% if request.user.teacher %}
-            <li>Hey Teacher</li>
-        {% elif request.user.student %}
-            <li>Hey Student</li>
-        {% else %}
-            <li>Hey UnLogged</li>
-        {% endif %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'result:dashboard' %}">Scholaris</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'result:dashboard' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'result:register' %}">
+            {% if request.user.is_authenticated %}
+
+            {% else  %}
+                Register
+            {% endif %}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'result:login' %}">
+            {% if request.user.is_authenticated %}
+                Logout
+            {% else  %}
+                Login
+            {% endif %}
+        </a>
+      </li>
     </ul>
+  </div>
+</nav>
 
+<div>
     <ul>
         <li><a href="{% url 'forum:forum-post-list' %}">forum</a></li>
         <li><a href="{% url 'result:dashboard' %}">Dashboard</a></li>
@@ -29,5 +54,8 @@
 
 
     </div>
+
+
+
 
 </div>

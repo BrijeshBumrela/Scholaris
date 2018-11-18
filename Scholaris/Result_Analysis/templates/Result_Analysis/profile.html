@@ -1,0 +1,103 @@
+{% extends 'Result_Analysis/base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'Result_Analysis/navbar2.html' %}
+
+<div style="background: #212226">
+
+	<div class="container" style="padding-top: 200px;background: #212226">
+		<div class="row" style="background:#212226;height: 600px;border-radius: 10px">
+			<div  class="col-sm-4" id="pro1">
+				{% if request.user.student %}
+					<img  width=250px height=250px style="border-radius: 50%" src="{{user.student.photo.url}}" >
+				{% endif %}
+				{% if request.user.teacher %}
+					<img  width=250px height=250px style="border-radius: 50%" src="{{user.teacher.photo.url}}" >
+				{% endif %}
+			</div>
+			<div class="col-sm-8" id="pro2">
+				<h4 style="color: #f4c613;text-transform: uppercase;">{{user.username}}</h4>
+				{% if request.user.teacher %}
+					<H6 style="color: #f4c613">teacher</H6><hr style="border-color:#f4c613">
+				{% endif %}
+				{% if request.user.student %}
+					<H6 style="color: #f4c613">student</H6><hr style="border-color:#f4c613">
+				{% endif %}
+				<span style="color: #f4c613">Firstname</span>
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				<span style="color: #f4f4f4">{{user.first_name}}</span><br><br>
+				<span style="color: #f4c613">Lastname</span>
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				<span style="color: #f4f4f4">{{user.last_name}}</span><br><br>
+				<span style="color: #f4c613">Email</span>
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				<span  style="color: #f4f4f4">{{user.email}}</span><br><br>
+				<button class='btn-general btn-profile' onclick="proedit()">EDIT PROFILE</button>
+			</div>
+
+			<div  class="col-sm-4" id="edit1">
+				{% if request.user.student %}
+					<img  width=250px height=250px style="border-radius: 50%" src="{{request.user.student.photo.url}}" >
+				{% endif %}
+				{% if request.user.teacher %}
+					<img  width=250px height=250px style="border-radius: 50%" src="{{request.user.teacher.photo.url}}" >
+				{% endif %}
+			</div>
+
+			<div  class="col-sm-8" id="edit2">
+				<H4 style="color: #f4c613">UPDATE PROFILE</H4><hr style="border-color:#f4c613">
+
+				<form method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					{% if request.user.teacher %}
+						<span style="color: #f4c613">FirstName:</span> 
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						{{u1_form.first_name}}<br><br>
+						<span style="color: #f4c613">LastName:</span>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						{{u1_form.last_name}}<br><br>
+						<span style="color: #f4c613">DateOfBirth:</span>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						{{p1_form.dob}}<br><br>
+						<span  style="color: #f4c613">
+                        {% if p1_form.photo %}
+						    {{p1_form.photo}}<br>
+                        {% endif %}
+                            </span>
+						{% endif %}
+
+					{% if request.user.student %}
+						<span style="color: #f4c613">FirstName  :</span>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						{{u_form.first_name}}<br><br>
+						<span style="color: #f4c613">LastName   :</span>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						{{u_form.last_name}}<br><br>
+						<span style="color: #f4c613">DateOfBirth:</span>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						{{p_form.dob}}<br><br>
+						<span  style="color: #f4c613">
+                            {{p_form.photo}}
+                        </span>
+
+                    {% endif %}
+					<button class='btn-general btn-profile' class="reg" type="submit">Update</button><br><br>
+
+				</form>
+				<button class='btn-general btn-profile'><a style="text-decoration: none;" href="{% url 'result:changepassword'%}">CHANGE PASSWORD</a></button>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+{% endblock %}
+<!--
+		<div class="row" style="background:#f4c613;height:50px;border-radius: 10px">
+			<div class="col-sm-12"  >
+
+			</div>
+			
+		</div>
+		-->	
