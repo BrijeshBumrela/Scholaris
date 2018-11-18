@@ -104,7 +104,6 @@ def set_course_teacher(request):
     if request.method == "POST":
 
         selected_course = request.POST.get('course')
-        print(selected_course + ' jafhhjkasdhflksahfkljsahfdlkjsahdflkjhasldkfjhsakljdfhjsalkfhlfsdalk')
         get_course = Course.objects.get(name=selected_course)
         teacher = get_object_or_404(Teacher, pk=request.user.teacher.id)
         teacher.course = get_course

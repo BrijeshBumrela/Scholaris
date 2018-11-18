@@ -11,7 +11,7 @@
 
     });
     </script>
-    <form action="{% url 'exam:exam-result' %}" method="post">
+    <form action="{% url 'exam:result' test.id %}" method="post">
     {% csrf_token %}
 
 <div class="row m-0">
