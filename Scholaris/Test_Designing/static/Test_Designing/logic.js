@@ -2,15 +2,24 @@ $(function(){
     var current_qs =1;
     var qs_attempted;
     var percentage = 0;
+
+    console.log($(".qs-text").value)
     progress(percentage);
     $('.carousel').carousel('pause')
 
     $("#prev").click(function(){
-        $('.carousel').carousel('prev')
+        if(get_current() != 1) {
+            $('.carousel').carousel('prev')
+        }
     });
 
     $("#next").click(function(){
-        $('.carousel').carousel('next')
+        if(get_current() != 10) {
+            $('.carousel').carousel('next')
+        }
+        else{
+            window.alert("Its the last question! Please click Submit")
+        }
     });
 
     $(".carousel-item").first().addClass("active")
@@ -76,8 +85,8 @@ function prog_count() {
 function create(num){
     var x =0,y=0;
     for(var i=0;i<num;i++){
-        btn = "<button onclick='change_qs("+i+");return false'  class='btn btn-info rounded-circle mx-2 py-2 px-3' id='btn-"+i+"'>"+(i+1)+"</button>";
-        $("#qs-panel").append(btn)
+        btn = "<button onclick='change_qs("+i+");return false'  class='btn btn-info rounded-circle mx-2 py-2 px-3 my-2' id='btn-"+i+"'>"+(i+1)+"</button>";
+        $("#qs-panel").append(btn);
         if((i+1)%4 == 0){
             $("#use").append("<br>")
         }
@@ -88,7 +97,11 @@ function create(num){
 
 var x = setInterval(function(){
 	timer_no--;
-	document.getElementById("demo1").innerHTML = timer_no;
+
+	var minutes = Math.floor(timer_no /60);
+	var seconds = Math.floor(timer_no % 60);
+
+	document.getElementById("demo1").innerHTML = minutes + "m " + seconds + "s ";
 
 	if ( timer_no< 0) {
         clearInterval(x);
@@ -103,11 +116,19 @@ var x = setInterval(function(){
 }
 
 function clear_ans(){
-     $('input[name=Choose]').attr('checked',false);
+     x = $(".active .qs-text").text();
+     var i =x[x.length - 1];
+     $('input[name=qs-'+i+']').attr('checked',false);
 }
 
 function shuff(num){
      for(var i=1;i<=num;i++){
         $('div#shuffle-'+i+' label').shuffle();
     }
+}
+
+function get_current(){
+     x = $(".active .qs-text").text();
+     var i = x.split(" ")
+     return parseInt(i[1])
 }
