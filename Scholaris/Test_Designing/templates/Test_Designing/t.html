@@ -8,7 +8,7 @@
         text_qs(number);
         create(number);
 
-
+        shuff(number);
     });
     </script>
     <form action="{% url 'exam:result' test.id %}" method="post">
@@ -62,7 +62,7 @@
                                 <h4>{{post.text}}</h4>
                             </div>
                             <div class="row py-3 pl-5 ml-1">
-                            <div class="col">
+                            <div class="col" id="shuffle-{{post.id}}">
 								<label class="container c">{{post.option1}}
 								  <input type="radio"  name="qs-{{post.id}}" value="1">
 								  <span class="checkmark"></span>

@@ -24,6 +24,28 @@ $(function(){
         console.log(percentage);
     })
 
+    $.fn.shuffle = function() {
+
+			var allElems = this.get(),
+				getRandom = function(max) {
+					return Math.floor(Math.random() * max);
+				},
+				shuffled = $.map(allElems, function(){
+					var random = getRandom(allElems.length),
+						randEl = $(allElems[random]).clone(true)[0];
+					allElems.splice(random, 1);
+					return randEl;
+			   });
+
+			this.each(function(i){
+				$(this).replaceWith($(shuffled[i]));
+			});
+
+			return $(shuffled);
+
+    };
+
+
 });
 
 function text_qs(num){
@@ -82,4 +104,10 @@ var x = setInterval(function(){
 
 function clear_ans(){
      $('input[name=Choose]').attr('checked',false);
+}
+
+function shuff(num){
+     for(var i=1;i<=num;i++){
+        $('div#shuffle-'+i+' label').shuffle();
+    }
 }
