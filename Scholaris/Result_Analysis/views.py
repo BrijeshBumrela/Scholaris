@@ -14,7 +14,7 @@ def dashboard(request):
 
 
 def student_register(request):
-    form = TeacherRegistrationForm(request.POST or None)
+    form = TeacherRegistrationForm(None)
     form1 = StudentRegistrationForm(request.POST or None)
 
     if request.method == 'POST':
@@ -28,7 +28,7 @@ def student_register(request):
             raw_password = form1.cleaned_data.get('password1')
             user = authenticate(username=username,password=raw_password)
             login(request, user)
-            return redirect('result:course_list')
+            return redirect('result:dashboard')
     else:
         form = TeacherRegistrationForm()
         form1 = StudentRegistrationForm()
@@ -63,7 +63,7 @@ def teacher_register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('result:course_list')
+            return redirect('result:dashboard')
     else:
         form = TeacherRegistrationForm()
         form1 = StudentRegistrationForm()
@@ -104,7 +104,6 @@ def set_course_teacher(request):
     if request.method == "POST":
 
         selected_course = request.POST.get('course')
-        print(selected_course + ' jafhhjkasdhflksahfkljsahfdlkjsahdflkjhasldkfjhsakljdfhjsalkfhlfsdalk')
         get_course = Course.objects.get(name=selected_course)
         teacher = get_object_or_404(Teacher, pk=request.user.teacher.id)
         teacher.course = get_course

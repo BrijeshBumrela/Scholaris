@@ -1,0 +1,71 @@
+
+
+
+.body{
+	font-family: 'Raleway';
+	background-color:#f4f4f4;
+}
+
+.header {
+	height: 400px;
+	width: 100%;
+	font-size: 40px;
+	font-family: 'Open Sans';
+	background-color: #212226; 
+	text-align: center;
+	padding:  120px;
+	color: #f4c613
+}
+
+
+
+
+.header h1{
+	height: 300px;
+	width: 100%;
+	font-size: 40px;
+	font-family: 'Open Sans';
+	background-color: #f4c613; 
+	text-align: center;
+	padding:  70px;
+	color: white;
+	margin-bottom: 0px; 
+}
+
+.marks{
+	color: #212226;
+	background-color: white;
+
+
+
+}
+
+.button {
+	border-radius: 28px;
+	font-size: 13px;
+	text-transform: uppercase;
+	margin:0 6px;
+	padding: 12px 46px 12px 46px;
+	-webkit-trasition: all .5s;
+	transition: all .5s;
+}
+
+.button:hover,
+.button:focus {
+	background-color: #f4c613;
+	color: #ffffff;
+	border :1px solid #f4c613;
+}
+
+
+.footer{
+	height: 200px;
+	width: 100%;
+	font-size: 40px;
+	font-family: 'Open Sans';
+	background-color: #212226; 
+	text-align: center;
+	padding:  120px;
+	color: #f4c613;
+	margin-top: 800px;
+}

@@ -1,0 +1,104 @@
+{% extends 'Test_Designing/base.html'%}
+
+{% block exam %}
+    <script>
+    var number = {{ no_of_qs }};
+    var timer_no = {{ timer }};
+    $(function(){
+        text_qs(number);
+        create(number);
+
+        shuff(number);
+    });
+    </script>
+    <form action="{% url 'exam:result' test.id %}" method="post">
+    {% csrf_token %}
+
+<div class="row m-0">
+    <div class="col-9">
+        <h1 class="test-name">Test name</h1>
+    </div>
+    <div class="col-3">
+        <p id="demo1"></p>
+    </div>
+</div>
+<div class="container-fluid mt-5 mb-5" >
+    <div class="row">
+        <div class="col-3 order-2 mx-2 p-4 main">
+			<div class="bg-secondary text-white pl-2 py-2 mb-5 mt-3" >
+                <h3>Progress Panel</h3>
+            </div>
+			<div class="my-4">
+				<h4 class="text">Progress</h4>
+			</div>
+			<div class="mb-5">
+				<div class="progress" style="height: 2rem;">
+					<div class="progress-bar bg-secondary progress-bar-striped progress-bar-animated active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%;">40%
+					</div>
+				</div>
+			</div>
+			<div class="my-4">
+				<h4 class="text">Question Panel</h4>
+			</div>
+
+
+            <div id="qs-panel"></div>
+        </div>
+        <div class="col-8 order-1 p-4 mr-4 ml-5 main">
+            <div id="Ex" class="carousel" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+
+            {% for post in posts %}
+
+        <div class="carousel-item">
+
+            <div class="bg-secondary text-white pl-2 py-2 mb-5 mt-3" >
+                <h3 class="qs-text">Question 1</h3>
+            </div>
+
+            <div class="container ">
+						<div class="qs-{{post.id}}">
+                            <div class="pl-2 mb-4">
+                                <h4>{{post.text}}</h4>
+                            </div>
+                            <div class="row py-3 pl-5 ml-1">
+                            <div class="col" id="shuffle-{{post.id}}">
+								<label class="container c">{{post.option1}}
+								  <input type="radio"  name="qs-{{post.id}}" value="1">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="container c">{{post.option2}}
+								  <input type="radio" name="qs-{{post.id}}" value="2">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="container c">{{post.option3}}
+								  <input type="radio" name="qs-{{post.id}}" value="3">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="container c">{{post.option4}}
+								  <input type="radio" name="qs-{{post.id}}" value="4">
+								  <span class="checkmark"></span>
+								</label>
+                            </div>
+                            </div>
+						</div>
+            </div>
+            </div>
+    {% endfor %}
+            <!-- added carsoul -->
+        </div></div>
+            <div class="row pl-5">
+
+                <button type="button" class="btn btn-outline-info m-3" id="prev">Previous</button>
+                <button type="button" class="btn btn-outline-secondary m-3" id="mnext">Mark for review & next</button>
+                <button type="button" class="btn btn-outline-success m-3 pr-4 pl-4" id="next">Next</button>
+                <button type="button" class="btn btn-outline-warning m-3" id="cls_ans">Clear Answer</button>
+                <input type="submit" value="Finish" class="btn btn-outline-primary m-3 pr-4 pl-4">
+            </div>
+
+        </div>
+    </div>
+</div>
+</form>
+
+{% endblock %}

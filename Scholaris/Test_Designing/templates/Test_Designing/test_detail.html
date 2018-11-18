@@ -2,10 +2,12 @@
 
 {% block content %}
     <div>
-        {% for question in question_list %}
-            <div>
-                {{ question.text}}
-            </div>
-        {% endfor %}
+        <form action="{% url 'exam:result' test.id %}">
+            {% for question in question_list %}
+                <div>
+                    {{ question.text}}
+                </div>
+            {% endfor %}
+        </form>
     </div>
 {% endblock %}
