@@ -4,31 +4,38 @@
     <form action="{% url 'exam:exam-result' %}" method="post">
     {% csrf_token %}
     <h1>Test name</h1>
-
+    <div id="Ex" class="carousel" data-ride="carousel">
+	  <div class="carousel-inner" role="listbox">
     {% for post in posts %}
-        <h4>{{post.text}}</h4>
 
-        <ul style="list-style: none">
-            <li>
-                <input type="radio" name="qs-{{post.id}}" value="1">
-                <label>{{post.option1}}</label>
-            </li>
-            <li>
-                <input type="radio" name="qs-{{post.id}}" value="2">
-                <label>{{post.option2}}</label>
-            </li>
-            <li>
-                <input type="radio" name="qs-{{post.id}}" value="3">
-                <label>{{post.option3}}</label>
-            </li>
-            <li>
-                <input type="radio" name="qs-{{post.id}}" value="4">
-                <label>{{post.option4}}</label>
-            </li>
-        </ul>
+        <div class="carousel-item">
+            <div class="qs-{{post.id}}" >
+                <h4>{{post.text}}</h4>
 
+
+                <label class="container">{{post.option1}}
+                  <input type="radio" name="qs-{{post.id}}" value="1">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">{{post.option2}}
+                  <input type="radio" name="qs-{{post.id}}" value="2">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">{{post.option3}}
+                  <input type="radio" name="qs-{{post.id}}" value="3">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">{{post.option4}}
+                  <input type="radio" name="qs-{{post.id}}" value="4">
+                  <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
     {% endfor %}
+      </div>
+    </div>
     <input type="submit" value="submit">
     </form>
 
 {% endblock %}
+
