@@ -64,4 +64,6 @@ border :1px solid #f4c613;
 	padding:  120px;
 	color: #f4c613;
 
+.post_form {
+    background: red;
 }
