@@ -1,19 +1,19 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
-from .models import Post
+from .models import *
 from .forms import *
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 def post_list(request):
-    posts = Post.published.all()
+    posts = Post.published.all().order_by('-updated')
     query = request.GET.get('q')
-    print(query)
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 5)
     try:
@@ -31,20 +31,57 @@ def post_list(request):
     return render(request, 'Discussion_Forum/post_view.html', context)
 
 def question(request, id, slug):
-    #user = User.objects.get(id=id)
+    # user = User.objects.get(id=id)
     post = get_object_or_404(Post, id=id, slug=slug)
+    comments = Comment.objects.filter(post=post).order_by('-id')
+    is_comment_upvoted = []
+    is_comment_downvoted = []
+    comment_upvotes = []
+    comment_downvotes = []
+
     is_upvoted = False
     if post.upvotes.filter(id=request.user.id).exists():
         is_upvoted = True
+
+    for comment in comments:
+
+        if comment.upvotes.filter(id=request.user.id).exists():
+            is_comment_upvoted = is_comment_upvoted.append(True)
+        else:
+            is_comment_upvoted = is_comment_upvoted.append(False)
+
+        if comment.downvotes.filter(id=request.user.id).exists():
+            is_comment_downvoted = is_comment_downvoted.append(True)
+        else:
+            is_comment_downvoted = is_comment_downvoted.append(False)
+
+        comment_upvotes = comment_upvotes.append(comment.total_comment_upvotes())
+        comment_downvotes = comment_downvotes.append(comment.total_comment_downvotes())
+
+
+
+
+    # if comments.comment_upvotes.filter(id=request.user.id).exists():
+    #     is_comment_upvoted = True
+
+
+
     context = {
         'post': post,
         'is_upvoted': is_upvoted,
         'total_upvotes': post.total_upvotes(),
+        'comments': comments,
+        'is_comment_upvoted': is_comment_upvoted,
+        'is_comment_downvoted': is_comment_downvoted,
+        'total_comment_upvotes': comment_upvotes,
+        'total_comment_downvotes': comment_downvotes,
     }
     return render(request, "Discussion_Forum/question_view.html", context)
 
+
+
+
 def upvote_post(request):
-    #post = get_object_or_404(Post, id=request.POST.get('post_id'))
     post = get_object_or_404(Post, id=request.POST.get('id'))
 
     #is_upvoted = False
@@ -84,7 +121,9 @@ def post_create(request):
     return render(request, 'Discussion_Forum/post_create.html', context)
 
 def post_edit(request, id):
-    post = get_object_or_404(Post, id)
+    post = get_object_or_404(Post, id=id)
+    if post.author != request.user:
+        raise Http404()
     if request.method == "POST":
         form = PostEditForm(request.POST or None, instance=post)
         if form.is_valid():
@@ -97,6 +136,41 @@ def post_edit(request, id):
         'post': post,
         }
     return render(request, 'Discussion_Forum/post_edit.html', context)
+
+def post_delete(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.user != post.author:
+        raise Http404
+    post.delete()
+
+    url: str = 'http://127.0.0.1:8000/forum'
+    return redirect(url)
+
+@login_required()
+def updown_comment(request, id):
+    comment = get_object_or_404(Comment, id=id)
+    print(comment)
+    if comment.upvotes.filter(id=request.user.id).exists():
+        comment.upvotes.remove(request.user)
+        is_comment_upvoted = False
+    else:
+        comment.upvotes.add(request.user)
+        is_comment_upvoted = False
+
+    if comment.downvotes.filter(id=request.user.id).exists():
+        comment.downvotes.remove(request.user)
+        is_comment_downvoted = False
+    else:
+        comment.downvotes.add(request.user)
+        is_comment_downvoted = False
+
+    attr = comment.post.id
+    attr2 = comment.post.slug
+    
+    url: str = 'http://127.0.0.1:8000/forum/question/' + str(attr) + '/' + str(attr2)
+
+    return HttpResponseRedirect(url)
+
 
 class PostsView(ListView):
     model = Post

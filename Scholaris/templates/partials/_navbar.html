@@ -1,6 +1,6 @@
 <div>
     <ul>
-        <li><a href="{% url 'forum:forum-post-list' %}">forum</a></li>
+
         {% if request.user.teacher %}
             <li>Hey Teacher</li>
         {% elif request.user.student %}
@@ -11,7 +11,7 @@
     </ul>
 
     <ul>
-        <li><a href="{% url 'forum:index' %}">forum</a></li>
+        <li><a href="{% url 'forum:forum-post-list' %}">forum</a></li>
         <li><a href="{% url 'result:dashboard' %}">Dashboard</a></li>
         <li><a href="{% url 'exam:index' %}">Test</a></li>
     </ul>
