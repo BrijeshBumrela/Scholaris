@@ -10,9 +10,6 @@
         <a class="nav-link" href="{% url 'result:dashboard' %}">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="{% url 'result:register' %}">
             {% if request.user.is_authenticated %}
 
@@ -22,13 +19,11 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'result:login' %}">
             {% if request.user.is_authenticated %}
-                Logout
+                <a class="nav-link" href="{% url 'result:logout' %}">Logout</a>
             {% else  %}
-                Login
+                <a class="nav-link" href="{% url 'result:login' %}">Login</a>
             {% endif %}
-        </a>
       </li>
     </ul>
   </div>
