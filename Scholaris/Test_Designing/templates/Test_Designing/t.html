@@ -2,6 +2,7 @@
 
 {% block exam %}
     <script>
+    var questions_order = [];
     var number = {{ no_of_qs }};
     var timer_no = {{ timer }}*60;
     $(function(){
@@ -84,17 +85,51 @@
 						</div>
             </div>
             </div>
+                <script>
+                    questions_order.push({{post.id}});
+                </script>
     {% endfor %}
             <!-- added carsoul -->
-        </div></div>
+                </div>
+            </div>
             <div class="row pl-5">
 
                 <button type="button" class="btn btn-outline-info m-3" id="prev">Previous</button>
                 <button type="button" class="btn btn-outline-secondary m-3" id="mnext">Mark for review & next</button>
                 <button type="button" class="btn btn-outline-success m-3 pr-4 pl-4" id="next">Next</button>
                 <button type="button" class="btn btn-outline-warning m-3" id="cls_ans">Clear Answer</button>
-                <input type="submit" value="Finish" class="btn btn-outline-primary m-3 pr-4 pl-4">
+                <button type="button" class="btn btn-outline-primary m-3 pr-4 pl-4 "  data-toggle="modal" data-target="#myModal">Submit</button>
+                <!--
+                    <input type="submit" value="Finish" class="btn btn-outline-primary m-3 pr-4 pl-4 ">
+                -->
             </div>
+
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header" style="background-color: #f4c613;color: white">
+          <h4 class="modal-title">Do you really want to submit?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          Continue anyways
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <input type="submit" value="OK" class="btn  ">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
         </div>
     </div>
