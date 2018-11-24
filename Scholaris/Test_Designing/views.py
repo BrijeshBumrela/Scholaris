@@ -115,6 +115,8 @@ def exam(request):
     testid = request.POST['exam-name']
     posts = Question.objects.filter(question__question_list__id=testid)
     timer = Test.objects.get(pk=testid).duration
+
+
     if posts.count() is 0:
         return HttpResponse('exam not found!')
     else:
@@ -133,6 +135,7 @@ def exam(request):
 def result(request, id):
     test = Test.objects.get(id=id)
     student = Student.objects.get(student=request.user)
+
     questions = test.questionset.question_set.all()
 
     correct = 0
@@ -183,8 +186,15 @@ def list_all_test(request):
 def detail(request, id):
     get_test = get_object_or_404(Test, id=id)
     question_list = get_test.questionset.question_set.all()
+
+    student = Student.objects.get(student=request.user)
+
+    if (get_test.studentresult_set.filter(student=student).exists()):
+        return HttpResponse("You Can't Bruh !")
+
     if question_list.count() is 0:
         return HttpResponse('exam not found!')
+
     else:
         test = list(question_list)
         random.shuffle(test)
