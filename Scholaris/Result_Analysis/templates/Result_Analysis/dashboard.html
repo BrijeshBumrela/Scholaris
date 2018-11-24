@@ -8,7 +8,12 @@
                 <p><a href="{% url 'result:student_list_teacher' %}">Your Tests</a></p>
             </div>
         {% elif request.user.student %}
-        {% else %}
+        <br>
+        Your name is
+        {% elif request.user.teacher %}
+            {{ user.username }}
+
+            <a href="{% url 'result:logout' %}">Logout</a>
         {% endif %}
     </div>
 

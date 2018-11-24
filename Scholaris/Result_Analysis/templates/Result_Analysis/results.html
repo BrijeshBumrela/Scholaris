@@ -1,0 +1,195 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+
+	    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		 <title>results</title>
+		 <!--favicon -->
+		 <!-- <link rel="shortcut icon" href=""> -->
+		 
+		 <!-- Google Fonts -->
+		 <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600,700,800" rel="stylesheet">
+		 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+		 
+		 <!-- FontAwesome -->
+		 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+		 
+		 <!-- Bootstrap -->
+         <link rel="stylesheet" href="{% static 'Result_Analysis/css/bootstrap/bootstrap.css' %}">		 
+		 
+		 <!-- Custom CSS -->
+		 <link rel="stylesheet" href="{% static 'Result_Analysis/css/style.css' %}">
+		 
+		 <!-- Apex charts -->
+		 <link href="{% static 'Result_Analysis/css/apex/styles.css' %}" rel="stylesheet">
+		 
+		 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    	
+
+	    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link rel="stylesheet" href="{% static 'Result_Analysis/navbar2.css' %}">	
+	    
+	    
+		    	<script type="text/javascript">
+        	var percentage =  "{{percentage}}";
+        	console.log(percentage);
+        	var marks=[]
+        	{% for x in test_marks %}
+	  						marks.push("{{x}}");
+	  		{% endfor %}
+	  		console.log(marks);
+        </script>
+	
+	</head>
+	
+	<body>
+	    <!-- pre loader
+		<div id = "pre-loader" >   
+		
+			<div id="status" >
+			
+			 &nbsp;
+
+            </div>
+			
+		</div> 
+	     -->
+		
+		{% include 'Result_Analysis/navbar2.html' %}
+		<section id="results">
+			
+			<div class="content-box-md">
+				
+				<div class="container" style="background-color:#212226">
+					
+					<div class="row">
+						
+						<div class="col-md-12">
+						
+							<div class = "vertical-heading" >
+								
+								<h4> Statistics </h4>
+								<h2> Your <strong>Stats</strong><br> So Far </h2>
+								
+							</div>
+						
+						</div>
+						
+					</div>
+					
+					<div class="row">
+						
+						<div class="col-lg-4 col-md-6 col-sm-12">
+
+                        <!-- Stats Item 01 -->
+                        <div class="stats-item text-center">
+                            <i class="fas fa-book"></i>
+                            <h3 class="counter">
+                            	{% for a in students %}
+									{{a.course.count}}	
+								{% endfor %}
+							</h3>
+                            <p>No. of Courses</p>
+                        </div>
+
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+
+							<!-- Stats Item 02 -->
+							<div class="stats-item text-center">
+								<i class="fas fa-scroll"></i>
+								<h3 class="counter">{{results.count}}</h3>
+								<p>Total no. of tests</p>
+							</div>
+
+						</div>
+						<div class="col-lg-4 col-md-12 col-sm-12">
+
+							<!-- Stats Item 03 -->
+							<div class="stats-item text-center">
+								<i class="fa fa-trophy"></i>
+								<h3 class="counter">{{ high }}</h3>
+								<p>Highest Score</p>
+							</div>
+
+						</div>
+					
+							
+					</div>
+	
+				</div>
+			</div>	
+		</section>
+		
+		<section>
+			<div class="row">
+				<div style="margin-left: 20px" class="col-md-2">
+					<form method='POST'>
+						{% csrf_token %}
+						
+							{% for c in courses %}
+							<input type="radio" style="width:15px" name="select_course" value="{{ c }}" required="">{{c}}<br>
+	  						{% endfor %}
+						
+						<input type="submit" value="ok" name="">
+					</form>
+					{% for x in test_marks %}
+	  						{{x}}
+	  				{% endfor %}
+	  				<span>Percentage:{{percentage}}</span>
+				</div> 
+			    <div class="col-md-4">
+				
+					<div id='chart1'> 
+						<br>
+					</div>
+				
+				
+				</div> 
+				
+				<div class="col-md-4">
+				
+					<div id='chart2'> 
+						<br>
+					</div>
+				    
+				</div>
+		    </div>
+		</section>
+		
+		<!-- jQuery -->
+        <script src = "{% static 'Result_Analysis/js/jQuery.js' %}"> </script>
+		
+		<!-- bootstrap JS -->
+        <script src="{% static 'Result_Analysis/js/bootstrap/bootstrap.js' %}"> </script>	
+		
+		<!-- waypoints -->
+		<script src="{% static 'Result_Analysis/js/waypoints/jquery.waypoints.min.js' %}"></script>
+		
+		<!-- Counter -->
+		<script src="{% static 'Result_Analysis/js/counter/jquery.counterup.min.js' %}"></script>
+	
+		<script src="{% static 'Result_Analysis/js/apex/apexcharts.js' %}"></script>
+		<script src="{% static 'Result_Analysis/js/apex/chart1.js' %}"></script>
+	
+	
+        <script src = "{% static 'Result_Analysis/js/script.js' %}"> </script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        
+
+    </body>
+
+</html>

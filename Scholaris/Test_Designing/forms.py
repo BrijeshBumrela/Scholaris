@@ -21,7 +21,7 @@ class TestCreateForm(forms.ModelForm):
 
     class Meta:
         model = Test
-        exclude = ['teacher']
+        exclude = ['teacher','total_marks']
 
 
 

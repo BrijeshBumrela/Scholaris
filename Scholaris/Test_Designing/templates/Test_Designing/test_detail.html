@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <form action="{% url 'exam:result' test.id %}">
+            {% for question in question_list %}
+                <div>
+                    {{ question.text}}
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+{% endblock %}

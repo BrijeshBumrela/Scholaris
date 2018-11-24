@@ -1,0 +1,38 @@
+<div style="float: left;">
+                 <button data-toggle="collapse" data-target="#ans-card" class="btn btn-outline-info justify-content-center" >Answer</button>
+                </div> <br><br><br>
+                <div class="card collapse card-answer" id="ans-card">
+                    <form method="post" class="comment-form" action=".">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ comment_form.as_p }}
+                        </div>
+                        {% if request.user.is_authenticated %}
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        {% else %}
+                            <button type="submit" class="btn btn-primary" disabled>Submit</button>
+                        {% endif %}
+                    </form>
+                </div>
+
+               <hr>
+                    <h4 class="text ml-5">{{ comments.count }} Answer{{ comments|pluralize }}</h4>
+                <hr>
+                {% for comment in comments %}
+                    <div class="card">
+                        <!-- Left-aligned media object -->
+                        <div class="media">
+                            <div class="media-body">
+                                <blockquote class="blockquote" style="font-size: medium">
+                                    <p class "mb-0"> {{ comment.content }} </p>
+                                    <footer class="blockquote-footer">by <cite title="Source Title"> {{ comment.user | capfirst }}</cite></footer>
+                                </blockquote>
+                            </div>
+                        </div>
+
+                        <!--             {% include 'Discussion_Forum/answerup-downvote.html' %}
+                                  -->
+
+                        <hr>
+                    </div>
+                {% endfor %}

@@ -1,0 +1,144 @@
+/* =========================================
+    Default Theme
+    ----------------------------------------
+    Fonts: Raleway & Open Sans
+    ----------------------------------------
+    Colors:
+        Moon Yellow:         #f4c613
+        Grey:                #212226
+        White Smoke:         #f4f4f4
+        White:               #fff
+        Black:               #000   
+============================================ */
+
+
+
+
+
+
+body {
+	margin: 0;
+	padding: 0;
+	background:#f4f4f4 ;
+
+}
+
+h1,h2,h3,h4,h5,h6
+{
+	font-family:"Raleway",sans-serif;
+}
+p{
+	font-family: "Open Sans",sans-serif;
+	font-size: 13px;
+	
+	font-weight:400;
+	line-height:24px; 
+}
+.dash .cont{
+	padding-top: 100px;
+}
+.container-custom {
+	width: 80%;
+	margin: auto;
+
+}
+.ctn{
+	padding-top: 100px;
+
+}
+.dash1{
+	width: 100%;
+	vertical-align: center;
+	margin-top: 70px;
+	padding-top: 70px;
+}
+
+.dash-box {
+	text-align: center;
+	border: 2px #f4c613;
+	
+	padding: 10px 10px 10px 10px;
+/*	transform: rotateZ(0deg) translate(00px);
+	transition: 1s;
+*/
+	/*transition: background 1s, transform 1s 0.5s ease-in;  /* transition time, delay time */
+
+
+}
+
+.cont1{
+	background-color: #fff;
+	padding: 30px 30px 30px 30px;
+	vertical-align: center;
+}
+
+.cont2{
+	background-color: #f4f4f4;
+	padding: 30px 30px 30px 30px;
+	vertical-align: center;
+}
+
+
+.dash-box:hover {
+	background: #f4c613;
+	transition: all 400ms ease-in-out;
+	box-shadow:  5px 5px 8px #888888;
+	color: #fff;
+	/*transform: rotate(360deg);*/
+
+}
+
+.dash_stats {
+	margin-bottom: 20px;
+}
+
+
+.row {
+	margin: 20px;
+}
+
+.cont{
+	background-color:  #212226;
+	padding-top:70px;
+	
+	/*padding: 30px 30px 30px 30px;*/
+}
+
+.cont h1{
+	color: #f4c613;
+}
+
+.cont h2{
+	color: #fff;
+}
+
+.pnl{
+	margin-top: 30px;
+}
+
+.clr{
+	color: #f4c613;
+}
+
+.rowstyle{
+	background-color: #212226;
+	color: #212226;
+}
+
+.table{
+	font-family:"Raleway",sans-serif;
+}
+
+#button-addon2{
+    font-family: 'Raleway',sans-serif;
+    color: #000;
+    font-size: 12px;
+    margin: 0 6px;
+    padding: 12px 26px 12px 26px;
+    transition: all .5s;
+    background-color:  #f4f4f4;
+   }
+#button-addon2:hover{
+	color: #f4c613;
+	background-color: #212226;
+}

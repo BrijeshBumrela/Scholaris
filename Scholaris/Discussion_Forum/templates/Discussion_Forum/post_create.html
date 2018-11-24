@@ -1,0 +1,65 @@
+{% extends 'Discussion_Forum/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block styles %}
+
+    <link href="{% static 'forum.css' %}" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+  <form action="{% url 'forum:post_create' %}" method="POST">
+    {% csrf_token %}
+	<div class="container">
+		<div class="row" style="margin: 20px">
+        <div class="col-sm-12">
+        	<div class="form-group">
+            <label for="title" style="font-size: 20px;font-family: 'Raleway'">Title:</label>
+            {% render_field form.title class="form-control" rows='1' id='comment' style='font_size : 20px' placeholder='title..' %}
+            </div><br>
+          <div class="form-group">
+            <label for="title" style="font-size: 20px;font-family: 'Raleway'">Tag:</label>
+              {% render_field form.tag class="form-control" rows='1' id='comment' style='font_size : 20px' placeholder='tag..' %}
+          </div>
+        </div>
+   		 </div>
+		<div class="row" style="margin: 20px">
+        <div class="col-sm-12">
+
+    <div class="form-group">
+      <label for="post" style="font-family: 'Raleway';font-size: 20px;">Content:</label>
+        {% render_field form.body class="form-control" rows='1' id='comment' style='font_size : 20px'%}
+    </div>
+
+</div>
+</div>
+
+<div class="row" style="margin: 20px;height: 100px">
+        <div class="col-sm-12">
+        	<div class="btn-group" >
+    <button type="button" class="btn btn-secondary" style="font-size: 20px">Status</button>
+
+        {% render_field form.status class="btn btn-secondary dropdown-toggle dropdown-toggle-split"  %}
+    <div class="dropdown-menu">
+      <a class="dropdown-item" style="font-size: 20px;" href="#">Draft</a>
+      <a class="dropdown-item" style="font-size: 20px;" href="#">Published</a>
+    </div>
+  </div>
+
+</div>
+</div>
+        <div class="col-sm-12" style="text-align: center;">
+        			<input type="submit" class="button button-q" style="font-family: 'Raleway'" value="Create">
+        </div>
+
+</div>
+
+  </form>
+{% endblock %}
+

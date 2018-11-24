@@ -3,11 +3,9 @@ from Result_Analysis.models import Teacher, Student
 
 class Test(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
-    exam_time = models.DateTimeField()
-    exam_duration = models.IntegerField(default=0)
-    total_marks = models.IntegerField()
-
-
+    time = models.DateTimeField()
+    duration = models.IntegerField(default=0)
+    total_marks = models.IntegerField(default=0)
 
 class QuestionSet(models.Model):
     question_list = models.OneToOneField(Test, on_delete=models.CASCADE)
@@ -36,7 +34,7 @@ class Question(models.Model):
     )
 
     answer = models.CharField(max_length=200, choices=OPTIONS)
-    mark = models.IntegerField()
+    mark = models.IntegerField(default=1)
 
     def __str__(self):
         return self.text

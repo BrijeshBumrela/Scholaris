@@ -1,0 +1,63 @@
+{% extends 'Test_Designing/base.html'%}
+
+{% block exam %}
+    <form action="{% url 'exam:result' test.id %}" method="post">
+    {% csrf_token %}
+    <h1>Test name</h1>
+    <div id="Ex" class="carousel" data-ride="carousel">
+	  <div class="carousel-inner" role="listbox">
+    {% for post in posts %}
+
+        <div class="carousel-item">
+            <div class="qs-{{post.id}}" >
+                <h4>{{post.text}}</h4>
+
+
+    {% for que in que_list %}
+        <h4>{{que.text}}</h4>
+
+        <ul style="list-style: none">
+            <li>
+                <input type="radio" name="qs-{{que.id}}" value="1">
+                <label>{{que.option1}}</label>
+            </li>
+            <li>
+                <input type="radio" name="qs-{{que.id}}" value="2">
+                <label>{{que.option2}}</label>
+            </li>
+            <li>
+                <input type="radio" name="qs-{{que.id}}" value="3">
+                <label>{{que.option3}}</label>
+            </li>
+            <li>
+                <input type="radio" name="qs-{{que.id}}" value="4">
+                <label>{{que.option4}}</label>
+            </li>
+        </ul>
+
+                <label class="container">{{post.option1}}
+                  <input type="radio" name="qs-{{post.id}}" value="1">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">{{post.option2}}
+                  <input type="radio" name="qs-{{post.id}}" value="2">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">{{post.option3}}
+                  <input type="radio" name="qs-{{post.id}}" value="3">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">{{post.option4}}
+                  <input type="radio" name="qs-{{post.id}}" value="4">
+                  <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+    {% endfor %}
+      </div>
+    </div>
+    <input type="submit" value="submit">
+    </form>
+
+{% endblock %}
+
