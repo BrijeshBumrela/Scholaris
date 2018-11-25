@@ -103,13 +103,6 @@ def list_all_test(request):
     }
     return render(request, 'Test_Designing/test_list.html', context)
 
-
-@login_required(login_url='result:login')
-@user_passes_test(check_student, login_url='/test/error')
-def exam_form(request):
-    return render(request,'Test_Designing/quiz-form.html')
-
-
 @login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
 def exam(request):

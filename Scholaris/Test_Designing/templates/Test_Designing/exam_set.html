@@ -1,14 +1,19 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Create Test</title>
+    <link rel="stylesheet" href="{% static 'Test_Designing/css/datedropper.css' %}">
+    <link rel="stylesheet" href="{% static 'Test_Designing/css/custom-datedropper.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
+    <script src="{% static 'Test_Designing/datedropper.js' %}"></script>
 </head>
 
 <body>
+    <input class="datedropper-class" type="text">
 
-    {% if test_form.errorr or question_formset.errors %}
+    {% if test_form.errors or question_formset.errors %}
         <p>NOT VALID</p>
             {% for error in test_form.errors %}
                 {{ error }}
@@ -37,8 +42,7 @@
     </form>
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
+
 <script type="text/javascript">
     $('.link-formset').formset({
         addText: 'Add Question',
@@ -56,6 +60,8 @@
             question_counter += 1;
         }
     });
+    {#$(':input[type="number"]').dateDropper();#}
+    $('.datedropper-class').dateDropper();
 </script>
 
 
