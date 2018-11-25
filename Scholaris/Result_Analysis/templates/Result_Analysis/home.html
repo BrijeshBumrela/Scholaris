@@ -16,46 +16,40 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
       <!-- Basic SEO -->
     <meta name="description" content="Creative website development with html5, css3, jQuery & bootstrap framework">
     <meta name="keywords" content="HTML5, CSS3, JQuery, Bootstrap, Web Design, Web Development, Responsive website, Creative website">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="img/favicon/favicon.ico">
+    <link rel="shortcut icon" href="{% static 'Result_Analysis/home_img/favicon/favicon.ico' %}">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
     <!-- Fontawesome -->
-    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/font-awesome/css/font-awesome.min.css' %}">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
 
     <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="css/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl-carousel/owl.theme.default.min.css">
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/owl-carousel/owl.carousel.min.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/owl-carousel/owl.theme.default.min.css' %}">#}
 
     <!-- Responsive Tabs CSS -->
-    <link rel="stylesheet" href="css/responsive-tabs/responsive-tabs.min.css">
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/responsive-tabs/responsive-tabs.min.css' %}">#}
 
     <!-- Magnific Popup -->
-    <link rel="stylesheet" href="css/magnific-popup/magnific-popup.min.css">
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/magnific-popup/magnific-popup.min.css' %}">#}
 
     <!-- Animate CSS -->
-    <link rel="stylesheet" href="css/animate/animate.min.css">
-    <link rel="stylesheet" href="css/animate/animate.css">
+    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/animate/animate.css' %}">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/style.css' %}">
 
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/responsive.css' %}">
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/responsive.css' %}">#}
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 
@@ -74,8 +68,7 @@
                 <ul>
                     {% if request.user.teacher %}
                         <li><a class="menu-item" href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
-                        <li><a href="{% url 'result:choose_course_teacher' %}" class='menu-item'>COURSE</a></li>
-                        <li><a href="{% url 'result:teacher_profile' %}" class="menu-item">PROFILE</a></li>
+                        <li><a href="{% url 'result:profile2' %}" class="menu-item">PROFILE</a></li>
                         <li><a href="#" class="menu-item">FOLLOWERS</a></li>
                         <li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>
                         <li><a href="{% url 'result:list_all_teachers_to_follow' %}" class="menu-item">STUDENTS</a></li>
@@ -215,7 +208,7 @@
 					<div class="row wow fadeInRight" data-wow-duration="3s">
 					<div class="vertical-heading">
 							
-							<h2> <strong>Result</strong> Analasis</h2><br>
+							<h2> <strong>Result</strong> Analysis</h2><br>
 						</div>
 						<div id="about-right">
 							<p>

@@ -11,7 +11,7 @@ var options = {
             }
         },
     },
-    series: [percentage],
+    series: [ percentage ],
     labels: ['Your percentage'],
     fill:{
                 colors: ['#f4c613']
@@ -43,10 +43,10 @@ var options1 = {
                 colors: ['#f4c613']
             },
             series: [{
-                data: [90, 50, 78, 70, 40, 86, 60, 39, 72, 81]
+                data: marks
             }],
             xaxis: {
-                categories: ['Test1', 'Test2', 'Test3', 'Test4', 'Test5', 'Test6', 'Test7', 'Test8', 'Test9', 'Test10'],
+                categories: test
             },
             yaxis: {
                 

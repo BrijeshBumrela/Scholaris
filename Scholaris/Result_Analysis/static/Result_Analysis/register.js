@@ -1,9 +1,9 @@
 function function1() {
-	document.getElementById("student_register").style.display="block"
-	document.getElementById("teacher_register").style.display="none"
-	document.getElementById("teacher_img").style.display="block"
-	document.getElementById("stu_img").style.display="none"
-	document.getElementById("student_register").style.backgroundColor="#000"
+	document.getElementById("student_register").style.display="block";
+	document.getElementById("teacher_register").style.display="none";
+	document.getElementById("teacher_img").style.display="block";
+	document.getElementById("stu_img").style.display="none";
+	document.getElementById("student_register").style.backgroundColor="#000";
 	//document.getElementById("teacher_img").style.height="1000px"
 	//document.getElementById("teacher_img").style.paddingtop="0px"
 	//document.getElementById("stu_img").style.backgroundColor="white"

@@ -36,55 +36,83 @@
 		<link rel="stylesheet" href="{% static 'Result_Analysis/navbar2.css' %}">	
 	    
 	    
-		    	<script type="text/javascript">
+        <script type="text/javascript">
         	var percentage =  "{{percentage}}";
         	console.log(percentage);
-        	var marks=[]
-        	{% for x in test_marks %}
-	  						marks.push("{{x}}");
-	  		{% endfor %}
+        	var marks = {{test_marks}}
+        	var test=[];
+        	var tests = "test";
+        	var no_of_tests={{course_name.count}}+1;
+        	for(i=1;i<no_of_tests;i++){
+        		test.push(tests.concat(i))
+        	}
 	  		console.log(marks);
+        	console.log(percentage);
         </script>
-	
+
+		<style type="text/css">
+			.btn-general{
+			font-family:'Raleway',san-serif;
+			border-radius: 28px;
+			font-size:13px;
+			text-transform: uppercase;
+			padding:12px 46px 12px 46px;
+			margin:0px 6px;
+			-webkit-transition:all .5s;
+			transition: all .5s;
+
+		}
+		.btn-profile{
+			background-color : #f4f4f4;
+			color:#000;
+			border:1px solid #fff;
+		}
+		.btn-profile:hover,
+		.btn-profile:focus {
+			color: #fff;
+			background-color: #f4c613;
+			border:1px solid #f4c613;
+		}
+		</style>
 	</head>
-	
+
 	<body>
 	    <!-- pre loader
-		<div id = "pre-loader" >   
-		
+		<div id = "pre-loader" >
+
 			<div id="status" >
-			
+
 			 &nbsp;
 
             </div>
-			
-		</div> 
+
+		</div>
 	     -->
-		
+
 		{% include 'Result_Analysis/navbar2.html' %}
 		<section id="results">
-			
+
 			<div class="content-box-md">
-				
+
 				<div class="container" style="background-color:#212226">
-					
+
 					<div class="row">
-						
+
 						<div class="col-md-12">
-						
+
 							<div class = "vertical-heading" >
-								
+
 								<h4> Statistics </h4>
 								<h2> Your <strong>Stats</strong><br> So Far </h2>
-								
+
 							</div>
-						
+
 						</div>
-						
+
 					</div>
-					
+
 					<div class="row">
-						
+
 						<div class="col-lg-4 col-md-6 col-sm-12">
 
                         <!-- Stats Item 01 -->
@@ -92,7 +120,7 @@
                             <i class="fas fa-book"></i>
                             <h3 class="counter">
                             	{% for a in students %}
-									{{a.course.count}}	
+									{{a.course.count}}
 								{% endfor %}
 							</h3>
                             <p>No. of Courses</p>
@@ -119,30 +147,28 @@
 							</div>
 
 						</div>
-					
-							
+
+
 					</div>
-	
+
 				</div>
-			</div>	
+			</div>
 		</section>
-		
+
 		<section>
 			<div class="row">
 				<div style="margin-left: 20px" class="col-md-2">
+					{% if no_courses %}
 					<form method='POST'>
 						{% csrf_token %}
-						
+
 							{% for c in courses %}
-							<input type="radio" style="width:15px" name="select_course" value="{{ c }}" required="">{{c}}<br>
+							<input type="radio" style="width:15px" name="select_course" value="{{ c }}" required="" checked="">{{c}}<br>
 	  						{% endfor %}
-						
-						<input type="submit" value="ok" name="">
+
+						<input class='btn-general btn-profile' type="submit" value="ok" name="">
 					</form>
-					{% for x in test_marks %}
-	  						{{x}}
-	  				{% endfor %}
-	  				<span>Percentage:{{percentage}}</span>
+					{% endif %}
 				</div> 
 			    <div class="col-md-4">
 				
