@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 
 
 '''  Utility Functions   '''
+
 def check_teacher(user):
     try:
         Teacher.objects.get(teacher=user)
@@ -24,6 +25,9 @@ def check_student(user):
         return True
     except:
         return False
+
+'''        end          '''
+
 
 
 def index(request):

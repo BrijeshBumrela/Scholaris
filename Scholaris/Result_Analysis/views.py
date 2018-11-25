@@ -63,7 +63,7 @@ def teacher_register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('result:dashboard')
+            return redirect('result:choose_course_teacher')
     else:
         form = TeacherRegistrationForm()
         form1 = StudentRegistrationForm()
