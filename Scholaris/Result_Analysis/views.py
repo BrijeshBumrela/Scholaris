@@ -6,15 +6,31 @@ from django.http import HttpResponse
 from Test_Designing.models import StudentResult, Test
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from Discussion_Forum.models import Post
 
 
+'''             Utility Functions            '''
+
+def get_question():
+    return Post.published.all().order_by('-updated')[:5]
+
+
+'''                 """"""""""               '''
 
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('result:dashboard')
     return render(request, 'Result_Analysis/home.html')
+
 
 @login_required()
 def dashboard(request):
-    return render(request, 'Result_Analysis/dashboard1.html')
+    posts = get_question()
+    print(posts)
+    context = {
+        'posts':posts
+    }
+    return render(request, 'Result_Analysis/dashboard1.html', context)
 
 
 def student_register(request):

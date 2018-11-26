@@ -126,31 +126,15 @@
 									<th>Email</th>
 									<th>Question Text</th>
 								</tr>
-								<tr>
-									<td>PSVN Bhavani Shankar</td>
-									<td>psvn@gmail.com</td>
-									<td>I can speak really good Hindi</td>
-								</tr>
-								<tr>
-									<td>Raja Aluri</td>
-									<td>raja@gmail.com</td>
-									<td>I don't like new hostel</td>
-								</tr>
-								<tr>
-									<td>Naga Pranav</td>
-									<td>naga@gmail.com</td>
-									<td>Gaming Boss</td>
-								</tr>
-								<tr>
-									<td>D Chandrahaas</td>
-									<td>chandra@gmail.com</td>
-									<td>I like cooking</td>
-								</tr>
-								<tr>
-									<td>Brijesh Bumrela</td>
-									<td>brijesh@gmail.com</td>
-									<td>Finally someone whom I can play CS with</td>
-								</tr>							
+                                {% for post in posts %}
+                                        <tr>
+
+                                            <td>{{ post.author.username }}</td>
+                                            <td>{{ post.author.email }}</td>
+                                            <td><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></td>
+
+                                        </tr>
+                                {% endfor %}
 							</table>
 						</div>
 					</div>
