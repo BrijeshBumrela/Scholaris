@@ -1,17 +1,19 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Create Test</title>
     <link rel="stylesheet" href="{% static 'Test_Designing/css/datedropper.css' %}">
     <link rel="stylesheet" href="{% static 'Test_Designing/css/custom-datedropper.css' %}">
+    <link rel="stylesheet" href="{% static 'Test_Designing/css/jquery.timepicker.min.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
     <script src="{% static 'Test_Designing/datedropper.js' %}"></script>
+    <script src="{% static 'Test_Designing/jquery.timepicker.min.js' %}"></script>
 </head>
 
 <body>
-    <input class="datedropper-class" type="text">
 
     {% if test_form.errors or question_formset.errors %}
         <p>NOT VALID</p>
@@ -24,7 +26,16 @@
     <form method="POST" action="{% url 'exam:design' %}">
         <!-- Create A drop down containing all categories (hardcode it) -->
         {% csrf_token %}
-        {{ test_form.as_p }}
+        <div>
+            <p>
+                <label for="id_time">Time:</label>
+                {{ test_form.time|add_class:"timepicker" }}
+            </p>
+            <p><label for="id_duration">Duration:</label>
+                {{ test_form.duration|add_class:"datedropper-class" }}
+            </p>
+
+        </div>
         <div>
             {{ question_formset.management_form }}
             {% for question in question_formset%}
@@ -62,6 +73,12 @@
     });
     {#$(':input[type="number"]').dateDropper();#}
     $('.datedropper-class').dateDropper();
+
+    $('.timepicker').timepicker();
+    timeCalculator = document.querySelector('.timepicker');
+    console.log(timeCalculator.value);
+    actualTime = timeCalculator.value.slice(0, -2);
+    timeCalculator.textContent = actualTime
 </script>
 
 

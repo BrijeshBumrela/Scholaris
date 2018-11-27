@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <title>student list</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/stu.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+</head>
+
+<body class="body">
+{% include 'Result_Analysis/navbar2.html' %}
+
+
+ <div class="bg-image"></div>
+    <div class="bg-text">
+        <h1 style="font-size:50px;font-family: 'Raleway'">Student List</h1>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group" style="float: right;width: 40%">
+        
+                </div>
+            </div>
+        </div><br><br><br>
+        <div class="row" align="left">
+        <div class="col-sm-12">
+            <div style="margin-right: 10px">
+                <i class="fa fa-search" aria-hidden="true" style="font-size: 20px;margin-top: 5px"></i>
+                <button class="btn btn-secondary" style="color: black;font-family: 'Raleway'" onclick="sortTable()">Sort the Data</button>
+                <table class="table table-striped" id="myTable" style="font-size: 20px;font-family: 'Open Sans'">
+                    <thead>
+                        {% if count == 0 %}
+                            <tr>
+                                <td>No Students</td>
+                            </tr>
+                        {% else %}
+                            <thead>
+                            <tr>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                            </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                {% for student in students %}
+                                    <tr>
+                                        <td>{{ student.total_votes }}</td>
+                                        <td>{{ student.student.email }}</td>
+                                        <td>{{ student.student.last_name }}</td>
+                                    </tr>
+
+                                {% endfor %}
+                            </tbody>
+                        {% endif %}
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+
+
+</script>
+
+
+</body>
+</html>

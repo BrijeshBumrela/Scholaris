@@ -153,12 +153,13 @@ def follow(request):
 
 def student_list_teacher(request):
     teacherInstance = get_object_or_404(Teacher, pk=request.user.teacher.id)
-    getStudents = teacherInstance.followers.all()
-
+    students = teacherInstance.followers.all()
+    print(students)
     context = {
-        'students': getStudents
+        'students': students,
+        'count': len(students)
     }
-    return render(request, "Result_Analysis/my_students.html", context)
+    return render(request, "Result_Analysis/stu.html", context)
 
 
 '''        Profile for student        '''
