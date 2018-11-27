@@ -6,11 +6,11 @@
     <title>Create Test</title>
     <link rel="stylesheet" href="{% static 'Test_Designing/css/datedropper.css' %}">
     <link rel="stylesheet" href="{% static 'Test_Designing/css/custom-datedropper.css' %}">
-    <link rel="stylesheet" href="{% static 'Test_Designing/css/jquery.timepicker.min.css' %}">
+{#    <link rel="stylesheet" href="{% static 'Test_Designing/css/jquery.timepicker.min.css' %}">#}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
     <script src="{% static 'Test_Designing/datedropper.js' %}"></script>
-    <script src="{% static 'Test_Designing/jquery.timepicker.min.js' %}"></script>
+{#    <script src="{% static 'Test_Designing/jquery.timepicker.min.js' %}"></script>#}
 </head>
 
 <body>
@@ -49,7 +49,7 @@
             </div>
             {% endfor %}
         </div>
-        <input type="submit" value="CreateTest">
+        <input class="submitBtn" type="submit" value="CreateTest">
     </form>
 </body>
 
@@ -75,10 +75,23 @@
     $('.datedropper-class').dateDropper();
 
     $('.timepicker').timepicker();
-    timeCalculator = document.querySelector('.timepicker');
-    console.log(timeCalculator.value);
-    actualTime = timeCalculator.value.slice(0, -2);
-    timeCalculator.textContent = actualTime
+
+
+    const changeDate = (e) => {
+        e.preventDefault();
+        timeCalculator = document.querySelector('.timepicker');
+        console.log(timeCalculator.value);
+        actualTime = timeCalculator.value.slice(0, -2);
+        timeCalculator.innerHTML = actualTime
+        console.log(actualTime);
+        window.location.href = '{% url 'exam:design' %}';
+    }
+
+    const btn = document.querySelector('.submitBtn');
+    btn.addEventListener("click", changeDate);
+
+
+
 </script>
 
 

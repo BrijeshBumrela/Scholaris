@@ -3,9 +3,8 @@ from Result_Analysis.models import Teacher, Student
 
 class Test(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
-    time = models.DateTimeField()
-    timeactual = models.TimeField(auto_now_add=False,null=True)
-    duration = models.IntegerField(default=0)
+    time = models.CharField(max_length=20)
+    duration = models.DateField(default=0)
     total_marks = models.IntegerField(default=0)
 
 class QuestionSet(models.Model):
