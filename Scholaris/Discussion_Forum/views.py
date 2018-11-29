@@ -150,14 +150,15 @@ def post_edit(request, id):
         }
     return render(request, 'Discussion_Forum/post_edit.html', context)
 
+@login_required()
 def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
     if request.user != post.author:
         raise Http404
     post.delete()
-
-    url: str = 'http://127.0.0.1:8000/forum'
-    return redirect(url)
+    #
+    # url: str = 'http://127.0.0.1:8000/forum'
+    return redirect('forum:forum-post-list')
 
 @login_required()
 def updown_comment(request, id):

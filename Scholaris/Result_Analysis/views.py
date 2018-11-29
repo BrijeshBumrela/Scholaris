@@ -15,20 +15,27 @@ def get_question():
     return Post.published.all().order_by('-updated')[:5]
 
 
+def post_count(user):
+    posts = Post.objects.filter(author=user)
+    return len(posts)
+
 '''                 """"""""""               '''
 
 def index(request):
-    if request.user.is_authenticated:
-        return redirect('result:dashboard')
-    return render(request, 'Result_Analysis/home.html')
+    try:
+        if request.user.teacher or request.user.student:
+            return redirect('result:dashboard')
+    except:
+        return render(request, 'Result_Analysis/home.html')
 
 
 @login_required()
 def dashboard(request):
     posts = get_question()
-    print(posts)
+    countPost = post_count(request.user)
     context = {
-        'posts':posts
+        'posts': posts,
+        'post_count': countPost
     }
     return render(request, 'Result_Analysis/dashboard1.html', context)
 
