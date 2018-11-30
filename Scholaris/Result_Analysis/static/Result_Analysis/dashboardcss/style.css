@@ -79,7 +79,13 @@ p{
 	vertical-align: center;
 }
 
+.cont1:hover{
+	box-shadow: 0 0 20px rgba(0,0,0, .1);
+}
 
+.cont2:hover{
+	box-shadow: 0 0 20px rgba(0,0,0, .1);
+}
 .dash-box:hover {
 	background: #f4c613;
 	transition: all 400ms ease-in-out;
@@ -101,8 +107,7 @@ p{
 .cont{
 	background-color:  #212226;
 	padding-top:70px;
-	
-	/*padding: 30px 30px 30px 30px;*/
+	padding-bottom: 30px;
 }
 
 .cont h1{

@@ -7,9 +7,10 @@
 		<div class="menu">
 			<ul>
 				{% if request.user.student %}
-                    <li>Hi {{ request.user.username }}</li>
+
 					<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a></li>
-					<li><a href="{% url 'result:dashboard' %}" class='menu-item'">DASHBOARD</a></li>
+					<li style="color: #f4c613">Hi {{ request.user.username }}</li>
+                    <li><a href="{% url 'result:dashboard' %}" class='menu-item'">DASHBOARD</a></li>
 					<li><a href="{% url 'result:profile' %}" class="menu-item">PROFILE</a></li>
 			 		<li><a href="{% url 'exam:list_all_test' %}" class="menu-item">TEST-TAKING</a></li>
 					<li><a href="{% url 'result:results' %}" class="menu-item">RESULTS</a></li>
