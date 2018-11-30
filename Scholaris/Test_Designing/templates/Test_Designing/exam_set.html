@@ -6,11 +6,11 @@
     <title>Create Test</title>
     <link rel="stylesheet" href="{% static 'Test_Designing/css/datedropper.css' %}">
     <link rel="stylesheet" href="{% static 'Test_Designing/css/custom-datedropper.css' %}">
-{#    <link rel="stylesheet" href="{% static 'Test_Designing/css/jquery.timepicker.min.css' %}">#}
+    <link rel="stylesheet" href="{% static 'Test_Designing/css/jquery.timepicker.min.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
     <script src="{% static 'Test_Designing/datedropper.js' %}"></script>
-{#    <script src="{% static 'Test_Designing/jquery.timepicker.min.js' %}"></script>#}
+    <script src="{% static 'Test_Designing/js/timepicker/jquery.timepicker.js' %}"></script>
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                 {{ test_form.date|add_class:"datedropper-class" }}
             </p>
             <p><label for="id_time">Time:</label>
-                {{ test_form.time }}
+                {{ test_form.time|add_class:"decide_time" }}
             </p>
             <p><label for="id_duration">Duration (In Minutes):</label>
                 {{ test_form.duration }}
@@ -82,8 +82,13 @@
             question_counter += 1;
         }
     });
-    {#$(':input[type="number"]').dateDropper();#}
+    // Setting up the date
     $('.datedropper-class').dateDropper();
+
+
+    // Setting up the time
+    $('.decide_time').timepicker();
+
 
 </script>
 
