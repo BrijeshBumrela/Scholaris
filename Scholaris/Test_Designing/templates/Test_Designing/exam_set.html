@@ -28,14 +28,25 @@
         {% csrf_token %}
         <div>
             <p>
-                <label for="id_time">Time:</label>
-                {{ test_form.time|add_class:"timepicker" }}
+                <label for="id_name">Name:</label>
+                {{ test_form.name }}
             </p>
-            <p><label for="id_duration">Duration:</label>
-                {{ test_form.duration|add_class:"datedropper-class" }}
+            <p>
+                <label for="id_description">Description:</label>
+                {{ test_form.description }}
             </p>
-
+            <p>
+                <label for="id_date">Date:</label>
+                {{ test_form.date|add_class:"datedropper-class" }}
+            </p>
+            <p><label for="id_time">Time:</label>
+                {{ test_form.time }}
+            </p>
+            <p><label for="id_duration">Duration (In Minutes):</label>
+                {{ test_form.duration }}
+            </p>
         </div>
+
         <div>
             {{ question_formset.management_form }}
             {% for question in question_formset%}
@@ -73,24 +84,6 @@
     });
     {#$(':input[type="number"]').dateDropper();#}
     $('.datedropper-class').dateDropper();
-
-    $('.timepicker').timepicker();
-
-
-    const changeDate = (e) => {
-        e.preventDefault();
-        timeCalculator = document.querySelector('.timepicker');
-        console.log(timeCalculator.value);
-        actualTime = timeCalculator.value.slice(0, -2);
-        timeCalculator.innerHTML = actualTime
-        console.log(actualTime);
-        window.location.href = '{% url 'exam:design' %}';
-    }
-
-    const btn = document.querySelector('.submitBtn');
-    btn.addEventListener("click", changeDate);
-
-
 
 </script>
 

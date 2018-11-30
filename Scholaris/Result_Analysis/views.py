@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from django.contrib.auth import authenticate, login, update_session_auth_hash
-from .models import Student, Teacher, Course
+from .models import Student, Teacher, Course, Task
 from django.http import HttpResponse
 from Test_Designing.models import StudentResult, Test
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
@@ -24,18 +24,24 @@ def post_count(user):
 def index(request):
     try:
         if request.user.teacher or request.user.student:
+            print('Hi There')
             return redirect('result:dashboard')
     except:
+        print('hiiiiiii')
         return render(request, 'Result_Analysis/home.html')
 
 
 @login_required()
 def dashboard(request):
+    user = get_object_or_404(User, pk=request.user.id)
     posts = get_question()
     countPost = post_count(request.user)
+    tasks = user.task_set.all()
+
     context = {
         'posts': posts,
-        'post_count': countPost
+        'post_count': countPost,
+        'tasks': tasks
     }
     return render(request, 'Result_Analysis/dashboard1.html', context)
 
@@ -249,7 +255,7 @@ def results(request):
         high=0
     else:
         high=max(marks_list_all)
-    if request.method=='POST':
+    if request.method == 'POST':
         subject=request.POST['select_course']
         course_name= StudentResult.objects.filter(test__teacher__course__name=subject,student__id=request.user.student.id)
         for tests in course_name:
@@ -266,5 +272,15 @@ def results(request):
     else:
         context = {'students':x,'results':y,'high':high,'courses':names_courses,'no_courses':no_courses,}
         return render(request,'Result_Analysis/results.html',context)
+
+@login_required()
+def add_task(request):
+    if request.method == 'POST':
+        text = request.POST['text']
+
+    Task.objects.create(author=request.user, text=text)
+
+    return HttpResponse('')
+
 
 

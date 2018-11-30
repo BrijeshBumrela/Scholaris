@@ -1,10 +1,22 @@
 from django.db import models
 from Result_Analysis.models import Teacher, Student
+from datetime import datetime
+
+
+OPTIONS = (
+        ('1','option1'),
+        ('2','option2'),
+        ('3','option3'),
+        ('4','option4'),
+)
 
 class Test(models.Model):
+    name = models.CharField(max_length=50,null=True)
+    description = models.CharField(max_length=250,null=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
     time = models.CharField(max_length=20)
-    duration = models.DateField(default=0)
+    date = models.DateField()
+    duration = models.IntegerField(default=0)
     total_marks = models.IntegerField(default=0)
 
 class QuestionSet(models.Model):

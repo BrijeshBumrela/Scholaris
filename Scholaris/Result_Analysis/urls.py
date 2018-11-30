@@ -24,4 +24,5 @@ urlpatterns = [
     path('list_all_students/', views.list_all_students, name='list_all_students'),
     path('follow/', views.follow, name='follow'),
     path('list_all_teachers_to_follow/', views.list_all_teachers_to_follow, name='list_all_teachers_to_follow'),
+    path('task/', views.add_task, name='task'),
 ]

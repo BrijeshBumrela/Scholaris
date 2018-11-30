@@ -19,9 +19,9 @@ class QuestionForm(forms.ModelForm):
 
 class TestCreateForm(forms.ModelForm):
     class Meta:
-        time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
         model = Test
-        fields = ('time','duration')
+
+        exclude = ('teacher','total_marks',)
 
 
 
