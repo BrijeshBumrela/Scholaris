@@ -34,6 +34,7 @@ $(function(){
         if(get_current() != 10) {
             mrev(1);//adding class review
             $('.carousel').carousel('next');
+            mrev(0);
         }
         else{
             window.alert("Its the last question!Can't review");
@@ -124,6 +125,8 @@ var x = setInterval(function(){
 
 	if ( timer_no< 0) {
         clearInterval(x);
+        $("#examform").submit();
+        console.log("exam form submitted");
         document.getElementById("demo1").innerHTML = "EXPIRED";
     }
 },1000);

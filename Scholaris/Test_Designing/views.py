@@ -7,8 +7,8 @@ from django.forms import formset_factory
 from django.http import HttpResponse
 import random
 from django.contrib.auth.decorators import user_passes_test, login_required
-
-
+import datetime
+from django.utils import timezone
 
 '''  Utility Functions   '''
 def check_teacher(user):
@@ -88,7 +88,7 @@ def design(request):
     }
     return render(request, 'Test_Designing/exam_set.html', context)
 
-
+'''
 #exam_taking views starts here
 @login_required()
 @user_passes_test(check_student, login_url='/test/error')
@@ -101,7 +101,7 @@ def list_all_test(request):
         'test_list':test_list
     }
     return render(request, 'Test_Designing/test_list.html', context)
-
+'''
 
 @login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
@@ -172,8 +172,21 @@ def result(request, id):
 def list_all_test(request):
     teacher_list = Teacher.objects.filter(followers=request.user.student)
     test_list = []
+
     for teacher in teacher_list:
         test_list.extend(teacher.test_set.all())
+    tl = []
+    oneday = datetime.timedelta(days=1)
+    for t in list(test_list):
+        '''
+        diff = t.time.date() - datetime.date.today()
+        if(diff < oneday ):
+            tl.append(t)
+        '''
+        if (t.time.date() > datetime.date.today()):
+            tl.append(t)
+    #test_list=tl
+
     context = {
         'test_list':test_list
     }
@@ -196,6 +209,22 @@ def detail(request, id):
         }
 
     return render(request, 'Test_Designing/t.html', context)
+
+
+def testdetail(request, id):
+    get_test = get_object_or_404(Test, id=id)
+    entry_token = False
+    if get_test.time < timezone.now():
+        entry_token = True
+
+    context = {
+        'test':get_test,
+        'timer': get_test.duration,
+        'time':get_test.time,
+        'marks':get_test.total_marks,
+        'entry_token':entry_token,
+    }
+    return render(request, 'Test_Designing/quiz-form.html', context)
 
 
 #testid = request.POST['exam-name']
