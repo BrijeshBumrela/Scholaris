@@ -15,11 +15,11 @@
 
 
 		<div class="row">
-			<div class="col col-lg-6 col-sm-12 cont2">
-				<div id="chart"></div>
+			<div class="col-lg-6 col-sm-12 cont2">
+				<div id="chart" style="box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);"></div>
 			</div>
-			<div class="col col-lg-6 cont1">
-				<div id="chart-1">
+			<div class="col-lg-6 cont1">
+				<div id="chart-1" style="box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);">
 				</div>
 			</div>
 		</div>
@@ -27,50 +27,41 @@
 
 			<br><br>
         <div class="row">
-			<div class="col-lg-7 col-sm-12" >
-
-				<div id="calendar" class="cont1"></div>
+			<div class="col-lg-8 col-sm-12">
+				<div id="calendar" class="cont1" style="border: 3px solid orange;box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+"></div>
 			</div>
-			<div class="col-lg-4 col-sm-12">
+			<div class="col-lg-4 col-sm-12" style="box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+">
 				<div class="panel panel-default cont2">
 					<div class="panel-heading">
 						<h2 class="panel-title">Panel Title</h2>
 					</div>
 					<div class="panel-body pn1">
 						<div class="row dash_stats">
-							<div class="col-md-6">
+							<div class="col-lg-12">
 								<div class="card dash-box">
 									<h3><i class="fas fa-users"></i>{{ post_count }}</h3>
 							 		<h3>Questions Asked</h3>
 							 	</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-lg-12">
 								 <div class="card dash-box">
 								 	<h3><i class="fas fa-users"></i>    203</h3>
 								 	<h3>Users</h3>
 								 </div>
 							</div>
-						</div>
-						<div class="row dash_stats">
-							<div class="col-md-6 col-sm-12">
+							<div class="col-lg-12">
 								<div class="card dash-box">
 									<h3><i class="fas fa-users"></i>    203</h3>
 							 		<h3>Users</h3>
 							 	</div>
 							</div>
-							<div class="col-md-6 col-sm-12">
-								 <div class="card dash-box">
-								 	<h3><i class="fas fa-users"></i>    203</h3>
-								 	<h3>Users</h3>
-								 </div>
-							</div>
-
 						</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -107,7 +98,7 @@
         </div>
 
             <div class="row">
-			<div class="col-lg-12 col-sm-12">
+			<div class="col-lg-12">
 				<div class="container cont2">
 					<div style="margin-top:30px;">
 						<h3>
@@ -119,14 +110,14 @@
 								    <li class="list-group-item" value="{{ task.id }}">{{ task.text }}</li>
 							    {% endfor %}
                             </ul>
-
 						</div>
 						<div class="input-group mb-3">
-                            <form id="task_submit">
+                            <form action="{% url 'result:task' %}" method="POST" id="task_submit" style="width:100%;">
                                 {% csrf_token %}
                                 <input type="text" class="form-control" name="task" placeholder="Write Your Task" aria-label="Recipient's username" aria-describedby="button-addon2" id="frm">
+                                <br>
 							    <div class="input-group-append">
-								    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                                    <input type="submit" value="Submit" class="btn btn-dark">
 							    </div>
                             </form>
 						</div>

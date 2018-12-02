@@ -25,10 +25,8 @@ def post_count(user):
 def index(request):
     try:
         if request.user.teacher or request.user.student:
-            print('Hi There')
             return redirect('result:dashboard')
     except:
-        print('hiiiiiii')
         return render(request, 'Result_Analysis/home.html')
 
 
@@ -283,11 +281,11 @@ def results(request):
 @login_required()
 def add_task(request):
     if request.method == 'POST':
-        text = request.POST['text']
+        text = request.POST['task']
 
     Task.objects.create(author=request.user, text=text)
 
-    return HttpResponse('')
+    return redirect('result:dashboard')
 
 
 
