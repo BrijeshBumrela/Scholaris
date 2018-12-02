@@ -12,4 +12,5 @@ urlpatterns = [
     path('error/', views.exam_error, name='error'),
     path('list_all_test/', views.list_all_test, name='list_all_test'),
     path('detail/<int:id>/', views.detail, name='detail'),
+    path('test_detail/<int:id>/', views.testdetail, name='testdetail'),
 ]
