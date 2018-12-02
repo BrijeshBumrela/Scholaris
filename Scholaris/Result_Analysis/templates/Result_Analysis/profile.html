@@ -13,6 +13,7 @@
 					<img  width=250px height=250px style="border-radius: 50%" src="{{user.student.photo.url}}" >
 				{% endif %}
 				{% if request.user.teacher %}
+
 					<img  width=250px height=250px style="border-radius: 50%" src="{{user.teacher.photo.url}}" >
 				{% endif %}
 			</div>
@@ -38,20 +39,20 @@
 
 			<div  class="col-sm-4" id="edit1">
 				{% if request.user.student %}
-					<img  width=250px height=250px style="border-radius: 50%" src="{{request.user.student.photo.url}}" >
+					<img  width=250px height=250px style="border-radius: 50%" src="{{user.student.photo.url}}" >
 				{% endif %}
 				{% if request.user.teacher %}
-					<img  width=250px height=250px style="border-radius: 50%" src="{{request.user.teacher.photo.url}}" >
+					<img  width=250px height=250px style="border-radius: 50%" src="{{user.teacher.photo.url}}" >
 				{% endif %}
 			</div>
 
 			<div  class="col-sm-8" id="edit2">
 				<H4 style="color: #f4c613">UPDATE PROFILE</H4><hr style="border-color:#f4c613">
-
+				{% if request.user.teacher %}
 				<form method="POST" enctype="multipart/form-data">
 					{% csrf_token %}
-					{% if request.user.teacher %}
-						<span style="color: #f4c613">FirstName:</span> 
+
+						<span style="color: #f4c613">FirstName:</span>
 						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						{{u1_form.first_name}}<br><br>
 						<span style="color: #f4c613">LastName:</span>
@@ -61,13 +62,14 @@
 						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						{{p1_form.dob}}<br><br>
 						<span  style="color: #f4c613">
-                        {% if p1_form.photo %}
-						    {{p1_form.photo}}<br>
-                        {% endif %}
-                            </span>
-						{% endif %}
+						{{p1_form.photo}}<br></span>
+					<button class='btn-general btn-profile' class="reg" type="submit">Update</button><br><br>
+
+				{% endif %}
 
 					{% if request.user.student %}
+					<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
 						<span style="color: #f4c613">FirstName  :</span>
 						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						{{u_form.first_name}}<br><br>
@@ -78,14 +80,18 @@
 						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						{{p_form.dob}}<br><br>
 						<span  style="color: #f4c613">
-                            {{p_form.photo}}
-                        </span>
-
-                    {% endif %}
+						{{p_form.photo}}<br></span>
 					<button class='btn-general btn-profile' class="reg" type="submit">Update</button><br><br>
 
+					{% endif %}
+
 				</form>
+				{% if request.user.student %}
 				<button class='btn-general btn-profile'><a style="text-decoration: none;" href="{% url 'result:changepassword'%}">CHANGE PASSWORD</a></button>
+				{% endif %}
+				{% if request.user.teacher %}
+				<button class='btn-general btn-profile'><a style="text-decoration: none;" href="{% url 'result:changepassword'%}">CHANGE PASSWORD</a></button>
+				{% endif %}
 			</div>
 		</div>
 		

@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import QuestionForm, TestCreateForm
 from Test_Designing.models import Test,QuestionSet,Question,StudentResult
 from Result_Analysis.models import Teacher,Student
-from django.contrib.auth.models import User
+from django.contrib import messages
 from django.forms import formset_factory
 from django.http import HttpResponse
 import random
@@ -11,6 +11,7 @@ import datetime
 from django.utils import timezone
 
 '''  Utility Functions   '''
+
 def check_teacher(user):
     try:
         Teacher.objects.get(teacher=user)
@@ -25,6 +26,9 @@ def check_student(user):
     except:
         return False
 
+'''        end          '''
+
+
 
 def index(request):
     return render(request,'Test_Designing/exam.html')
@@ -33,8 +37,10 @@ def index(request):
 def exam_error(request):
     return render(request, 'Test_Designing/exam/exam_error.html')
 
+
 @login_required(login_url='result:login')
 @user_passes_test(check_teacher, login_url='/test/error')
+
 def design(request):
     test_form = TestCreateForm()
     question_formset = formset_factory(QuestionForm)
@@ -70,6 +76,8 @@ def design(request):
 
             testList.total_marks = total_marks
             testList.save()
+            messages.success(request, 'Test Created Successfully')
+            return redirect('result:dashboard')
 
 
 
@@ -88,7 +96,6 @@ def design(request):
     }
     return render(request, 'Test_Designing/exam_set.html', context)
 
-'''
 #exam_taking views starts here
 @login_required()
 @user_passes_test(check_student, login_url='/test/error')
@@ -100,8 +107,7 @@ def list_all_test(request):
     context = {
         'test_list':test_list
     }
-    return render(request, 'Test_Designing/test_list.html', context)
-'''
+    return render(request, 'Test_Designing/t.html', context)
 
 @login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
@@ -115,6 +121,8 @@ def exam(request):
     testid = request.POST['exam-name']
     posts = Question.objects.filter(question__question_list__id=testid)
     timer = Test.objects.get(pk=testid).duration
+
+
     if posts.count() is 0:
         return HttpResponse('exam not found!')
     else:
@@ -133,6 +141,7 @@ def exam(request):
 def result(request, id):
     test = Test.objects.get(id=id)
     student = Student.objects.get(student=request.user)
+
     questions = test.questionset.question_set.all()
 
     correct = 0
@@ -196,8 +205,15 @@ def list_all_test(request):
 def detail(request, id):
     get_test = get_object_or_404(Test, id=id)
     question_list = get_test.questionset.question_set.all()
+
+    student = Student.objects.get(student=request.user)
+
+    if (get_test.studentresult_set.filter(student=student).exists()):
+        return HttpResponse("You Can't Bruh !")
+
     if question_list.count() is 0:
         return HttpResponse('exam not found!')
+
     else:
         test = list(question_list)
         random.shuffle(test)
@@ -225,6 +241,3 @@ def testdetail(request, id):
         'entry_token':entry_token,
     }
     return render(request, 'Test_Designing/quiz-form.html', context)
-
-
-#testid = request.POST['exam-name']

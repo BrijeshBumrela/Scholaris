@@ -36,6 +36,7 @@ p{
 }
 .dash .cont{
 	padding-top: 100px;
+	padding-bottom: 45px;
 }
 .container-custom {
 	width: 80%;
@@ -50,7 +51,7 @@ p{
 	width: 100%;
 	vertical-align: center;
 	margin-top: 70px;
-	padding-top: 70px;
+	padding-top: 45px;
 }
 
 .dash-box {
