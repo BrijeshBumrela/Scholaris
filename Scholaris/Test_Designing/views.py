@@ -1,14 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import QuestionForm, TestCreateForm
 from Test_Designing.models import Test,QuestionSet,Question,StudentResult
 from Result_Analysis.models import Teacher,Student
-from django.contrib.auth.models import User
+from django.contrib import messages
 from django.forms import formset_factory
 from django.http import HttpResponse
 import random
 from django.contrib.auth.decorators import user_passes_test, login_required
-
-
+import datetime
+from django.utils import timezone
 
 '''  Utility Functions   '''
 
@@ -40,6 +40,7 @@ def exam_error(request):
 
 @login_required(login_url='result:login')
 @user_passes_test(check_teacher, login_url='/test/error')
+
 def design(request):
     test_form = TestCreateForm()
     question_formset = formset_factory(QuestionForm)
@@ -75,6 +76,8 @@ def design(request):
 
             testList.total_marks = total_marks
             testList.save()
+            messages.success(request, 'Test Created Successfully')
+            return redirect('result:dashboard')
 
 
 
@@ -93,7 +96,6 @@ def design(request):
     }
     return render(request, 'Test_Designing/exam_set.html', context)
 
-
 #exam_taking views starts here
 @login_required()
 @user_passes_test(check_student, login_url='/test/error')
@@ -105,7 +107,13 @@ def list_all_test(request):
     context = {
         'test_list':test_list
     }
-    return render(request, 'Test_Designing/test_list.html', context)
+    return render(request, 'Test_Designing/t.html', context)
+
+@login_required(login_url='result:login')
+@user_passes_test(check_student, login_url='/test/error')
+def exam_form(request):
+    return render(request,'Test_Designing/quiz-form.html')
+
 
 @login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
@@ -172,11 +180,24 @@ def result(request, id):
 @user_passes_test(check_student, login_url='/test/error')
 def list_all_test(request):
     teacher_list = Teacher.objects.filter(followers=request.user.student)
-    test_list = []
+    #test_list = []
+    '''
     for teacher in teacher_list:
         test_list.extend(teacher.test_set.all())
+    tl = []
+    oneday = datetime.timedelta(days=1)
+    for t in list(test_list):
+        
+        diff = t.time.date() - datetime.date.today()
+        if(diff < oneday ):
+            tl.append(t)
+        
+        if (t.date.date() > datetime.date.today()):
+            tl.append(t)
+    #test_list=tl
+    '''
     context = {
-        'test_list':test_list
+        'test_list':teacher_list
     }
     return render(request, 'Test_Designing/test_list.html', context)
 
@@ -206,4 +227,17 @@ def detail(request, id):
     return render(request, 'Test_Designing/t.html', context)
 
 
-#testid = request.POST['exam-name']
+def testdetail(request, id):
+    get_test = get_object_or_404(Test, id=id)
+    entry_token = False
+    if get_test.date < timezone.now():
+        entry_token = True
+
+    context = {
+        'test':get_test,
+        'timer': get_test.duration,
+        'time':get_test.date,
+        'marks':get_test.total_marks,
+        'entry_token':entry_token,
+    }
+    return render(request, 'Test_Designing/quiz-form.html', context)

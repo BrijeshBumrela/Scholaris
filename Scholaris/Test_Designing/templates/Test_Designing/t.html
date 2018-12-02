@@ -2,8 +2,9 @@
 
 {% block exam %}
     <script>
+    var questions_order = [];
     var number = {{ no_of_qs }};
-    var timer_no = {{ timer }};
+    var timer_no = {{ timer }}*60;
     $(function(){
         text_qs(number);
         create(number);
@@ -11,20 +12,20 @@
         shuff(number);
     });
     </script>
-    <form action="{% url 'exam:result' test.id %}" method="post">
+    <form action="{% url 'exam:result' test.id %}" method="post" id="examform">
     {% csrf_token %}
 
 <div class="row m-0">
     <div class="col-9">
         <h1 class="test-name">Test name</h1>
     </div>
-    <div class="col-3">
+    <div class="col-3 m-auto">
         <p id="demo1"></p>
     </div>
 </div>
 <div class="container-fluid mt-5 mb-5" >
     <div class="row">
-        <div class="col-3 order-2 mx-2 p-4 main">
+        <div class="col-3 order-2 mx-2 p-4 main ">
 			<div class="bg-secondary text-white pl-2 py-2 mb-5 mt-3" >
                 <h3>Progress Panel</h3>
             </div>
@@ -84,17 +85,51 @@
 						</div>
             </div>
             </div>
+                <script>
+                    questions_order.push({{post.id}});
+                </script>
     {% endfor %}
             <!-- added carsoul -->
-        </div></div>
+                </div>
+            </div>
             <div class="row pl-5">
 
                 <button type="button" class="btn btn-outline-info m-3" id="prev">Previous</button>
                 <button type="button" class="btn btn-outline-secondary m-3" id="mnext">Mark for review & next</button>
                 <button type="button" class="btn btn-outline-success m-3 pr-4 pl-4" id="next">Next</button>
                 <button type="button" class="btn btn-outline-warning m-3" id="cls_ans">Clear Answer</button>
-                <input type="submit" value="Finish" class="btn btn-outline-primary m-3 pr-4 pl-4">
+                <button type="button" class="btn btn-outline-primary m-3 pr-4 pl-4 "  data-toggle="modal" data-target="#myModal">Submit</button>
+                <!--
+                    <input type="submit" value="Finish" class="btn btn-outline-primary m-3 pr-4 pl-4 ">
+                -->
             </div>
+
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header" style="background-color: #f4c613;color: white">
+          <h4 class="modal-title">Do you really want to submit?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          Continue anyways
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <input type="submit" value="OK" class="btn  ">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
         </div>
     </div>

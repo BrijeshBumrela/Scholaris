@@ -1,0 +1,152 @@
+.body{
+  font-family: calibri;
+  background-color: #fff;
+}
+
+.check {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    border-style: solid;
+    border-color: #f4c613;
+    border-radius: 5px;
+    text-align: center;
+
+    cursor: pointer;
+    font-size: 40px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+.checkmark {
+    position: absolute;
+    top: 17px;
+    left: 85px;
+    height: 30px;
+    width: 30px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+
+.check:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+
+.check input:checked ~ .checkmark {
+    background-color: #f4c613;
+}
+
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+.check input:checked ~ .checkmark:after {
+    display: block;
+}
+
+
+.check .checkmark:after {
+  top: 8px;
+  left: 8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+}
+
+
+*{
+  box-sizing: border-box;
+}
+
+.bg-image {
+  background-image: url("course.jpg");
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  height: 400px; 
+  background-position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.bg-text {
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.4);
+  color: white;
+  font-weight: bold;
+  border: 3px solid #fff5cc;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+
+.col-sm-12{
+  padding-bottom: 15px;
+}
+
+
+
+.button {
+border-radius: 28px;
+font-size: 13px;
+text-transform: uppercase;
+margin:0 6px;
+padding: 12px 46px 12px 46px;
+-webkit-trasition: all .5s;
+transition: all .5s;
+}
+
+.button-q {
+  background-color: #f4f4f4;
+  color: 000;
+  border: 1px solid #fff;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #f4c613;
+color: #ffffff;
+border :1px solid #f4c613;
+}
+
+.footer1{
+margin-top: 40px;
+text-align:center;
+
+}
+
+.footer{
+  height: 200px;
+  width: 100%;
+  font-size: 40px;
+  font-family: 'Open Sans';
+  background-color: #212226; 
+  text-align: center;
+  padding:  120px;
+  color: #f4c613;
+  margin-top: 49px;
+}

@@ -20,7 +20,9 @@ class QuestionForm(forms.ModelForm):
 class TestCreateForm(forms.ModelForm):
     class Meta:
         model = Test
-        fields = ('time','timeactual','duration')
+
+        exclude = ('teacher','total_marks',)
+
 
 
 

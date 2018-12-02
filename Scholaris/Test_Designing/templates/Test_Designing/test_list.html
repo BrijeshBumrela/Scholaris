@@ -5,9 +5,9 @@
 
         <div>
 
-            <a href="{% url 'exam:detail' test.id %}">{{ test.total_marks }} - {{ test.teacher }}</a>
+            <a href="{% url 'exam:testdetail' test.id %}">{{ test.total_marks }} - {{ test.teacher }}</a>
 
         </div>
-
+        
     {% endfor %}
 {% endblock %}

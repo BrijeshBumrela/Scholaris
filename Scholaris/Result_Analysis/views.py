@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from django.contrib.auth import authenticate, login, update_session_auth_hash
-from .models import Student, Teacher, Course
+from .models import Student, Teacher, Course, Task
 from django.http import HttpResponse
 from Test_Designing.models import StudentResult, Test
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Discussion_Forum.models import Post
+from django.contrib import messages
 
 
 '''             Utility Functions            '''
@@ -15,20 +16,33 @@ def get_question():
     return Post.published.all().order_by('-updated')[:5]
 
 
+def post_count(user):
+    posts = Post.objects.filter(author=user)
+    return len(posts)
+
 '''                 """"""""""               '''
 
 def index(request):
-    if request.user.is_authenticated:
-        return redirect('result:dashboard')
-    return render(request, 'Result_Analysis/home.html')
+    try:
+        if request.user.teacher or request.user.student:
+            print('Hi There')
+            return redirect('result:dashboard')
+    except:
+        print('hiiiiiii')
+        return render(request, 'Result_Analysis/home.html')
 
 
 @login_required()
 def dashboard(request):
+    user = get_object_or_404(User, pk=request.user.id)
     posts = get_question()
-    print(posts)
+    countPost = post_count(request.user)
+    tasks = user.task_set.all()
+
     context = {
-        'posts':posts
+        'posts': posts,
+        'post_count': countPost,
+        'tasks': tasks
     }
     return render(request, 'Result_Analysis/dashboard1.html', context)
 
@@ -95,11 +109,16 @@ def teacher_register(request):
     return render(request, 'Result_Analysis/register.html', context)
 
 def choose_course_teacher(request):
+    teacher = get_object_or_404(Teacher, id=request.user.teacher.id)
+    if teacher.course:
+        messages.warning(request, 'You have Already selected course!')
+        return redirect('result:dashboard')
+
     course_list = Course.objects.all()
     context = {
         'course_list': course_list
     }
-    return render(request, 'Result_Analysis/choose_course_teacher.html', context)
+    return render(request, 'Result_Analysis/courses.html', context)
 
 def list_all_students(request):
     std2 = Student.objects.all()
@@ -115,23 +134,24 @@ def list_all_students(request):
 def list_all_teachers_to_follow(request):
     teachers = Teacher.objects.all()
     context = {
-        'all_teachers': teachers
+        'teachers': teachers
     }
-    return render(request, 'Result_Analysis/follow.html', context)
+    return render(request, 'Result_Analysis/tea.html', context)
 
 
 def set_course_teacher(request):
     if request.method == "POST":
 
         selected_course = request.POST.get('course')
+        print(selected_course + ' ' + 'foa;iesnoisevn')
         get_course = Course.objects.get(name=selected_course)
         teacher = get_object_or_404(Teacher, pk=request.user.teacher.id)
         teacher.course = get_course
         teacher.save()
-        return HttpResponse('Done')
+        messages.success(request, 'Course Successfully Set')
+        return redirect('result:dashboard')
     else:
-        print('Not freaking running')
-        return HttpResponse('Not done')
+        return HttpResponse('Some Error Occured')
 
 def follow(request):
     if request.method == 'POST':
@@ -242,7 +262,7 @@ def results(request):
         high=0
     else:
         high=max(marks_list_all)
-    if request.method=='POST':
+    if request.method == 'POST':
         subject=request.POST['select_course']
         course_name= StudentResult.objects.filter(test__teacher__course__name=subject,student__id=request.user.student.id)
         for tests in course_name:
@@ -259,5 +279,15 @@ def results(request):
     else:
         context = {'students':x,'results':y,'high':high,'courses':names_courses,'no_courses':no_courses,}
         return render(request,'Result_Analysis/results.html',context)
+
+@login_required()
+def add_task(request):
+    if request.method == 'POST':
+        text = request.POST['text']
+
+    Task.objects.create(author=request.user, text=text)
+
+    return HttpResponse('')
+
 
 

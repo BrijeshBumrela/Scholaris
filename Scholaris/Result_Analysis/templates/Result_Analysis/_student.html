@@ -15,7 +15,7 @@
 
 
 		<div class="row">
-			<div class="col col-lg-6 cont2">
+			<div class="col col-lg-6 col-sm-12 cont2">
 				<div id="chart"></div>
 			</div>
 			<div class="col col-lg-6 cont1">
@@ -28,6 +28,7 @@
 			<br><br>
         <div class="row">
 			<div class="col-lg-7 col-sm-12" >
+
 				<div id="calendar" class="cont1"></div>
 			</div>
 			<div class="col-lg-4 col-sm-12">
@@ -39,8 +40,8 @@
 						<div class="row dash_stats">
 							<div class="col-md-6">
 								<div class="card dash-box">
-									<h3><i class="fas fa-users"></i>    203</h3>
-							 		<h3>Users</h3>
+									<h3><i class="fas fa-users"></i>{{ post_count }}</h3>
+							 		<h3>Questions Asked</h3>
 							 	</div>
 							</div>
 							<div class="col-md-6">
@@ -114,19 +115,20 @@
 						</h3>
 						<div>
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item">Cras justo odio</li>
-								<li class="list-group-item">Dapibus ac facilisis in</li>
-								<li class="list-group-item">Morbi leo risus</li>
-								<li class="list-group-item">Porta ac consectetur ac</li>
-								<li class="list-group-item">Vestibulum at eros</li>
-							</ul>
+                                {% for task in tasks %}
+								    <li class="list-group-item" value="{{ task.id }}">{{ task.text }}</li>
+							    {% endfor %}
+                            </ul>
 
 						</div>
 						<div class="input-group mb-3">
-	  						<input type="text" class="form-control" placeholder="Write Your Task" aria-label="Recipient's username" aria-describedby="button-addon2" id="frm">
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-							</div>
+                            <form id="task_submit">
+                                {% csrf_token %}
+                                <input type="text" class="form-control" name="task" placeholder="Write Your Task" aria-label="Recipient's username" aria-describedby="button-addon2" id="frm">
+							    <div class="input-group-append">
+								    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+							    </div>
+                            </form>
 						</div>
 					</div>
 				</div>

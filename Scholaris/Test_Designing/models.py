@@ -1,15 +1,25 @@
 from django.db import models
 from Result_Analysis.models import Teacher, Student
 
+
 class Test(models.Model):
+    name = models.CharField(max_length=50,null=True)
+    description = models.CharField(max_length=250,null=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
     time = models.DateTimeField()
-    timeactual = models.TimeField(auto_now_add=False,null=True)
     duration = models.IntegerField(default=0)
     total_marks = models.IntegerField(default=0)
 
+
+    def __str__(self):
+        return self.name
+
+
 class QuestionSet(models.Model):
     question_list = models.OneToOneField(Test, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.question_list.name
 
 class Question(models.Model):
     question = models.ForeignKey(QuestionSet, on_delete=models.CASCADE)
@@ -47,6 +57,9 @@ class StudentResult(models.Model):
     correct_ans = models.IntegerField(default=0)
     wrong_ans = models.IntegerField(default=0)
     marks = models.IntegerField(default=0)
+
+    def  __str__(self):
+        return self.student.student.username + ' - ' + self.test.name
 
 # @receiver(pre_save, sender=Question)
 # def pre_save_connection(sender, **kwargs):
