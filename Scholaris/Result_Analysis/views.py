@@ -7,6 +7,7 @@ from Test_Designing.models import StudentResult, Test
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Discussion_Forum.models import Post
+from django.contrib import messages
 
 
 '''             Utility Functions            '''
@@ -108,11 +109,16 @@ def teacher_register(request):
     return render(request, 'Result_Analysis/register.html', context)
 
 def choose_course_teacher(request):
+    teacher = get_object_or_404(Teacher, id=request.user.teacher.id)
+    if teacher.course:
+        messages.warning(request, 'You have Already selected course!')
+        return redirect('result:dashboard')
+
     course_list = Course.objects.all()
     context = {
         'course_list': course_list
     }
-    return render(request, 'Result_Analysis/choose_course_teacher.html', context)
+    return render(request, 'Result_Analysis/courses.html', context)
 
 def list_all_students(request):
     std2 = Student.objects.all()
@@ -128,23 +134,24 @@ def list_all_students(request):
 def list_all_teachers_to_follow(request):
     teachers = Teacher.objects.all()
     context = {
-        'all_teachers': teachers
+        'teachers': teachers
     }
-    return render(request, 'Result_Analysis/follow.html', context)
+    return render(request, 'Result_Analysis/tea.html', context)
 
 
 def set_course_teacher(request):
     if request.method == "POST":
 
         selected_course = request.POST.get('course')
+        print(selected_course + ' ' + 'foa;iesnoisevn')
         get_course = Course.objects.get(name=selected_course)
         teacher = get_object_or_404(Teacher, pk=request.user.teacher.id)
         teacher.course = get_course
         teacher.save()
-        return HttpResponse('Done')
+        messages.success(request, 'Course Successfully Set')
+        return redirect('result:dashboard')
     else:
-        print('Not freaking running')
-        return HttpResponse('Not done')
+        return HttpResponse('Some Error Occured')
 
 def follow(request):
     if request.method == 'POST':
