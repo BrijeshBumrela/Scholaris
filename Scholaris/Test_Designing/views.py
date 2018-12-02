@@ -180,24 +180,24 @@ def result(request, id):
 @user_passes_test(check_student, login_url='/test/error')
 def list_all_test(request):
     teacher_list = Teacher.objects.filter(followers=request.user.student)
-    test_list = []
-
+    #test_list = []
+    '''
     for teacher in teacher_list:
         test_list.extend(teacher.test_set.all())
     tl = []
     oneday = datetime.timedelta(days=1)
     for t in list(test_list):
-        '''
+        
         diff = t.time.date() - datetime.date.today()
         if(diff < oneday ):
             tl.append(t)
-        '''
-        if (t.time.date() > datetime.date.today()):
+        
+        if (t.date.date() > datetime.date.today()):
             tl.append(t)
     #test_list=tl
-
+    '''
     context = {
-        'test_list':test_list
+        'test_list':teacher_list
     }
     return render(request, 'Test_Designing/test_list.html', context)
 
@@ -230,13 +230,13 @@ def detail(request, id):
 def testdetail(request, id):
     get_test = get_object_or_404(Test, id=id)
     entry_token = False
-    if get_test.time < timezone.now():
+    if get_test.date < timezone.now():
         entry_token = True
 
     context = {
         'test':get_test,
         'timer': get_test.duration,
-        'time':get_test.time,
+        'time':get_test.date,
         'marks':get_test.total_marks,
         'entry_token':entry_token,
     }

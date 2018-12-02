@@ -23,7 +23,7 @@
     {% endif %}
     <br>
     <br>
-    <form method="POST" action="{% url 'exam:design' %}">
+    <form method="POST" action="{% url 'exam:design' %}" novalidate id="subForm">
         <!-- Create A drop down containing all categories (hardcode it) -->
         {% csrf_token %}
         <div>
@@ -35,18 +35,21 @@
                 <label for="id_description">Description:</label>
                 {{ test_form.description }}
             </p>
-            <p>
+            <p style="display:none;">
                 <label for="id_date">Date:</label>
-                {{ test_form.date|add_class:"datedropper-class" }}
+                {{ test_form.time|add_class:'dateTimeDisplay' }}
             </p>
-            <p><label for="id_time">Time:</label>
-                {{ test_form.time|add_class:"decide_time" }}
+            <p>
+                <label for="date">Date:</label>
+                <input type="text" class="datedropper-class" maxlength="50" required id="id_date">
+            </p>
+            <p>
+                <input type="text" class="decide_time"  maxlength="50" required>
             </p>
             <p><label for="id_duration">Duration (In Minutes):</label>
                 {{ test_form.duration }}
             </p>
         </div>
-
         <div>
             {{ question_formset.management_form }}
             {% for question in question_formset%}
@@ -90,6 +93,20 @@
     {#$('.decide_time').timepicker();#}
 
     $('.decide_time').timepicker({ 'timeFormat': 'H:i:s' });
+
+    const timeVar = document.querySelector('.decide_time');
+    const dateVar = document.querySelector('.datedropper-class');
+
+
+    document.querySelector('#subForm').addEventListener('submit',(e) => {
+            const dateTimeVar = `${dateVar.value} ${timeVar.value}`;
+
+            dateTimeDisplay = document.querySelector('.dateTimeDisplay');
+            dateTimeDisplay.value = dateTimeVar;
+
+            console.log(dateTimeVar);
+    });
+
 
 </script>
 

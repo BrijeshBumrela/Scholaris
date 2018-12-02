@@ -6,8 +6,7 @@ class Test(models.Model):
     name = models.CharField(max_length=50,null=True)
     description = models.CharField(max_length=250,null=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
-    time = models.CharField(max_length=20)
-    date = models.DateField()
+    time = models.DateTimeField()
     duration = models.IntegerField(default=0)
     total_marks = models.IntegerField(default=0)
 
