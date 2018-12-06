@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Discussion_Forum.models import Post
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 '''             Utility Functions            '''
@@ -131,8 +132,24 @@ def list_all_students(request):
 
 def list_all_teachers_to_follow(request):
     teachers = Teacher.objects.all()
+    follow_list = []
+
+    present = True
+    notPresent = False
+
+    for teacher in teachers:
+        if teacher.followers.filter(id=request.user.student.id).exists():
+            follow_list.append(present)
+        else:
+            follow_list.append(notPresent)
+
+    zipped_data = zip(teachers, follow_list)
+
+    print(zipped_data)
+
     context = {
-        'teachers': teachers
+        'teachers': teachers,
+        'follow_list': zipped_data
     }
     return render(request, 'Result_Analysis/tea.html', context)
 
@@ -168,6 +185,30 @@ def follow(request):
         'course_list': course_list
     }
     return render(request, "Result_Analysis/course_set.html", context)
+
+def follow_ajax(request):
+    if request.method == 'POST':
+        get_teacher = get_object_or_404(Teacher, id=request.POST.get('username',None))
+
+        check_following = get_teacher.followers.filter(id=request.user.student.id).exists()
+
+        if check_following:
+            get_teacher.followers.remove(request.user.student.id)
+            is_following = False
+        else:
+            get_teacher.followers.add(request.user.student.id)
+            is_following = True
+
+        get_teacher.save()
+
+        print(is_following)
+
+        data = {
+            'is_following': is_following
+        }
+        return JsonResponse(data)
+
+
 
 def student_list_teacher(request):
     teacherInstance = get_object_or_404(Teacher, pk=request.user.teacher.id)

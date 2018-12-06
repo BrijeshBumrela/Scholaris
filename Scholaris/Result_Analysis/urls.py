@@ -25,4 +25,5 @@ urlpatterns = [
     path('follow/', views.follow, name='follow'),
     path('list_all_teachers_to_follow/', views.list_all_teachers_to_follow, name='list_all_teachers_to_follow'),
     path('task/', views.add_task, name='task'),
+    path('follow_ajax/', views.follow_ajax, name='follow_ajax')
 ]

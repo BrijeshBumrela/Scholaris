@@ -40,7 +40,6 @@ def exam_error(request):
 
 @login_required(login_url='result:login')
 @user_passes_test(check_teacher, login_url='/test/error')
-
 def design(request):
     test_form = TestCreateForm()
     question_formset = formset_factory(QuestionForm)
@@ -97,17 +96,6 @@ def design(request):
     return render(request, 'Test_Designing/exam_set.html', context)
 
 #exam_taking views starts here
-@login_required()
-@user_passes_test(check_student, login_url='/test/error')
-# def list_all_test(request):
-#     teacher_list = Teacher.objects.filter(followers=request.user.student)
-#     test_list = []
-#     for teacher in teacher_list:
-#         test_list.extend(teacher.test_set.all())
-#     context = {
-#         'test_list':test_list
-#     }
-#     return render(request, 'Test_Designing/t.html', context)
 
 @login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')

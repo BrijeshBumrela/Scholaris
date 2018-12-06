@@ -55,12 +55,19 @@
                             </tr>
                             </thead>
                             <tbody id="myTable">
-                                {% for teacher in teachers %}
+                                {% for teacher,follow in follow_list %}
                                     <tr>
                                         <td>{{ teacher.teacher.username }}</td>
                                         <td>{{ teacher.teacher.email }}</td>
                                         <td>
-                                            <button class="btn btn-lg">Follow</button>
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                {% if follow %}
+                                                    <button value="{{ teacher.id }}" class="btn btn-lg btn-danger follow-btn">Unfollow</button>
+                                                {% else %}
+                                                    <button value="{{ teacher.id }}" class="btn btn-lg btn-success follow-btn">Follow</button>
+                                                {% endif %}
+                                            </form>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -106,6 +113,35 @@ function sortTable() {
     }
   }
 }
+
+$('.follow-btn').click(function(e) {
+    e.preventDefault();
+    const username = $(this).val();
+
+    $.ajax({
+        type: 'POST',
+        url: "/follow_ajax/",
+        data: {
+            username: username,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        dataType: 'json',
+        success: function(data) {
+            if(data.is_following === true) {
+                $('.follow-btn').html('Unfollow');
+                $('.follow-btn').addClass('btn-danger');
+                $('.follow-btn').removeClass('btn-success');
+            }
+            else {
+                $('.follow-btn').html('Follow');
+                $('.follow-btn').addClass('btn-success');
+                $('.follow-btn').removeClass('btn-danger');
+            }
+        }
+    })
+
+})
+
 
 
 
