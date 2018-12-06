@@ -40,7 +40,6 @@
     </nav>
 
 {% elif request.user.teacher %}
-    Hi {{ request.user }}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +50,7 @@
                 <li class="nav-item"><a href="{% url 'result:dashboard' %}" class='nav-link'"> Dashboard</a></li>
                 <li class="nav-item"><a href="{% url 'exam:list_all_test' %}" class='nav-link'"> Create Test</a></li>
                 <li class="nav-item"><a href="{% url 'forum:forum-post-list' %}" class='nav-link'"> Forum</a></li>
-                <li class="nav-item"><a href="{% url 'result:list_all_teachers_to_follow' %}" class='nav-link'"> Followers</a></li>
+                <li class="nav-item"><a href="{% url 'result:list_all_students' %}" class='nav-link'"> Followers</a></li>
                 <li class="nav-item"><a href="{% url 'result:list_all_teachers_to_follow' %}" class='nav-link'"> Course</a></li>
             </ul>
 

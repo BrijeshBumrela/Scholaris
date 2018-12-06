@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>student profile</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/userprofile.css' %}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+</head>
+<body class="body">
+	<div class="container-fluid">
+		
+		<div class="profile-main">
+			<div class="profile-header">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="user-image">
+							<img src="{{ student.photo.url }}">
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="user-data">
+							<br><br><br>
+							<p style="font-size: 18px">
+                                student name: {{ student.student.first_name }} {{ student.student.last_name }}<br>
+							</p>
+						</div>
+					</div>
+					<div class="tab-panel-main">
+						<ul class="tabs">
+							<li class="tab-link current" data-tab="course-detail">Basic-details </li>
+							<li class="tab-link" data-tab="previousexam-detail">Previous-exam details</li>
+							<li class="tab-link" data-tab="allexam">Previous exams Details</li>
+						</ul>
+						<div id="course-detail" class="tab-content current"><br><br><br><br><br><br><br><br>
+                            <div class="bio-box">
+
+                                <div class="desc">
+                                    course information:
+                                </div>
+                            </div>
+                            <div class="detail-box">
+                                <p>Detail</p>
+                                <ul class="ul-first">
+                                    <li>Birth date</li>
+                                    <li>City</li>
+                                    <li>Country</li>
+                                </ul>
+                                <ul class="ul-second">
+                                    <li>8 March 1997</li>
+                                    <li>Chennai</li>
+                                    <li>India</li>
+                                </ul>
+                            </div>
+                        </div>
+							<div id="previousexam-detail" class="tab-content"><br><br><br><br><br><br><br><br>
+								<div class="Edu-box-main">
+									<h2><i class="fa fa-graduation-cap" aria-hidden="true"></i> Previous exam details</h2>
+									<div class="Edu-box">
+										<h5><span>marks scored</span> <br>
+											marks scored will be shown here.
+										</div>
+										<div class="Edu-box">
+											<h5><span>class average</span> <br>
+												class average will be shown here.
+											</div>
+										</div>
+									</div>
+									<div id="allexam" class="tab-content"><br><br><br><br><br><br><br><br>
+										<div class="portfolio-box">
+											<div class="portfolio-img-box">
+												<h3>student stats</h3>
+												<img src="graph.jpg">
+											</div>
+											<div class="portfolio-img-box">
+												<h3>exams graph</h3>
+												<img src="">
+											</div>
+											
+										</div>
+									</div>
+								</div>
+
+								<div class="footer">
+									<p><strong>contact student:</strong></p><br>
+									student contacts will be shown here.<br>
+									<i class="fa fa-address-card" aria-hidden="true"> address of the student</i><br>
+									<i class="fa fa-phone" aria-hidden="true"> phone number</i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('ul.tabs li').click(function(){
+							var tab_id = $(this).attr('data-tab');
+
+							$('ul.tabs li').removeClass('current');
+							$('.tab-content').removeClass('current');
+
+							$(this).addClass('current');
+							$("#"+tab_id).addClass('current');
+						});
+					});
+				</script>
+
+
+			</body>
+			</html>

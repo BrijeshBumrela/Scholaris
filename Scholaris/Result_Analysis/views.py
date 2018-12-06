@@ -5,6 +5,7 @@ from .models import Student, Teacher, Course, Task
 from django.http import HttpResponse
 from Test_Designing.models import StudentResult, Test
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from Test_Designing.views import check_student, check_teacher
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Discussion_Forum.models import Post
 from django.contrib import messages
@@ -119,16 +120,18 @@ def choose_course_teacher(request):
     }
     return render(request, 'Result_Analysis/courses.html', context)
 
+
+@login_required()
+@user_passes_test(check_teacher, login_url='/test/error')
 def list_all_students(request):
-    std2 = Student.objects.all()
-    stud_list = []
-    for stud in std2:
-        stud_list.append(stud.student.username)
+    teacher = get_object_or_404(Teacher, id=request.user.teacher.id)
+
+    stud_list = teacher.followers.all()
+    print(stud_list)
     context = {
         'all_students': stud_list
     }
-    print(stud_list)
-    return render(request, 'Result_Analysis/list_all_students.html', context)
+    return render(request, 'Result_Analysis/stu.html', context)
 
 def list_all_teachers_to_follow(request):
     teachers = Teacher.objects.all()
@@ -329,4 +332,14 @@ def add_task(request):
     return redirect('result:dashboard')
 
 
+
+def userprofile(request, id):
+    student = get_object_or_404(Student, id=id)
+    print(student)
+
+    context = {
+        'student': student
+    }
+
+    return render(request, 'Result_Analysis/userprofile.html', context)
 

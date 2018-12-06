@@ -55,13 +55,18 @@
                             </tr>
                             </thead>
                             <tbody id="myTable">
-                                {% for student in students %}
+                                {% for student in all_students %}
                                     <tr>
-                                        <td>{{ student.total_votes }}</td>
-                                        <td>{{ student.student.email }}</td>
-                                        <td>{{ student.student.last_name }}</td>
-                                    </tr>
 
+                                            <td>
+                                                <a href="{% url 'result:userprofile' student.id %}" style="text-decoration: none;">
+                                                    {{ student.student.first_name }}
+                                                </a>
+                                            </td>
+                                            <td>{{ student.student.email }}</td>
+                                            <td>{{ student.student.last_name }}</td>
+
+                                    </tr>
                                 {% endfor %}
                             </tbody>
                         {% endif %}
