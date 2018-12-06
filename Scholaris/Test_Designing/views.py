@@ -99,15 +99,15 @@ def design(request):
 #exam_taking views starts here
 @login_required()
 @user_passes_test(check_student, login_url='/test/error')
-def list_all_test(request):
-    teacher_list = Teacher.objects.filter(followers=request.user.student)
-    test_list = []
-    for teacher in teacher_list:
-        test_list.extend(teacher.test_set.all())
-    context = {
-        'test_list':test_list
-    }
-    return render(request, 'Test_Designing/t.html', context)
+# def list_all_test(request):
+#     teacher_list = Teacher.objects.filter(followers=request.user.student)
+#     test_list = []
+#     for teacher in teacher_list:
+#         test_list.extend(teacher.test_set.all())
+#     context = {
+#         'test_list':test_list
+#     }
+#     return render(request, 'Test_Designing/t.html', context)
 
 @login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
@@ -184,24 +184,26 @@ def result(request, id):
 @user_passes_test(check_student, login_url='/test/error')
 def list_all_test(request):
     teacher_list = Teacher.objects.filter(followers=request.user.student)
-    #test_list = []
-    '''
+    test_list = []
     for teacher in teacher_list:
         test_list.extend(teacher.test_set.all())
+
+    #test_list = []
+    '''
     tl = []
     oneday = datetime.timedelta(days=1)
     for t in list(test_list):
-        
+
         diff = t.time.date() - datetime.date.today()
         if(diff < oneday ):
             tl.append(t)
-        
+
         if (t.date.date() > datetime.date.today()):
             tl.append(t)
     #test_list=tl
     '''
     context = {
-        'test_list':teacher_list
+        'test_list':test_list
     }
     return render(request, 'Test_Designing/test_list.html', context)
 
