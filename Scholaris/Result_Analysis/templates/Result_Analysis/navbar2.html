@@ -1,58 +1,102 @@
 
 {% load static %}
 
+    <style>
+        .navbar-nav > li {
+            margin-right: 35px;
+            margin-left: 35px;
+        }
+    </style>
 
-	<link rel="stylesheet" href="{% static 'Result_Analysis/navbar2.css' %}">	
-	<nav>
-		<div class="menu">
-			<ul>
-				{% if request.user.student %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item"><a href="{% url 'result:dashboard' %}" class='nav-link'"> Dashboard</a></li>
+      <li class="nav-item"><a href="{% url 'exam:list_all_test' %}" class='nav-link'"> Take Test</a></li>
+      <li class="nav-item"><a href="{% url 'result:results' %}" class='nav-link'"> Results</a></li>
+      <li class="nav-item"><a href="{% url 'forum:forum-post-list' %}" class='nav-link'"> Forum</a></li>
+      <li class="nav-item"><a href="{% url 'result:list_all_teachers_to_follow' %}" class='nav-link'"> Following</a></li>
+      <li class="nav-item"><a href="{% url 'result:list_all_teachers_to_follow' %}" class='nav-link'"> Course</a></li>
 
-					<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a></li>
-					<li style="color: #f4c613">Hi {{ request.user.username }}</li>
-                    <li><a href="{% url 'result:dashboard' %}" class='menu-item'">DASHBOARD</a></li>
-					<li><a href="{% url 'result:profile' %}" class="menu-item">PROFILE</a></li>
-			 		<li><a href="{% url 'exam:list_all_test' %}" class="menu-item">TEST-TAKING</a></li>
-					<li><a href="{% url 'result:results' %}" class="menu-item">RESULTS</a></li>
-					<li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>
-					<li><a href="{% url 'result:list_all_teachers_to_follow' %}" class="menu-item">FOLLOWING</a></li>
-					<li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>
-					<li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
-				{% endif %}
-				{% if request.user.teacher %}
-                    <li>Hi {{ request.user.username }}</li>
-					<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
-					<li><a href="{% url 'result:profile2' %}" class="menu-item">PROFILE</a></li>
-			 		<li><a href="" class="menu-item">FOLLOWERS</a></li>
-			 		<li><a href="{% url 'exam:design' %}" class="menu-item">MAKE A TEST</a></li>
-					<li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>
-                    <li><a href="{% url 'result:student_list_teacher' %}">LIST STUDENTS</a></li>
-					<li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>
-					<li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
-				{% endif %}
-			</ul>
-			<div class="search-form">
-				<input type="text" name="" placeholder="search sholaris.com">		
-			</div>
-			<a class="close"><i class="fa fa-times"></i></a>
-		</div>
-	</nav>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Hi {{ request.user }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'result:profile' %}">Profile</a>
+          <a class="dropdown-item" href="{% url 'result:logout' %}">LogOut</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+{#	<nav>#}
+{#		<div class="menu">#}
+{#			<ul>#}
+{#				{% if request.user.student %}#}
+{#                    <li>Hi {{ request.user.username }}</li>#}
+{#					<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a></li>#}
+{#					<li><a href="{% url 'result:dashboard' %}" class='menu-item'">DASHBOARD</a></li>#}
+{#					<li><a href="{% url 'result:profile' %}" class="menu-item">PROFILE</a></li>#}
+{#			 		<li><a href="{% url 'exam:list_all_test' %}" class="menu-item">TEST-TAKING</a></li>#}
+{#					<li><a href="{% url 'result:results' %}" class="menu-item">RESULTS</a></li>#}
+{#					<li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>#}
+{#					<li><a href="{% url 'result:list_all_teachers_to_follow' %}" class="menu-item">FOLLOWING</a></li>#}
+{#					<li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>#}
+{#					<li><a href="#" id="search"><i class="fa fa-search"></i></a></li>#}
+{#				{% endif %}#}
+{#				{% if request.user.teacher %}#}
+{#                    <li>Hi {{ request.user.username }}</li>#}
+{#					<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>#}
+{#					<li><a href="{% url 'result:profile2' %}" class="menu-item">PROFILE</a></li>#}
+{#			 		<li><a href="" class="menu-item">FOLLOWERS</a></li>#}
+{#			 		<li><a href="{% url 'exam:design' %}" class="menu-item">MAKE A TEST</a></li>#}
+{#					<li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>#}
+{#                    <li><a href="{% url 'result:student_list_teacher' %}">LIST STUDENTS</a></li>#}
+{#					<li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>#}
+{#					<li><a href="#" id="search"><i class="fa fa-search"></i></a></li>#}
+{#				{% endif %}#}
+{#			</ul>#}
+{#			<div class="search-form">#}
+{#				<input type="text" name="" placeholder="search sholaris.com">#}
+{#			</div>#}
+{#			<a class="close"><i class="fa fa-times"></i></a>#}
+{#		</div>#}
+{#	</nav>#}
+>>>>>>> Test_Designing
 <br><br>
-	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-	<script type="text/javascript">
+
+
+<script type="text/javascript">
 	  	$(document).ready(function(){
 	  			$('#search').click(function(){
-	  				$('.menu-item').addClass('hide-item')
-	  				$('.search-form').addClass('active')
-	  				$('.close').addClass('active')
+	  				$('.menu-item').addClass('hide-item');
+	  				$('.search-form').addClass('active');
+	  				$('.close').addClass('active');
 	  				$('#search').hide()
 
-	  			})
+	  			});
 	  			$('.close').click(function(){
-	  				$('.menu-item').removeClass('hide-item')
-	  				$('.search-form').removeClass('active')
-	  				$('.close').removeClass('active')
+	  				$('.menu-item').removeClass('hide-item');
+	  				$('.search-form').removeClass('active');
+	  				$('.close').removeClass('active');
 	  				$('#search').show()
 	  			})
 	  	})
+
+
 	</script>
+

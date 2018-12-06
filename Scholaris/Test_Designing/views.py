@@ -99,15 +99,15 @@ def design(request):
 #exam_taking views starts here
 @login_required()
 @user_passes_test(check_student, login_url='/test/error')
-def list_all_test(request):
-    teacher_list = Teacher.objects.filter(followers=request.user.student)
-    test_list = []
-    for teacher in teacher_list:
-        test_list.extend(teacher.test_set.all())
-    context = {
-        'test_list':test_list
-    }
-    return render(request, 'Test_Designing/t.html', context)
+# def list_all_test(request):
+#     teacher_list = Teacher.objects.filter(followers=request.user.student)
+#     test_list = []
+#     for teacher in teacher_list:
+#         test_list.extend(teacher.test_set.all())
+#     context = {
+#         'test_list':test_list
+#     }
+#     return render(request, 'Test_Designing/t.html', context)
 
 @login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
@@ -120,9 +120,13 @@ def exam_form(request):
 def exam(request):
     testid = request.POST['exam-name']
     posts = Question.objects.filter(question__question_list__id=testid)
-    timer = Test.objects.get(pk=testid).duration
+    get_test = get_object_or_404(Test, id=testid)
+    timer = get_test.duration
 
-
+    expiry_time = get_test.time + datetime.timedelta(minutes=get_test.duration)
+    r = expiry_time - timezone.now()
+    print(r)
+    print(r.seconds)
     if posts.count() is 0:
         return HttpResponse('exam not found!')
     else:
@@ -131,7 +135,7 @@ def exam(request):
         context = {
             'posts': test,
             'no_of_qs':posts.count(),
-            'timer':timer,
+            'timer': int(r.seconds),
         }
         return render(request,'Test_Designing/t.html',context)
     #return HttpResponse('exam')
@@ -180,24 +184,26 @@ def result(request, id):
 @user_passes_test(check_student, login_url='/test/error')
 def list_all_test(request):
     teacher_list = Teacher.objects.filter(followers=request.user.student)
-    #test_list = []
-    '''
+    test_list = []
     for teacher in teacher_list:
         test_list.extend(teacher.test_set.all())
+
+    #test_list = []
+    '''
     tl = []
     oneday = datetime.timedelta(days=1)
     for t in list(test_list):
-        
+
         diff = t.time.date() - datetime.date.today()
         if(diff < oneday ):
             tl.append(t)
-        
+
         if (t.date.date() > datetime.date.today()):
             tl.append(t)
     #test_list=tl
     '''
     context = {
-        'test_list':teacher_list
+        'test_list':test_list
     }
     return render(request, 'Test_Designing/test_list.html', context)
 
@@ -207,6 +213,12 @@ def detail(request, id):
     question_list = get_test.questionset.question_set.all()
 
     student = Student.objects.get(student=request.user)
+     
+    timer = get_test.duration
+
+    expiry_time = get_test.time + datetime.timedelta(minutes=get_test.duration)
+    r = expiry_time - timezone.now()
+
 
     if (get_test.studentresult_set.filter(student=student).exists()):
         return HttpResponse("You Can't Bruh !")
@@ -221,7 +233,7 @@ def detail(request, id):
             'posts':test,
             'test':get_test,
             'no_of_qs': question_list.count(),
-            'timer': get_test.duration,
+            'timer': r.seconds,
         }
 
     return render(request, 'Test_Designing/t.html', context)
@@ -230,14 +242,21 @@ def detail(request, id):
 def testdetail(request, id):
     get_test = get_object_or_404(Test, id=id)
     entry_token = False
-    if get_test.date < timezone.now():
+    expiry_token= False
+    expiry_time = get_test.time + datetime.timedelta(minutes=get_test.duration)
+    r =expiry_time - timezone.now()
+    if get_test.time < timezone.now():
         entry_token = True
+    if expiry_time < timezone.now():
+        expiry_token = True
 
     context = {
         'test':get_test,
-        'timer': get_test.duration,
-        'time':get_test.date,
+        'timer': int(r.seconds),
+        'time':get_test.time,
         'marks':get_test.total_marks,
         'entry_token':entry_token,
+        'expiry_token':expiry_token,
+        'expiry_time':expiry_time,
     }
     return render(request, 'Test_Designing/quiz-form.html', context)

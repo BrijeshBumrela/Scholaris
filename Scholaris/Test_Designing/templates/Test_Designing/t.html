@@ -4,7 +4,8 @@
     <script>
     var questions_order = [];
     var number = {{ no_of_qs }};
-    var timer_no = {{ timer }}*60;
+    var timer_no = {{ timer }};
+    console.log({{ timer }})
     $(function(){
         text_qs(number);
         create(number);
