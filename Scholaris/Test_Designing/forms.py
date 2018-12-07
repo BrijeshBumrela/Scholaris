@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from django.utils import timezone
 
 class QuestionForm(forms.ModelForm):
 
@@ -20,10 +21,19 @@ class QuestionForm(forms.ModelForm):
 class TestCreateForm(forms.ModelForm):
     class Meta:
         model = Test
-
         exclude = ('teacher','total_marks',)
 
 
+    def clean(self):
+        cleaned_data = super().clean()
+
+        exam_date = cleaned_data.get('time')
+        if exam_date < timezone.now():
+            self.add_error('time', 'Selected Time from past')
+
+        exam_duration = cleaned_data.get('duration')
+        if exam_duration < 0:
+            self.add_error('duration', 'Time can not be negative')
 
 
 

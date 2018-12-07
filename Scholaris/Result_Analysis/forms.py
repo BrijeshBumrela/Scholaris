@@ -107,6 +107,8 @@ class ProfileUpdateForm(forms.ModelForm):
             user_profile.user = user
         user_profile.save()
         return user_profile'''
+
+
 class TeacherProUpdateForm(forms.ModelForm):
     #dob = forms.DateField(widget=DatePicker(options={"format": "YYYY-MM-DD"}, fontawesome=True))
     class Meta:
