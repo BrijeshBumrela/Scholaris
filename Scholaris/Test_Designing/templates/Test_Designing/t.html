@@ -4,7 +4,8 @@
     <script>
     var questions_order = [];
     var number = {{ no_of_qs }};
-    var timer_no = {{ timer }}*60;
+    var timer_no = {{ timer }};
+    console.log({{ timer }})
     $(function(){
         text_qs(number);
         create(number);
@@ -20,7 +21,7 @@
         <h1 class="test-name">Test name</h1>
     </div>
     <div class="col-3 m-auto">
-        <p id="demo1"></p>
+        <div id="getting-started" style="font-size: 40px"></div>
     </div>
 </div>
 <div class="container-fluid mt-5 mb-5" >
@@ -136,4 +137,14 @@
 </div>
 </form>
 
+<script type="text/javascript">
+
+    var exam_date = new Date("{{ expiry_time.isoformat }}")
+  $('#getting-started').countdown(exam_date, function(event) {
+    $(this).html(event.strftime('%H:%M:%S'));
+    if(event.elapsed){
+        $("#examform").submit();
+    }
+  });
+</script>
 {% endblock %}
