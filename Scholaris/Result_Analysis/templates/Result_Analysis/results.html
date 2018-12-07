@@ -39,6 +39,8 @@
 	    
         <script type="text/javascript">
         	var percentage =  "{{percentage}}";
+        	var highest="{{top}}";
+        	var average="{{average}}"
         	console.log(percentage);
         	var marks = {{test_marks}}
         	var test=[];
@@ -48,7 +50,7 @@
         		test.push(tests.concat(i))
         	}
 	  		console.log(marks);
-        	console.log(percentage);
+        	console.log(top);
         </script>
 
 		<style type="text/css">
@@ -120,9 +122,7 @@
                         <div class="stats-item text-center">
                             <i class="fas fa-book"></i>
                             <h3 class="counter">
-                            	{% for a in students %}
-									{{a.course.count}}
-								{% endfor %}
+                            	{{students}}
 							</h3>
                             <p>No. of Courses</p>
                         </div>
@@ -164,7 +164,7 @@
 						{% csrf_token %}
 
 							{% for c in courses %}
-							<input type="radio" style="width:15px" name="select_course" value="{{ c }}" required="" checked="">{{c}}<br>
+							<input type="radio" style="width:15px" name="select_course" value="{{ c }}" required="">{{c}}<br>
 	  						{% endfor %}
 
 						<input class='btn-general btn-profile' type="submit" value="ok" name="">
@@ -180,7 +180,7 @@
 				
 				</div> 
 				
-				<div class="col-md-4">
+				<div class="col-md-5">
 				
 					<div id='chart2'> 
 						<br>
@@ -201,10 +201,9 @@
 		
 		<!-- Counter -->
 		<script src="{% static 'Result_Analysis/js/counter/jquery.counterup.min.js' %}"></script>
-	
-		<script src="{% static 'Result_Analysis/js/apex/apexcharts.js' %}"></script>
+
+		<script type="text/javascript" src='https://cdn.jsdelivr.net/npm/apexcharts'></script>		
 		<script src="{% static 'Result_Analysis/js/apex/chart1.js' %}"></script>
-	
 	
         <script src = "{% static 'Result_Analysis/js/script.js' %}"> </script>
 

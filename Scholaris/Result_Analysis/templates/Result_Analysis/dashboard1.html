@@ -33,6 +33,13 @@
 
 </head>
 <body>
+	<script type="text/javascript">
+        	var percentage =  "{{percent}}";
+        	var marks ={{marks}}
+        	var test={{tests}}
+
+	</script>
+
     {% include 'Result_Analysis/navbar2.html' %}
 
     {% if request.user.student %}

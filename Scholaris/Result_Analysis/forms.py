@@ -48,6 +48,12 @@ class TeacherRegistrationForm(UserCreationForm):
         if admin_id != '12345':
             print('Yes it is right')
             self.add_error('admin_id', 'Admin id does not match')
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+        if email and User.objects.filter(email=email).exclude(username=username).exists():
+            raise forms.ValidationError(u'Email id already exists')
+        return email
 
 
 class StudentRegistrationForm(UserCreationForm):
@@ -82,7 +88,12 @@ class StudentRegistrationForm(UserCreationForm):
         if password != confirm_password:
             print('are password not equal?')
             self.add_error('password', 'Password Did Not Match')
-
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+        if email and User.objects.filter(email=email).exclude(username=username).exists():
+            raise forms.ValidationError(u'Email id already exists')
+        return email
 
 
 class UserUpdateForm(UserChangeForm):

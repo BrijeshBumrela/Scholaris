@@ -27,4 +27,9 @@ class Teacher(models.Model):
 
     def __str__(self):
         return '{}'.format(self.teacher.username)
+class otp_verify(models.Model):
+    name=models.CharField(max_length=50)
+    otp=models.IntegerField(default=0)
 
+    def __str__(self):
+        return '{}'.format(self.name)

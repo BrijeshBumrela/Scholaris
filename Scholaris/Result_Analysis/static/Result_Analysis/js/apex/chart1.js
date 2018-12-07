@@ -1,34 +1,55 @@
 var options = {
-    chart: {
-        height: 350,
-        type: 'radialBar',
-		
-    },
-    plotOptions: {
-        radialBar: {
-            hollow: {
-                size: '70%',
-            }
-        },
-    },
-    series: [ percentage ],
-    labels: ['Your percentage'],
-    fill:{
-                colors: ['#f4c613']
+            chart: {
+                height: 400,
+                type: 'radialBar',
             },
-}
 
-var chart1 = new ApexCharts(
-    document.querySelector("#chart1"),
-    options
-);
+            title: {
+                text: 'Performance Comparison',
+                align: 'center',
+                margin: 20,
+                offsetY: 20,
+                style: {
+                    fontSize: '25px',
+                    color: '#212226',
+                },
+            },
 
-chart1.render();
+            plotOptions: {
+                circle: {
+                    dataLabels: {
+                        showOn: 'hover'
+                    }
+                },
+                radialBar: {
+                    hollow: {
+                        margin: 5,
+                        size: '60%',
+                        background: 'transparent',
+                        image: undefined,
+                    },
+                }
+            },
+            colors: ['#212226','#f4c613','#A9A9A9'],
+            series: [highest, average, percentage],
+            labels: ['Highest', 'Course Mean', 'Your Percentage'],
+           
+            markers: {
+                colors: ['#ffff00']
+            }
+            
+        }
 
+       var chart = new ApexCharts(
+            document.querySelector("#chart1"),
+            options
+        );
+        
+        chart.render();
 
 var options1 = {
             chart: {
-                height: 350,
+                height: 400,
                 type: 'bar',
             },
             plotOptions: {
