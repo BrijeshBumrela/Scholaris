@@ -1,0 +1,88 @@
+{% extends 'Result_Analysis/base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+	{% block head %}
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+ 	<style type="text/css">
+ 		.log{
+ 			color: #f4c613;
+ 			background-color: #f4f4f4;
+ 			height: 710px;
+ 			text-align: center;
+ 			padding-top:150px;
+ 		}
+ 		.btn-general{
+			font-family:'Raleway',san-serif;
+			border-radius: 28px;
+			font-size:13px;
+			text-transform: uppercase;
+			padding:12px 46px 12px 46px;
+			margin:0px 6px;
+			-webkit-transition:all .5s;
+			transition: all .5s;
+
+		}
+		.btn-profile{
+			background-color : #f4f4f4;
+			color:#000;
+			border:1px solid #fff;
+		}
+		.btn-profile:hover,
+		.btn-profile:focus {
+			color: #fff;
+			background-color: #f4c613;
+			border:1px solid #f4c613;
+		}
+		input[type=text],input[type=password]{
+			width:250px;
+			background: transparent;
+    		border-radius: 20px;
+    		height: 40px;
+    		background-color: #fff;
+    		text-align: center;
+    		color:#000;
+    		font-family: Raleway;
+    		font-size:20px;
+		}
+		.input{
+			background-color: #fff;
+		}
+		.glyphicon {
+			font-size: 200px;
+			color: #212226;
+		}
+		label{
+			font-family: Open Sans;
+			font-size:20px;
+			color: #212226;
+		}
+ 	</style>
+ 	{% endblock %}
+
+
+ 	{% block content %}
+	{% include 'Result_Analysis/navbar.html' %}
+<div class="container">
+	<div class="log"">
+		<div class="glyphicon glyphicon-user"></div><br><br>
+		<form method="POST" class="w3-container">
+			{% csrf_token %}
+			<label>USERNAME</label><br>
+
+			{{form.username}}<br>{{form.username.errors}}<br>
+		
+			<label>PASSWORD</label><br>
+			{{form.password}}<br>{{form.password.errors}}<br>
+
+			<button class='btn-general btn-profile' type="submit">LOGIN</button>
+		</form>
+	</div>
+</div>
+	
+
+
+	{% endblock %}

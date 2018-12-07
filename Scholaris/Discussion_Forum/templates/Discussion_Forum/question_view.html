@@ -1,0 +1,45 @@
+{% extends "Discussion_Forum/question.html"  %}
+{% block title %} {{ post.title }} | Discussion Forum {% endblock %}
+{% block content %}
+
+
+     <div class="card">
+        <div class="card-body" >
+            <h3 class="card-title text-capitalize ">
+                    {{ post.title }}
+            </h3>
+            {{ post.body }}
+            <div class="card-text text-secondary">
+                By {{ post.author }} updated on {{ post.updated }}
+            </div>
+            <br>
+
+
+            <div id="upvote-section">
+                {% include 'Discussion_Forum/upvotepost_section.html' %}
+            </div>
+
+            {% if post.author == request.user %}
+                <div class="section1" style="float:right;">
+                    <a href="{% url 'forum:post_edit' id=post.id %}">
+                        <button type="button" class="btn btn-outline-success">Edit</button>
+                    </a>
+                    <a href="{% url 'forum:post_delete' id=post.id %}">
+                        <button type="button" class="btn btn-outline-danger" id="delete">Delete </button>
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+           <div class="comment-section">
+            {% include 'Discussion_Forum/comments.html' %}
+
+           </div>
+                </div>
+                </div>
+
+
+
+{% endblock content %}

@@ -22,9 +22,61 @@
     <form action="{% url 'result:teacher_register' %}" method="POST">
         {% csrf_token %}
 
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+
         <div>
             <h3>For Teacher</h3>
-            {{ form.as_p }}
+            <p>
+                <label for="id_username">Username:</label>
+                {{ form.username }}
+                <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+            </p>
+            <p>
+                <label for="id_first_name">First name:</label>
+                {{ form.first_name }}
+            </p>
+            <p>
+                <label for="id_last_name">First name:</label>
+                {{ form.last_name }}
+            </p>
+            <p>
+                <label for="id_email">Email:</label>
+                {{ form.email }}
+            </p>
+            <p>
+                <label for="id_password1">Password:</label>
+                {{ form.password1 }}
+                <span class="helptext">
+                    <ul>
+                        <li>Your password can&#39;t be too similar to your other personal information.</li>
+                        <li>Your password must contain at least 8 characters.</li>
+                        <li>Your password can&#39;t be a commonly used password.</li>
+                        <li>Your password can&#39;t be entirely numeric.</li>
+                    </ul>
+                </span>
+            </p>
+            <p>
+                <label for="id_password2">Password confirmation:</label>
+                {{ form.password2 }}
+                <span class="helptext">Enter the same password as before, for verification.</span>
+            </p>
+            <p>
+                <label for="id_admin_id">Admin id:</label>
+                {{ form.admin_id }}
+            </p>
         </div>
 
         <input type="submit" value="Student">

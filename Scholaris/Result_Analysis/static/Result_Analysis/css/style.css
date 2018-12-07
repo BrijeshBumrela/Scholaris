@@ -1,0 +1,185 @@
+ /*   Default fonts - Raleway & Open Sans
+   =================================================
+      Default colors -> moon yellow - #f4c613
+	                    Grey        - #212226
+						White Smoke - #f4f4f4
+						White       - #fff
+						Black       - #000
+   ==================================================
+  */
+  
+  
+  
+   /* ============= Html, Body ===========================*/
+   html, body {
+	   height : 100%;
+   }
+   
+   body {
+	   color : #f4f4f4;
+   }
+   
+   h1,h2,h3,h4,h5,h6 {
+	   font-family : "Raleway", sans-serif;
+   }
+   
+   p {
+	   font-family :"Open Sans", sans-serif;
+	   font-size : 13px;
+	   font-weight : 400;
+	   line-height : 24px;
+   }
+   
+   section {
+	   background : #fff;
+	   overflow : hidden;
+   }
+
+
+   /* =====================Pre Loader===================== */
+
+   #pre-loader {
+   
+        background-color : #fff;
+		position : fixed;
+		top : 0;
+		bottom : 0;
+		left : 0;
+		right : 0;
+        z-index : 9999;
+		
+   }  
+
+   #status {
+ 
+    background-image : url("../img/preloader.gif");  
+    background-repeat :	no-repeat; 
+	width : 70px;
+	height : 70px;
+	position : absolute;
+	left : 50%;
+	top : 50%;
+	margin-top : -45px;
+	margin-left : -35px;
+	
+   }
+
+
+    /* ====================== Buttons ======================== */
+
+   .btn-general {
+	   font-family : 'Raleway', sans-serif;
+	   border-radius : 28px;
+	   font-size : 13px;
+	   text-transform : uppercase;
+	   margin : 0 6px;
+	   padding: 12px 46px 12px 46px;
+       -webkit-transition : all .5s;
+       transition : all .5s;
+   }
+   
+   .btn-results {
+	   background-color : #f4f4f4;
+	   color : #000;
+	   border : 1px solid #fff;
+   }
+   
+   .btn-results:hover,
+   .btn-results:focus {
+	   color: #fff;
+	   background-color:#f4c613;
+	   border:1px solid #f4c613;
+	   
+	   
+	   
+   }
+    /*========================Results==========================*/
+    .content-box-md {  
+		padding: 50px 0;
+	}
+	
+	.vertical-heading h4 {
+		color : #f4c613;
+		font-size: 14px;
+		font-weight: 500;
+		text-transform: uppercase;
+		word-spacing : 9px;
+		display: inline-block;
+		-webkit-transform: rotate(-90deg);
+		transform: rotate(-90deg);
+		position: relative;
+		top : 60px;
+		left: -23px;	
+	}
+	
+	.vertical-heading h2 {
+		margin: 0 0 0 35px;
+		font-size : 42px;
+		font-weight : 100;
+		line-height: 45px;
+	}
+	
+	#results {
+	background : #212226;
+	}
+	
+	#results .vertical-heading {
+		margin-bottom: 50px;
+	}
+	
+	#results .vertical-heading h2 {
+		color : #fff;
+	}
+	
+	.stats-item {
+		background : rgba(61, 68, 68, 0.6);
+		border-radius:4px;
+		min-height: 170px;
+		padding: 25px 50px; 
+		-webkit-transition : all 400ms linear;
+		transition : all 400ms linear;
+	}	
+	
+	.stats-item i{
+		font-size: 42px;
+		color: #f4c613;
+		margin: 0 0 6px 0;
+		-webkit-transition : all 400ms linear;
+		transition : all 400ms linear;
+	}
+	
+	.stats-item h3{
+		font-size: 32px;
+		color: #fff;
+		margin: 5px 0 5px 0;
+	}
+	
+	.stats-item p{
+		color:#fff;
+		margin:0;
+	}
+	
+	.stats-item:hover{
+		background:#f4c613;
+	}
+	
+	.stats-item:hover i{
+		color :#000 ;
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+	
+	/*====================== Side bar in Results ===========================*/
+	
+	
+    
+		
+		
+	
+	
+	
+    
+	   
+	   
+ 
+						              

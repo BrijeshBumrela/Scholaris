@@ -1,30 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Quiz-form</title>
-</head>
+<html>
 <body>
 
 
-
-        <h1> test name is  {{ test.id }}</h1>
-        <h2>Duration of exam :{{timer}}</h2>
+<h1> test name is  {{ test.id }}</h1>
+        <h2>exam wiil ends at :{{ expiry_time }}</h2>
         <h3>Exam is on : {{time}}</h3>
         <h4>maximum marks :{{marks}}</h4><br>
 
-
-
-        {% if entry_token %}
+    
+    {% if expiry_token %}
+      <h3>Sorry!exam is expired</h3>
+    {% elif entry_token %}
         <a href="{% url 'exam:detail' test.id %}">take exam</a>
-
-        {% else %}
+        <br>exam wiil expiry on :{{ expiry_time }}
+    {% else %}
         <!-- Display the countdown timer in an element -->
         <div class="exam-time">
             <p>Exam starts in </p>
             <p id="demo"></p>
         </div>
-        {% endif %}
+    {% endif %}
 <script>
 var exam_date = new Date("{{ time.isoformat }}").getTime()
 var ran = Date.parse("{{ time.isoformat }}")

@@ -1,0 +1,67 @@
+{% extends 'Result_Analysis/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+	<link rel="stylesheet" href="{% static 'Result_Analysis/register.css' %}">	
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content %}
+{% include 'Result_Analysis/navbar.html' %}
+
+	<div class="row">
+
+		<div class="col-md-6 student container">
+			<center>
+			<div>
+				<img class='images' height=400px src="{% static 'Result_Analysis/student.jpg' %}">
+			</div>
+			<div id="student_register" class="overlay">
+				<h1 style="color:#212226">STUDENT REGISTRATION</h1>
+				<form action="{% url 'result:student_register' %}" method="POST" class="form1">
+        			{% csrf_token %}<br><br>
+					{{form1.username}}<br>{{ form1.username.errors }}<br>
+					{{form1.first_name}}<br>{{ form1.first_name.errors }}<br>
+					{{form1.last_name}}<br>{{ form1.last_name.errors }}<br>
+					{{form1.email}}<br>{{ form1.email.errors }}<br>
+					{{form1.password1}}<br>{{ form1.password1.errors }}<br>
+					{{form1.password2}}<br>{{ form1.password2.errors }}<br>
+					<input class="reg" type="submit" value="Register">				 
+				</form>
+			</div>
+			</center>
+		</div>
+
+
+
+		<div class="col-md-6 teacher container">
+			<center>
+			<div >
+				<img  class="images" src="{% static 'Result_Analysis/teacher.jpg' %}" height=400px>
+			</div>
+			<div id="teacher_register" class="overlay">
+				<h1  style="color:#212226">TEACHER REGISTRATION</h1><br>
+				<form action="{% url 'result:teacher_register' %}" method="POST">
+       				{% csrf_token %}
+
+					{{form.username}}<br>{{ form.username.errors }}<br>
+					{{form.first_name}}<br>{{ form.first_name.errors }}<br>
+					{{form.last_name}}<br>{{ form.last_name.errors }}<br>
+					{{form.email}}<br>{{ form.email.errors }}<br>
+					{{form.password1}}<br>{{ form.password1.errors }}<br>
+					{{form.password2}}<br>{{ form.password2.errors }}<br>
+					{{form.admin_id}}<br>{{ form.admin_id.errors }}<br>
+					<input class="reg" type="submit" value="Register">				 
+				</form>
+			</div>
+			</center>
+
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript" src="{% static 'Result_Analysis/register.js'%}"></script>
+{% endblock %}

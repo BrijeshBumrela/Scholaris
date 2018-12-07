@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">    
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+	<title> Scholaris</title>
+
+	<link rel="icon" type="jpg/png" href="{% static 'Result_Analysis/home_images/logo-dark.png' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/home_css/style.css' %}">
+
+	<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+      <!-- Basic SEO -->
+    <meta name="description" content="Creative website development with html5, css3, jQuery & bootstrap framework">
+    <meta name="keywords" content="HTML5, CSS3, JQuery, Bootstrap, Web Design, Web Development, Responsive website, Creative website">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'Result_Analysis/home_img/favicon/favicon.ico' %}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/font-awesome/css/font-awesome.min.css' %}">
+
+
+    <!-- Owl Carousel CSS -->
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/owl-carousel/owl.carousel.min.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/owl-carousel/owl.theme.default.min.css' %}">#}
+
+    <!-- Responsive Tabs CSS -->
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/responsive-tabs/responsive-tabs.min.css' %}">#}
+
+    <!-- Magnific Popup -->
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/magnific-popup/magnific-popup.min.css' %}">#}
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/animate/animate.css' %}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/style.css' %}">
+
+    <!-- Responsive CSS -->
+{#    <link rel="stylesheet" href="{% static 'Result_Analysis/home_css/responsive.css' %}">#}
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+</head>
+<body>
+	    <body>
+	<nav>
+		<div class="menu">
+            {% if request.user.teacher %}
+                <ul>
+                    {% if request.user.teacher %}
+                        <li><a class="menu-item" href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
+                        <li><a href="{% url 'result:profile2' %}" class="menu-item">PROFILE</a></li>
+                        <li><a href="#" class="menu-item">FOLLOWERS</a></li>
+                        <li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>
+                        <li><a href="{% url 'result:list_all_teachers_to_follow' %}" class="menu-item">STUDENTS</a></li>
+                        <li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>
+                        <li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
+                    {% endif %}
+                </ul>
+            {% elif request.user.student %}
+                <ul>
+                    <li>Hi Student</li>
+					<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a></li>
+					<li><a href="{% url 'result:dashboard' %} class='menu-item'">DASHBOARD</a></li>
+					<li><a href="{% url 'result:profile' %}" class="menu-item">PROFILE</a></li>
+			 		<li><a href="{% url 'exam:list_all_test' %}" class="menu-item">TEST-TAKING</a></li>
+					<li><a href="{% url 'result:results' %}" class="menu-item">RESULTS</a></li>
+					<li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">Forum</a></li>
+					<li><a href="#" class="menu-item">FOLLOWING</a></li>
+					<li><a href="{% url 'result:list_all_students' %}" class="menu-item">List Students</a></li>
+					<li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>
+					<li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
+				</ul>
+            {% else %}
+                <ul>
+                    <li><a href="#" class="icn"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
+                    <li ><a href="#" class="menu-item">Home</a></li>
+                    <li><a href="#about" class="menu-item">About</a></li>
+                    <li><a href="#contact" class="menu-item">Contact</a></li>
+                    <li><a href="#about-023" class="menu-item">Discussion</a></li>
+                    <li><a href="{% url 'result:login' %}" class="menu-item">Login</a></li>
+                    <li><a href="{% url 'result:register' %}" class="menu-item">Register</a></li>
+                </ul>
+
+            {% endif %}
+
+		</div>
+	</nav>
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+		 <section id="home">
+		 	<img src="{% static 'Result_Analysis/home_images/bg.jpg' %}" id="home-bg-img">
+		 	<!--overlay-->
+		 	<div id="home-overlay"></div>
+		 	<div id="home-content">
+		 		<div id="home-content-inner" class="text-center">
+		 			<div id="home-heading">
+		 				<h1 id="home-heading-1" class="animated fadeInDown">
+		 					Scholaris
+		 				</h1>
+		 				<h1 id="home-heading-2">
+		 					<span class="txt-type" data-wait="3000" data-words='["Result analyzer", "Guide", "Test Taker"]'>&nbsp;</span>
+		 				</h1>
+
+		 			</div>
+		 			<div id="home-text">
+		 				<p>Your classroom website for fun, effective engagement and on-the-fly assessments.</p>
+
+		 			</div>
+		 			<div id="home-btn">
+		 				<a class="btn btn-general btn-home" href="#about" title="Start Now" role="button"> Start Now</a>
+		 			</div>
+		 		</div>
+		 	</div>	
+			</section>
+<!-- Home ends-->
+
+
+<!--==============================================================
+	                   About
+===============================================================	-->
+<section id="about">
+	<div id="about-01">
+		<div class="content-box-lg">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+					<div id="about-left">
+						<div class="vertical-heading">
+							<h5>
+								Who we are
+							</h5>
+							<h2>A <strong>Story</strong><br>About Us</h2>
+						</div>
+					</div>
+					</div>
+					<div class="col-md-6">
+						<div id="about-right">
+							<p>
+								Yet fear of losing classroom control and creating gaps in content coverage can often cause teachers to back off and resort to a didactic teacher led approach.  We’re bringing the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and analyze subject matter as part of a novice group and then teach as part of a newly formed expert group.
+							</p>
+
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div id="about-bottom">
+							<img src="{% static 'Result_Analysis/home_images/about.jpg' %}" alt="About Us" class="img-responsive">
+						</div>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+
+
+<div id="about-021">
+	<div class="content-box-md">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-md-7">
+					<div class="row wow fadeIn" data-wow-duration="3s">
+					<img src="{% static 'Result_Analysis/home_images/screenshots/screen1.jpg' %}" class="scrn">
+					</div>
+			</div>
+				<div class="col-md-5">
+					<div class="row wow fadeInLeft" data-wow-duration="3s">
+					<div class="vertical-heading">
+							<h2> <strong>Test</strong> Taking</h2><br>
+						</div>
+						<div id="about-right">
+							<p>
+								Yet fear of losing classroom control and creating gaps in content coverage can often cause teachers to back off and resort to a didactic teacher led approach.  We’re bringing the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and analyze subject matter as part of a novice group and then teach as part of a newly formed expert group.
+							</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+<div id="about-022">
+	<div class="content-box-md">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-md-5">
+					<div class="row wow fadeInRight" data-wow-duration="3s">
+					<div class="vertical-heading">
+							
+							<h2> <strong>Result</strong> Analysis</h2><br>
+						</div>
+						<div id="about-right">
+							<p>
+								Yet fear of losing classroom control and creating gaps in content coverage can often cause teachers to back off and resort to a didactic teacher led approach.  We’re bringing the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and analyze subject matter as part of a novice group and then teach as part of a newly formed expert group.
+							</p>
+						</div>
+					</div>
+				</div>
+			
+				
+					<div class="col-md-6">
+						<div class="row wow fadeIn" data-wow-duration="3s">
+						<img src="{% static 'Result_Analysis/home_images/screenshots/screen2.jpg' %}" class="scrn">
+					</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+<div id="about-023">
+	<div class="content-box-md">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-7">
+					<div class="row wow fadeIn" data-wow-duration="3s">
+					<img src="{% static 'Result_Analysis/home_images/screenshots/screen3.jpg' %}" class="scrn">
+				</div>
+				</div>	
+				<div class="col-md-5">
+					<div class="row wow fadeInLeft" data-wow-duration="3s">
+					<div class="vertical-heading">
+							
+							<h2> <strong>Discussion</strong> Forum</h2><br>
+						</div>
+						<div id="about-right">
+							<p>
+								Yet fear of losing classroom control and creating gaps in content coverage can often cause teachers to back off and resort to a didactic teacher led approach.  We’re bringing the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and analyze subject matter as part of a novice group and then teach as part of a newly formed expert group.
+							</p>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+
+
+
+
+    </section>
+    <section id="contact">
+		<div class="content-box-md">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="vertical-heading">
+							<h5>
+								For Queries
+							</h5>
+							<h2><strong>Contact</strong><br>Us on</h2>
+						</div>
+					</div>
+						<div id="about-right">
+							<a href="https://www.facebook.com/">
+								<div class="contact-item ">
+
+									<i class="fab fa-facebook-square"></i>
+									
+								</div>
+							</a>
+							</div>
+							<a href="https://twitter.com/login">
+								<div class="contact-item ">
+								<i class="fab fa-twitter-square"></i>
+							</div>
+						</a>
+								<a href="https://mail.google.com/mail/u/0/#inbox">
+								<div class="contact-item ">
+									<i class="fas fa-envelope-square"></i>
+								</div>
+								</a>
+					</div>
+				</div>		
+		</div>
+				<script src="{% static 'Result_Analysis/home_js/main.js' %}" ></script>
+				 <!-- WOW JS -->
+    			<script src="{% static 'Result_Analysis/home_js/wow/wow.min.js' %}"></script>
+</body>
+</html>
+
+		

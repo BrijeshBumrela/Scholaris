@@ -1,0 +1,27 @@
+
+
+.btn-general{
+	font-family:'Raleway',san-serif;
+	border-radius: 28px;
+	font-size:13px;
+	text-transform: uppercase;
+	padding:12px 46px 12px 46px;
+	margin:0px 6px;
+	transition: all .5s;
+
+}
+.btn-profile{
+	background-color : #f4f4f4;
+	color:#000;
+	border:1px solid #fff;
+}
+.btn-profile:hover,
+.btn-profile:focus {
+	color: #fff;
+	background-color: #f4c613;
+	border:1px solid #f4c613;
+}
+
+.text{
+	color: #fff;
+}

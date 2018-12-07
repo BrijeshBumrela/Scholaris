@@ -1,0 +1,47 @@
+{% extends "Discussion_Forum/post_list.html"  %}
+{% block content %}
+
+    <div class="infinite-container">
+        {% for post in posts %}
+
+
+             <div class="card card-content infinite-item animated bounceInUp delay-4 ">
+                <div class="card-body" >
+                    <h3 class=" text-capitalize card-title">
+                        <a href="{{ post.get_absolute_url }}" class="card-link">
+                            {{ post.title }}
+                        </a>
+
+                    </h3>
+                    {{ post.body }}<br><br>
+
+                    <div class="card-text text-secondary float-right">
+                        By {{ post.author }} <br> updated on {{ post.updated }}
+                    </div>
+                     <br><i class="fas fa-thumbs-up "></i>  {{ post.total_upvotes }} Upvote{{ post.total_upvotes|pluralize }}
+                </div>
+             </div>
+
+            {% empty %}
+            <div class="container-fluid">
+                <br><br>
+                <h3>No Posts Found having search query "{{ request.GET.q }}"</h3>
+            </div>
+
+        {% endfor %}
+    </div>
+
+
+  {% if numbers.has_next %}
+    <a class="infinite-more-link" href="?page={{ numbers.next_page_number }}">More</a>
+  {% endif %}
+
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0]
+    });
+  </script>
+
+
+{% endblock content %}
+

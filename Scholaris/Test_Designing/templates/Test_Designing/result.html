@@ -21,7 +21,7 @@
   <div class="header">
     <div class="container" style="width: 100%;">
       <h1>
-        <iframe width="90" height="100" src="https://lottiefiles.com/iframe/782-check-mark-success" frameborder="0" ></iframe><br>
+        <iframe width="90" height="100" src="https://lottiefiles.com/iframe/782-check-mark-success"  frameborder="0" ></iframe><br>
         You have successfully submitted your test<br>
         Thank You...
       </h1>
@@ -39,9 +39,12 @@
         <br>Answered Wrong:
         <br>{{ wrong_ans }}
         <br>
-        <a href="{% url 'exam:index' %}">
-        <button class="button" style="font-family: 'Raleway';font-size: 20px;" >Exit
-        </button></a>
+        <a href="{% url 'exam:index' %}" style="text-decoration: none;">
+            <button class="button" style="font-family: 'Raleway';font-size: 20px;">
+                Exit
+            </button>
+        </a>
+
         <br><br><br>
       </div>
     </div>

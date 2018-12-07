@@ -234,7 +234,10 @@ def detail(request, id):
             'test':get_test,
             'no_of_qs': question_list.count(),
             'timer': r.seconds,
+<<<<<<< HEAD
             'expiry_time': expiry_time
+=======
+>>>>>>> 662d863f5d913fd8176c32e05db0d3d02d931fc8
         }
 
     return render(request, 'Test_Designing/t.html', context)

@@ -1,14 +1,21 @@
 {% load static %}
-
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Create Test</title>
+    <link rel="stylesheet" href="{% static 'Test_Designing/css/datedropper.css' %}">
+    <link rel="stylesheet" href="{% static 'Test_Designing/css/custom-datedropper.css' %}">
+    <link rel="stylesheet" href="{% static 'Test_Designing/css/jquery.timepicker.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
+    <script src="{% static 'Test_Designing/datedropper.js' %}"></script>
+    <script src="{% static 'Test_Designing/js/timepicker/jquery.timepicker.js' %}"></script>
 </head>
 
 <body>
 
-    {% if test_form.errorr or question_formset.errors %}
+    {% if test_form.errors or question_formset.errors %}
         <p>NOT VALID</p>
             {% for error in test_form.errors %}
                 {{ error }}
@@ -16,10 +23,33 @@
     {% endif %}
     <br>
     <br>
-    <form method="POST" action="{% url 'exam:design' %}">
+    <form method="POST" action="{% url 'exam:design' %}" novalidate id="subForm">
         <!-- Create A drop down containing all categories (hardcode it) -->
         {% csrf_token %}
-        {{ test_form.as_p }}
+        <div>
+            <p>
+                <label for="id_name">Name:</label>
+                {{ test_form.name }}
+            </p>
+            <p>
+                <label for="id_description">Description:</label>
+                {{ test_form.description }}
+            </p>
+            <p style="display:none;">
+                <label for="id_date">Date:</label>
+                {{ test_form.time|add_class:'dateTimeDisplay' }}
+            </p>
+            <p>
+                <label for="date">Date:</label>
+                <input type="text" class="datedropper-class" maxlength="50" required id="id_date">
+            </p>
+            <p>
+                <input type="text" class="decide_time"  maxlength="50" required>
+            </p>
+            <p><label for="id_duration">Duration (In Minutes):</label>
+                {{ test_form.duration }}
+            </p>
+        </div>
         <div>
             {{ question_formset.management_form }}
             {% for question in question_formset%}
@@ -33,12 +63,11 @@
             </div>
             {% endfor %}
         </div>
-        <input type="submit" value="CreateTest">
+        <input class="submitBtn" type="submit" value="CreateTest">
     </form>
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
+
 <script type="text/javascript">
     $('.link-formset').formset({
         addText: 'Add Question',
@@ -56,6 +85,28 @@
             question_counter += 1;
         }
     });
+    // Setting up the date
+    $('.datedropper-class').dateDropper();
+
+
+    // Setting up the time
+    {#$('.decide_time').timepicker();#}
+
+    $('.decide_time').timepicker({ 'timeFormat': 'H:i:s' });
+
+    const timeVar = document.querySelector('.decide_time');
+    const dateVar = document.querySelector('.datedropper-class');
+
+
+    document.querySelector('#subForm').addEventListener('submit',(e) => {
+            const dateTimeVar = `${dateVar.value} ${timeVar.value}`;
+
+            dateTimeDisplay = document.querySelector('.dateTimeDisplay');
+            dateTimeDisplay.value = dateTimeVar;
+
+    });
+
+
 </script>
 
 

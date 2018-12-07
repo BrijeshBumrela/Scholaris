@@ -3,7 +3,7 @@
 {% block content %}
     {% for test in test_list %}
 
-        <div>
+        <div style="margin-left: 500px">
 
             <a href="{% url 'exam:testdetail' test.id %}">{{ test.total_marks }} - {{ test.teacher }}</a>
 
