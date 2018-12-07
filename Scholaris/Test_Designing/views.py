@@ -257,4 +257,5 @@ def testdetail(request, id):
         'expiry_token':expiry_token,
         'expiry_time':expiry_time,
     }
-    return render(request, 'Test_Designing/quiz-form.html', context)
+    return render(request, 'Test_Designing/test_description.html', context)
+    # return render(request, 'Test_Designing/quiz-form.html', context)
