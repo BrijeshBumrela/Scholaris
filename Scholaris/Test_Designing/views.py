@@ -248,3 +248,28 @@ def testdetail(request, id):
         'expiry_time':expiry_time,
     }
     return render(request, 'Test_Designing/quiz-form.html', context)
+
+@login_required()
+@user_passes_test(check_teacher, login_url='/test/error')
+def my_test(request):
+    teacher = get_object_or_404(Teacher, id=request.user.teacher.id)
+
+    context = {
+        'list': teacher.test_set.all()
+    }
+
+    return render(request, 'Test_Designing/my_test.html', context)
+
+
+@login_required()
+@user_passes_test(check_teacher, login_url='/test/error')
+def edit_test(request, id):
+    test = get_object_or_404(Test, id=id)
+    question_list = test.questionset.question_set.all()
+
+    context = {
+        'q_list': question_list
+    }
+
+    return render(request, 'Test_Designing/edit_test.html', context)
+

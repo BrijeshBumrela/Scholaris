@@ -29,6 +29,9 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status  = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
+    # Post(title='1',body='11',tag='JS', status='published')
+
+
     def __str__(self):
         return  self.title
 

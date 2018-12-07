@@ -1,0 +1,17 @@
+{% extends 'Result_Analysis/base.html' %}
+
+{% block content %}
+    {% include 'Result_Analysis/navbar2.html' %}
+
+    {% for test in list %}
+
+        {{ test.name }} {{ test.time }}
+        {% if time_passed %}
+        {% else %}
+            <a href="{% url 'exam:edit_test' test.id %}">Edit Test</a>
+        {% endif %}
+        <br>
+
+    {% endfor %}
+
+{% endblock %}

@@ -37,11 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'Result_Analysis',
     'Discussion_Forum',
     'Test_Designing',
+    'restScholaris',
     'widget_tweaks',
+    'django_crontab',
 ]
+
+CRONJOBS = [
+    ('1 * * * *', 'Test_Designing.cron.my_task'),
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
