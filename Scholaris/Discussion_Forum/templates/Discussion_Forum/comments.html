@@ -18,21 +18,39 @@
                <hr>
                     <h4 class="text ml-5">{{ comments.count }} Answer{{ comments|pluralize }}</h4>
                 <hr>
-                {% for comment in comments %}
+                {% for comment,upvote,is_comment_upvoted,is_teacher in up %}
+
                     <div class="card">
-                        <!-- Left-aligned media object -->
-                        <div class="media">
-                            <div class="media-body">
-                                <blockquote class="blockquote" style="font-size: medium">
-                                    <p class "mb-0"> {{ comment.content }} </p>
-                                    <footer class="blockquote-footer">by <cite title="Source Title"> {{ comment.user | capfirst }}</cite></footer>
-                                </blockquote>
+                        {{ comment.user }}
+                        {% if is_teacher %}
+                            <div class="media">
+                                <div class="media-body">
+                                    <blockquote class="blockquote" style="font-size: large">
+                                        <p class="mb-0 float-left"> {{ comment.content }} </p>
+                                        <div class="float-right">
+                                            <i class="fas fa-chalkboard-teacher"></i>
+                                            <span style="font-size: large"class="badge badge-pill badge-success">{{ comment.user }}</span>
+                                        </div>
+                                        <footer class="blockquote-footer" style="font-size: medium">by <cite title="Source Title"> {{ comment.user | capfirst }}</cite></footer>
+                                    </blockquote>
+                                </div>
                             </div>
+                        {% else %}
+                            <div class="media">
+                                <div class="media-body">
+                                    <blockquote class="blockquote" style="font-size: large">
+                                        <p class="mb-0"> {{ comment.content }} </p>
+                                        <footer class="blockquote-footer" style="font-size: medium">by <cite title="Source Title"> {{ comment.user | capfirst }}</cite></footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+
+                        {% endif %}
+                        <div id="comment_upvote">
+
+                                     {% include 'Discussion_Forum/answerup-downvote.html' %}
                         </div>
-
-                        <!--             {% include 'Discussion_Forum/answerup-downvote.html' %}
-                                  -->
-
                         <hr>
                     </div>
+
                 {% endfor %}

@@ -9,30 +9,53 @@ from .forms import *
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+import copy
+from Result_Analysis.models import Course,Teacher
 
 
 # Create your views here.
 def post_list(request):
-    posts = Post.published.all().order_by('-updated')
+    post_list = Post.published.all().order_by('-updated')
     query = request.GET.get('q')
     if query:
-        posts = Post.published.filter(
+        post_list = Post.published.filter(
             Q(title__icontains=query)|
             Q(author__username=query)|
             Q(body__icontains=query)
         )
-    page = request.GET.get('page', 1)
-    paginator = Paginator(posts, 5)
-    try:
-        numbers = paginator.page(page)
-    except PageNotAnInteger:
-        numbers = paginator.page(1)
-    except EmptyPage:
-        numbers = paginator.page(paginator.num_pages)
 
+    Tag = request.POST.getlist('check')
+
+    if Tag:
+
+        p1 = []
+        for tag in Tag:
+            p1.extend(Post.published.filter(Q(tag__icontains=tag)))
+        post_list = copy.deepcopy(p1)
+
+    tags = []
+    for post in post_list:
+        tag = post.tag
+        tag = tag.split("  ")
+
+        tags.append(tag)
+
+
+    paginator = Paginator(post_list, 5)
+    page = request.GET.get('page')
+
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    post = zip(posts, tags)
     context = {
-        'posts':posts,
-        'numbers': numbers,
+        'post': post,
+        'posts': posts,
+        'courses': Course.objects.all(),
     }
 
     return render(request, 'Discussion_Forum/post_view.html', context)
@@ -56,18 +79,29 @@ def question(request, id, slug):
     if post.upvotes.filter(id=request.user.id).exists():
         is_upvoted = True
 
-    comment_id = 0
-    is_comment_upvoted = False
-    total_comment_upvotes = [0]
+    teacher_present = True
+    teacher_not_present = False
+    is_teacher = []
+
+    is_comment_upvoted = []
+    total_comment_upvotes = []
     for comment in comments:
 
+        try:
+            comment.user.teacher
+            is_teacher.append(teacher_present)
+        except:
+            is_teacher.append(teacher_not_present)
+
+
         if comment.upvotes.filter(id=request.user.id).exists():
-            comment_id = comment.id
-            is_comment_upvoted = True
+            is_comment_upvoted.append(True)
         else:
-            comment_id = False
+            is_comment_upvoted.append(False)
 
         total_comment_upvotes.append(comment.total_comment_upvotes())
+
+    up = zip(comments,total_comment_upvotes,is_comment_upvoted,is_teacher)
 
 
     context = {
@@ -75,12 +109,9 @@ def question(request, id, slug):
         'post': post,
         'is_upvoted': is_upvoted,
         'total_upvotes': post.total_upvotes(),
-        'comments': comments,
-        'comment_id' : comment_id,
-        'is_comment_upvoted': is_comment_upvoted,
-        'total_comment_upvotes': total_comment_upvotes,
         'comment_form': comment_form,
-
+        'comments':comments,
+        'up': up,
     }
     if request.is_ajax():
         html = render_to_string('Discussion_Forum/comments.html', context, request=request)
@@ -119,7 +150,6 @@ def post_create(request):
 
     if request.method == 'POST':
         form = PostCreateForm(request.POST)
-        print(form)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -156,32 +186,15 @@ def post_delete(request, id):
     if request.user != post.author:
         raise Http404
     post.delete()
-    #
-    # url: str = 'http://127.0.0.1:8000/forum'
     return redirect('forum:forum-post-list')
 
 @login_required()
 def updown_comment(request, id):
     comment = get_object_or_404(Comment, id=id)
-    print(comment)
     if comment.upvotes.filter(id=request.user.id).exists():
         comment.upvotes.remove(request.user)
-        is_comment_upvoted = False
     else:
         comment.upvotes.add(request.user)
-        is_comment_upvoted = False
 
-    attr = comment.post.id
-    attr2 = comment.post.slug
-    
-    url: str = 'http://127.0.0.1:8000/forum/question/' + str(attr) + '/' + str(attr2)
-
-    return HttpResponseRedirect(url)
-
-
-class PostsView(ListView):
-    model = Post
-    paginate_by = 5
-    context_object_name = 'posts'
-    template_name = 'Discussion_Forum/post_view.html'
+    return HttpResponseRedirect(comment.post.get_absolute_url())
 

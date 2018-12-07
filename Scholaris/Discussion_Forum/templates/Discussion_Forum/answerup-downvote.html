@@ -6,16 +6,16 @@
          <form action="{% url 'forum:updown_comment' comment.id %}" method="post">
              {% csrf_token %}
 
-             {% if  comment_id == comment.id  %}
+             {% if  is_comment_upvoted  %}
                  <div class="ml-md-4">
                      <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-success mr-md-0" ><i class="fas fa-thumbs-up"></i></button>
-                     <div>{{ total_comment_upvotes.comment.id }}</div>
+                     <div>{{ upvote }}</div>
                  </div>
              {% else %}
 
                  <div class="ml-md-4">
                          <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-up"></i></button>
-                         <div  class="btn btn-general mx-md-0">{{ total_comment_upvotes.commment.id }}</div>
+                         <div>{{ upvote }}</div>
                  </div>
              {% endif %}
 
