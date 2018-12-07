@@ -39,10 +39,16 @@ def dashboard(request):
     countPost = post_count(request.user)
     tasks = user.task_set.all()
 
+    student = get_object_or_404(Student,id=1)
+    teachers= student.teacher_set.all()
+    events =[]
+    for teacher in teachers:
+        events.extend(teacher.test_set.all())
     context = {
         'posts': posts,
         'post_count': countPost,
-        'tasks': tasks
+        'tasks': tasks,
+        'events':events,
     }
     return render(request, 'Result_Analysis/dashboard1.html', context)
 
