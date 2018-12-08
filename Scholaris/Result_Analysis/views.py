@@ -59,11 +59,17 @@ def dash_marks(result):
     marks=[]
     for tests in result:
         marks.append(tests.marks)
+    length=len(marks)
+    if length>10:
+        marks=marks[length-10:]
     return marks
 def dash_test(result):
     test_ids=[]
     for x in result:
         test_ids.append(x.test.id)
+    length=len(test_ids)
+    if length>10:
+        test_ids=test_ids[length-10:]
     return test_ids
 @login_required()
 def dashboard(request):
@@ -80,11 +86,17 @@ def dashboard(request):
             context['percent'] = percent
             context['marks'] = marks
             context['tests']=tests
-
+            posts = get_question()
+            print(posts)
+            context = {
+                'posts':posts,
+                'percent':percent,
+                'marks':marks,
+                'tests':tests,
+            }
+            return render(request, 'Result_Analysis/dashboard1.html', context)
     except:
         pass
-
-
     posts = get_question()
     print(posts)
     context = {
@@ -380,14 +392,24 @@ def student_list_teacher(request):
 def profile(request):
     if request.method == 'POST':
         u_form= UserUpdateForm(request.POST,instance=request.user or None)
-        p_form= ProfileUpdateForm(request.POST,request.FILES,instance=request.user.student or None)
+        try:
+            if request.user.student:
+                p_form= ProfileUpdateForm(request.POST,request.FILES,instance=request.user.student or None)
+        except:
+            p_form = TeacherProUpdateForm(request.POST, request.FILES, instance=request.user.teacher)
+
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
             return redirect('result:profile')
     else:
         u_form= UserUpdateForm(instance=request.user)
-        p_form= ProfileUpdateForm(instance=request.user.student)
+        try:
+            if request.user.student:
+                p_form= ProfileUpdateForm(instance=request.user.student)
+        except:
+            p_form = TeacherProUpdateForm(instance=request.user.teacher)
+
         # std=Student.objects.filter(pk=request.user.student.id)
         # for std in std:
         #     born=std.dob
@@ -401,39 +423,17 @@ def profile(request):
     return render(request, 'Result_Analysis/profile.html', context)
 
 '''       Profile for teacher         '''
-
-def teacher_profile(request):
-    if request.method == 'POST':
-        u1_form = UserUpdateForm(request.POST, instance=request.user)
-        p1_form = TeacherProUpdateForm(request.POST, request.FILES, instance=request.user.teacher)
-
-        if u1_form.is_valid() and p1_form.is_valid():
-            u1_form.save()
-            p1_form.save()
-            return redirect('result:profile2')
-    else:
-        u1_form = UserUpdateForm(instance=request.user)
-        p1_form = TeacherProUpdateForm(instance=request.user.teacher)
-        # std=Teacher.objects.filter(pk=request.user.teacher.id)
-        # for std in std:
-        #     born=std.dob
-        # aged=age(born)
-
-    context = {
-        'u1_form': u1_form,
-        'p1_form': p1_form,
-        # 'age':aged
-    }
-    return render(request, 'Result_Analysis/profile.html', context)
-
-
 def change_password(request):
     if request.method== 'POST':
         change_form = passwordchange(data=request.POST,user=request.user)
         if change_form.is_valid():
             change_form.save()
             update_session_auth_hash(request,change_form.user)
-            return redirect('result:profile')
+            try:
+                if request.user.student:
+                    return redirect('result:profile')
+            except:
+                return redirect('result:profile')
     else:
         change_form=passwordchange(user=request.user)
     context ={
@@ -441,19 +441,6 @@ def change_password(request):
     }
     return render(request, 'Result_Analysis/updatepassword.html', context)
 
-def change_password2(request):
-    if request.method== 'POST':
-        change_form = passwordchange(data=request.POST,user=request.user)
-        if change_form.is_valid():
-            change_form.save()
-            update_session_auth_hash(request,change_form.user)
-            return redirect('result:profile2')
-    else:
-        change_form=passwordchange(user=request.user)
-    context ={
-        'change_form':change_form,
-    }
-    return render(request, 'Result_Analysis/updatepassword.html', context)
 
 def course(stds):
     for std in stds:
@@ -494,6 +481,9 @@ def marks(result):
     test_marks=[]
     for tests in result:
         test_marks.append(tests.marks)
+    if len(test_marks)>10:
+        length=len(test_marks)-10
+        test_marks=test_marks[length:]
     return test_marks
 def StudentNames(result):
     names=set()
@@ -532,6 +522,18 @@ def average(result):
         percentage=(sum(marks)/sum(total))*100
         percentage=round(percentage,2)
     return percentage
+def test(result):
+    test_ids=[]
+    str1="test"
+    for x in result:
+        test_ids.append(x.test.id)
+    # for i in range(0,len(test_ids)):
+    #     x=test_ids[i]
+    #     test_ids[i]=str1+str(x)
+    length=len(test_ids)
+    if length>10:
+        test_ids=test_ids[length-10:]
+    return test_ids
 
 def results(request):
     student = Student.objects.filter(pk=request.user.student.id)
@@ -545,10 +547,11 @@ def results(request):
         result3= StudentResult.objects.filter(test__teacher__course__name=subject)
         StdNames=StudentNames(result3)
         test_marks=marks(result2)
+        testids=test(result2)
         percent=course_percentage(result2)
         top=topper(StdNames,result3)
         avg=average(result3)
-        context = {'average':avg,'top':top,'stdnames':StdNames,'students':no_courses,'results':result,'high':high,'courses':names,'test_marks':test_marks,'percentage':percent,'no_courses':no_courses,'course_name':result2,}
+        context = {'testids':testids,'average':avg,'top':top,'stdnames':StdNames,'students':no_courses,'results':result,'high':high,'courses':names,'test_marks':test_marks,'percentage':percent,'no_courses':no_courses,'course_name':result2,}
         return render(request,'Result_Analysis/results.html',context)
     else:
         context = {'students':no_courses,'results':result,'high':high,'courses':names,'no_courses':no_courses,}

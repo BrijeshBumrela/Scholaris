@@ -49,23 +49,7 @@
 
 			<div  class="col-sm-8" id="edit2">
 				<H4 style="color: #f4c613">UPDATE PROFILE</H4><hr style="border-color:#f4c613">
-				{% if request.user.teacher %}
 				<form method="POST" enctype="multipart/form-data">
-					{% csrf_token %}
-
-						<span style="color: #f4c613">FirstName:</span>
-						<span style="color: #f4f4f4; margin-left:100px">{{u1_form.first_name}}</span><br><br>
-						<span style="color: #f4c613">LastName:</span>
-						<span style="color: #f4f4f4; margin-left:100px">{{u1_form.last_name}}</span><br><br>
-						<span style="color: #f4c613">DateOfBirth:</span>
-						<span style="color: #f4f4f4; margin-left:90px">{{p1_form.dob}}</span><br><br>
-						<span  style="color: #f4c613"><input type="date" name="dob" id="id_dob"><br></span>
-					<button class='btn-general btn-profile' class="reg" type="submit">Update</button><br><br>
-
-				{% endif %}
-
-					{% if request.user.student %}
-					<form method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
 						<span style="color: #f4c613">FirstName  :</span>
 						<span style="color: #f4f4f4; margin-left:100px">{{u_form.first_name}}</span><br><br>
@@ -76,16 +60,8 @@
 						<span  style="color: #f4c613">
 						{{p_form.photo}}<br></span>
 					<button class='btn-general btn-profile' class="reg" type="submit">Update</button><br><br>
-
-					{% endif %}
-
 				</form>
-				{% if request.user.student %}
-				<button class='btn-general btn-profile'><a style="text-decoration: none;" href="{% url 'result:changepassword'%}">CHANGE PASSWORD</a></button>
-				{% endif %}
-				{% if request.user.teacher %}
-				<button class='btn-general btn-profile'><a style="text-decoration: none;" href="{% url 'result:changepassword2'%}">CHANGE PASSWORD</a></button>
-				{% endif %}
+					<button class='btn-general btn-profile'><a style="text-decoration: none;" href="{% url 'result:changepassword'%}">CHANGE PASSWORD</a></button>
 			</div>
 		</div>
 		
