@@ -178,9 +178,9 @@ def result(request, id):
 
 
 
-#exam-taking vies ends here
+#exam-taking views ends here
 
-@login_required()
+@login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
 def list_all_test(request):
     teacher_list = Teacher.objects.filter(followers=request.user.student)

@@ -9,6 +9,13 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'Chandrahaas3@gmail.com'
+EMAIL_HOST_PASSWORD = 'password7075'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 import os
 
@@ -80,7 +87,7 @@ WSGI_APPLICATION = 'Scholaris.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),#name of database
     }
 }
 

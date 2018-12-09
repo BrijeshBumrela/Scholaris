@@ -1,0 +1,18 @@
+{% extends 'Result_Analysis/base.html' %}
+{% block content %}
+
+	{% for message in messages %}
+                    <div class="alert alert-success">
+                        <a class="close" href="#" data-dismiss="alert">×</a>
+
+                        {{ message }}
+
+                    </div>
+     {% endfor %}
+	<form action="{% url 'result:new_otp' %}" method='POST'>
+		{% csrf_token %}
+		<input type="hidden" name='email' value="{{ email }}">
+		enter otp:<input type="text" name="otp1">
+		<input type="submit" name="submit">
+	</form>
+{% endblock %}

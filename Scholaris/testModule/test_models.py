@@ -10,6 +10,7 @@ class ExamTestClass(TestCase):
         user = User.objects.create(username='roger',email='roger@gmail.com',password='federer@20')
         teacher = Teacher.objects.create(teacher=user)
 
+
     def setUp(self):
         pass
 
@@ -17,5 +18,4 @@ class ExamTestClass(TestCase):
         get_teacher = Teacher.objects.get(id=1)
         expected_name = "{0}".format(get_teacher.teacher.username)
         self.assertEqual(expected_name, str(get_teacher))
-
 

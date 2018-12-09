@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{% static 'Test_Designing/css/datedropper.css' %}">
     <link rel="stylesheet" href="{% static 'Test_Designing/css/custom-datedropper.css' %}">
     <link rel="stylesheet" href="{% static 'Test_Designing/css/jquery.timepicker.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/ques1.css' %}">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
     <script src="{% static 'Test_Designing/datedropper.js' %}"></script>
@@ -23,6 +25,16 @@
     {% endif %}
     <br>
     <br>
+
+
+    <div class="container-fluid">
+
+    </div>
+
+
+
+
+
     <form method="POST" action="{% url 'exam:design' %}" novalidate id="subForm">
         <!-- Create A drop down containing all categories (hardcode it) -->
         {% csrf_token %}

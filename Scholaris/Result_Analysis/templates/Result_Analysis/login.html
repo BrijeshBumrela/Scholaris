@@ -1,5 +1,5 @@
 {% extends 'Result_Analysis/base.html' %}
-
+{% block title %}Login {% endblock %}
 {% load static %}
 
 {% load widget_tweaks %}
@@ -67,7 +67,7 @@
  	{% block content %}
 	{% include 'Result_Analysis/navbar.html' %}
 <div class="container">
-	<div class="log"">
+	<div class="log">
 		<div class="glyphicon glyphicon-user"></div><br><br>
 		<form method="POST" class="w3-container">
 			{% csrf_token %}
@@ -80,6 +80,7 @@
 
 			<button class='btn-general btn-profile' type="submit">LOGIN</button>
 		</form>
+		<a href="{% url 'result:new_pass' %}">forget password?</a>
 	</div>
 </div>
 	
