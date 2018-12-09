@@ -1,51 +1,29 @@
-        var options = {
-            chart: {
-                height: 400,
-                type: 'radialBar',
-            },
-
-            title: {
-                text: 'Performance Comparison',
-                align: 'center',
-                margin: 20,
-                offsetY: 20,
-                style: {
-                    fontSize: '25px',
-                    color: '#212226',
-                },
-            },
-
-            plotOptions: {
-                circle: {
-                    dataLabels: {
-                        showOn: 'hover'
-                    }
-                },
-                radialBar: {
-                    hollow: {
-                        margin: 5,
-                        size: '60%',
-                        background: 'transparent',
-                        image: undefined,
-                    },
-                }
-            },
-            colors: ['#212226','#f4c613','#A9A9A9'],
-            series: [79, 52, 61],
-            labels: ['Highest', 'Mean', 'Your'],
-           
-            markers: {
-           		colors: ['#ffff00']
-           	}
-            
-        }
-
-       var chart = new ApexCharts(
-            document.querySelector("#chart"),
-            options
-        );
+var options = {
+    chart: {
+        height: 350,
+        type: 'radialBar',
         
-        chart.render();
+    },
+    plotOptions: {
+        radialBar: {
+            hollow: {
+                size: '70%',
+            }
+        },
+    },
+    series: [ percentage ],
+    labels: ['Your percentage'],
+    fill:{
+                colors: ['#f4c613']
+            },
+}
+
+var chart1 = new ApexCharts(
+    document.querySelector("#chart"),
+    options
+);
+
+chart1.render();
 
 
 
@@ -75,7 +53,7 @@ var options1 = {
             },
             series: [{
                 name: "Marks",
-                data: [30, 41, 35, 51, 49, 62, 69, 91, 73],
+                data: marks,
 
             }],
             title: {
@@ -95,7 +73,7 @@ var options1 = {
                 },
             },
             xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                categories: test,
             },
             colors: ['#f4c613'],
         }

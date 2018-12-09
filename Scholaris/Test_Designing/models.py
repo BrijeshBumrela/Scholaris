@@ -10,7 +10,6 @@ class Test(models.Model):
     duration = models.IntegerField(default=0)
     total_marks = models.IntegerField(default=0)
 
-
     def __str__(self):
         return self.name
 
