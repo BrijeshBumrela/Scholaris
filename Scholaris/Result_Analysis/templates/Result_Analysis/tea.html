@@ -58,7 +58,7 @@
                                 {% for teacher,follow in follow_list %}
                                     <tr>
                                         <td>{{ teacher.teacher.username }}</td>
-                                        <td>{{ teacher.teacher.email }}</td>
+                                        <td>{{ teacher.course }}</td>
                                         <td>
                                             <form method="POST">
                                                 {% csrf_token %}
@@ -117,7 +117,6 @@ function sortTable() {
 $('.follow-btn').click(function(e) {
     e.preventDefault();
     const username = $(this).val();
-
     $.ajax({
         type: 'POST',
         url: "/follow_ajax/",
@@ -127,15 +126,16 @@ $('.follow-btn').click(function(e) {
         },
         dataType: 'json',
         success: function(data) {
+            const teacher_selected = data.teacher_id;
+            selectedBtn = document.querySelector(`[value=${CSS.escape(teacher_selected)}]`);
             if(data.is_following === true) {
-                $('.follow-btn').html('Unfollow');
-                $('.follow-btn').addClass('btn-danger');
+                $('button[value="' + teacher_selected + '"]').html('Unfollow').addClass('btn-danger').removeClass('btn-success');
+                /*    $('.follow-btn').addClass('btn-danger');
                 $('.follow-btn').removeClass('btn-success');
+            }*/
             }
             else {
-                $('.follow-btn').html('Follow');
-                $('.follow-btn').addClass('btn-success');
-                $('.follow-btn').removeClass('btn-danger');
+                $('button[value="' + teacher_selected + '"]').html('Follow').addClass('btn-success').removeClass('btn-danger');
             }
         }
     })

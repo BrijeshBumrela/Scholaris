@@ -151,7 +151,6 @@ def list_all_teachers_to_follow(request):
     print(zipped_data)
 
     context = {
-        'teachers': teachers,
         'follow_list': zipped_data
     }
     return render(request, 'Result_Analysis/tea.html', context)
@@ -191,7 +190,8 @@ def follow(request):
 
 def follow_ajax(request):
     if request.method == 'POST':
-        get_teacher = get_object_or_404(Teacher, id=request.POST.get('username',None))
+        user_id = request.POST.get('username', None)
+        get_teacher = get_object_or_404(Teacher, id=user_id)
 
         check_following = get_teacher.followers.filter(id=request.user.student.id).exists()
 
@@ -207,7 +207,8 @@ def follow_ajax(request):
         print(is_following)
 
         data = {
-            'is_following': is_following
+            'is_following': is_following,
+            'teacher_id':user_id
         }
         return JsonResponse(data)
 
