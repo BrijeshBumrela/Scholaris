@@ -1,86 +1,249 @@
 {% load static %}
-{% load widget_tweaks %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Test</title>
-    <link rel="stylesheet" href="{% static 'Test_Designing/css/datedropper.css' %}">
-    <link rel="stylesheet" href="{% static 'Test_Designing/css/custom-datedropper.css' %}">
-    <link rel="stylesheet" href="{% static 'Test_Designing/css/jquery.timepicker.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/ques1.css' %}">
+	<title>question paper details</title>
+	<link rel="stylesheet" type="text/css" href="ques1.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/static/Test_Designing/css/datedropper.css">
+    <link rel="stylesheet" href="/static/Test_Designing/css/custom-datedropper.css">
+    <link rel="stylesheet" href="/static/Test_Designing/css/jquery.timepicker.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
-    <script src="{% static 'Test_Designing/datedropper.js' %}"></script>
-    <script src="{% static 'Test_Designing/js/timepicker/jquery.timepicker.js' %}"></script>
+    <script src="/static/Test_Designing/datedropper.js"></script>
+    <script src="/static/Test_Designing/js/timepicker/jquery.timepicker.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'Result_Analysis/ques1.css' %}">
 </head>
+<body class="body">
 
-<body>
+{#    {% if test_form.errors or question_formset.errors %}#}
+{#        <p>NOT VALID</p>#}
+{#            {% for error in test_form.errors %}#}
+{#                {{ error }}#}
+{#            {% endfor %}#}
+{#    {% endif %}#}
 
-    {% if test_form.errors or question_formset.errors %}
-        <p>NOT VALID</p>
-            {% for error in test_form.errors %}
-                {{ error }}
+    {% if test_form.errors %}
+        Error in test form
+        {% for field, errors in test_form.errors.items %}
+            {% for error in errors %}
+                {{ error }}, {{ field }}
             {% endfor %}
+        {% endfor %}
     {% endif %}
-    <br>
-    <br>
+
+    {% if question_formset.errors %}
+        Error in question form
+        {% for field, errors in question_formset.errors.items %}
+            {% for error in errors %}
+                {{ error }}, {{ field }}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
 
 
     <div class="container-fluid">
+        <form method="POST" action="{% url 'exam:design' %}" novalidate id="subForm">
+        {% csrf_token %}
+        <div class="main1">
+           {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-12">
+                   <div class="title">
+                       <p style=" font-family: 'Raleway';margin-left:10px;text-align: center; font-weight: bolder;color: #212226; ">TITLE</p>
+                    </div>
+                    <input type="text" class="qbox" name="name" maxlength="50" required id="id_name" style="font-family:'Raleway'" placeholder="Title..."/>
+                    <br>
+                </div>
+            </div>
+            <br>
+            <div class="row" style="margin-left: 35px;margin-right: 35px;">
+                <div style="display:none">
+                    <label for="id_date" >Date:</label>
+                    <input type="text" name="time" class="dateTimeDisplay" required id="id_time" />
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="date" style="font-size: 20px;font-family: 'Raleway'">Date : </label>
+                        <br>
+                        <input type="text" class="datedropper-class form-control" maxlength="50" rows="" style="font-size: 20px" required id="id_date">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="option-1" style="font-size: 20px;font-family: 'Raleway'"> Time : </label>
+                        <br>
+                        <input type="text" class="decide_time form-control"  maxlength="50" required style="font-size: 20px">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="id_duration" style="font-size: 20px;font-family: 'Raleway'">Duration (In Minutes):</label>
+                        <input type="number" name="duration" class="form-control" value="0" required id="id_duration" />
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="row" style="margin-left: 35px;margin-right: 35px">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="id_description" style="font-size: 20px;font-family: 'open Sans';margin-left: 10px">Description:</label>
+                        <input type="text" name="description" class="form-control" rows="3" id="id_description" maxlength="250" required style="font-size: 20px;" >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <input type="hidden" name="form-TOTAL_FORMS" value="1" id="id_form-TOTAL_FORMS" /><input type="hidden" name="form-INITIAL_FORMS" value="0" id="id_form-INITIAL_FORMS" /><input type="hidden" name="form-MIN_NUM_FORMS" value="0" id="id_form-MIN_NUM_FORMS" /><input type="hidden" name="form-MAX_NUM_FORMS" value="1000" id="id_form-MAX_NUM_FORMS" />
+
+            <div class="link-formset dynamic-form main">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="question">
+                            <p style=" font-family: 'Open Sans';margin-left:10px ">QUESTION:</p>
+                        </div>
+                        <textarea class="qbox" name="form-0-text" cols="60" rows="10" style="font-family:'Raleway'" placeholder="Enter the Question here" required id="id_form-0-text"></textarea>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row" style="width:80%;">
+                    <div class="col-sm-12">
+                        <div class="question">
+                            <p style="font-family: 'Open Sans';margin-left:10px">Enter the options below:</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="optionarea" style="margin: 20px">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="id_form-0-option1" style="font-size: 20px;font-family: 'Raleway'">Option 1:</label>
+                                <input class="form-control" rows="1" style="font-size: 20px" type="text" name="form-0-option1" required maxlength="200" id="id_form-0-option1"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_form-0-option2" style="font-size: 20px;font-family: 'Raleway'">Option 2:</label>
+                                <input class="form-control" rows="1" style="font-size: 20px" type="text" name="form-0-option2" required maxlength="200" id="id_form-0-option2" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="id_form-0-option3" style="font-size: 20px;font-family: 'Raleway'">Option 3:</label>
+                                <input class="form-control" rows="1" style="font-size: 20px" type="text" name="form-0-option3" required maxlength="200" id="id_form-0-option3"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_form-0-option4" style="font-size: 20px;font-family: 'Raleway'">Option 4:</label>
+                                <input class="form-control" rows="1" style="font-size: 20px" type="text" name="form-0-option4" required maxlength="200" id="id_form-0-option4"/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="question">
+                            <p style=" font-family: 'Open Sans'; color: white;margin-left:10px">Correct Option:</p>
+                        </div> <br>
+                    </div>
+                </div>
+
+                <div style="margin: 20px">
+
+{#                            <div class="form-group">#}
+{#                                <div class="row" style="margin: 30px ">#}
+{#                                    <div class="col-sm-3">#}
+{#                                        <label class="container">#}
+{#                                            <input type="radio" checked="checked" name="radio">#}
+{#                                            <span class="checkmark"></span><p style="margin-left: 30px;font-family: 'Raleway'">option 1</p>#}
+{#                                        </label>#}
+{#                                    </div>#}
+{#                                    <div class="col-sm-3">#}
+{#                                        <label class="container">#}
+{#                                            <input type="radio" checked="checked" name="radio">#}
+{#                                            <span class="checkmark"></span><p style="margin-left: 30px;font-family: 'Raleway'">option 2</p>#}
+{#                                        </label>#}
+{#                                    </div>#}
+{#                                    <div class="col-sm-3">#}
+{#                                        <label class="container">#}
+{#                                            <input type="radio" checked="checked" name="radio">#}
+{#                                            <span class="checkmark"></span><p style="margin-left: 30px;font-family: 'Raleway'">option 3</p>#}
+{#                                        </label>#}
+{#                                    </div>#}
+{#                                    <div class="col-sm-3">#}
+{#                                        <label class="container">#}
+{#                                            <input type="radio" checked="checked" name="radio">#}
+{#                                            <span class="checkmark"></span><p style="margin-left: 30px;font-family: 'Raleway'">option 4</p>#}
+{#                                        </label>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+
+
+                    <p><label for="id_form-0-answer">Answer:</label>
+                        <select name="form-0-answer" required id="id_form-0-answer">
+
+                            <option value="" selected>---------</option>
+
+                            <option value="1">option1</option>
+
+                            <option value="2">option2</option>
+
+                            <option value="3">option3</option>
+
+                            <option value="4">option4</option>
+
+                        </select>
+                    </p>
+                    <p><label for="id_form-0-mark">Mark:</label> <input type="text" name="form-0-mark" value="1" required id="id_form-0-mark" /></p>
+                </div>
+                <br>
+            </div>
+        </div>
+        <div style="width:80%;margin:auto;">
+            <center>
+                <input type="submit" class="submitBtn button button-q" style="font-family: 'Raleway';background:orange; " value="Submit">
+            </center>
+        </div>
+
+        </form>
 
     </div>
 
 
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
 
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 
-    <form method="POST" action="{% url 'exam:design' %}" novalidate id="subForm">
-        <!-- Create A drop down containing all categories (hardcode it) -->
-        {% csrf_token %}
-        <div>
-            <p>
-                <label for="id_name">Name:</label>
-                {{ test_form.name }}
-            </p>
-            <p>
-                <label for="id_description">Description:</label>
-                {{ test_form.description }}
-            </p>
-            <p style="display:none;">
-                <label for="id_date">Date:</label>
-                {{ test_form.time|add_class:'dateTimeDisplay' }}
-            </p>
-            <p>
-                <label for="date">Date:</label>
-                <input type="text" class="datedropper-class" maxlength="50" required id="id_date">
-            </p>
-            <p>
-                <input type="text" class="decide_time"  maxlength="50" required>
-            </p>
-            <p><label for="id_duration">Duration (In Minutes):</label>
-                {{ test_form.duration }}
-            </p>
-        </div>
-        <div>
-            {{ question_formset.management_form }}
-            {% for question in question_formset%}
-             <div class="link-formset">
-             <h3>Question No <span class="question_no">1</span></h3>
-
-             {% for error in question.errors %}
-                {{ error }}
-             {% endfor %}
-              {{ question.as_p }}
-            </div>
-            {% endfor %}
-        </div>
-        <input class="submitBtn" type="submit" value="CreateTest">
-    </form>
-</body>
-
-
-<script type="text/javascript">
     $('.link-formset').formset({
         addText: 'Add Question',
         deleteText: ' Remove Question',
@@ -102,7 +265,7 @@
 
 
     // Setting up the time
-    {#$('.decide_time').timepicker();#}
+
 
     $('.decide_time').timepicker({ 'timeFormat': 'H:i:s' });
 
@@ -119,7 +282,24 @@
     });
 
 
+    $('.add-row').wrap("<div class='wrapped-div'></div>");
+    $('.wrapped-div').css({"padding-top":"40px"});
+    $('.add-row').css({"margin-left":"205px"});
+
+    $('.add-row').click(function () {
+        console.log('Clicked!');
+    });
+
+    $('.link-formset').css({"height":"1050px"});
+
+    $('.add-row').click(function() {
+        $('.add-row').wrap("<div class='wrapped-div'></div>");
+        $('.wrapped-div').css({"padding-top":"40px"});
+        $('.add-row').css({"margin-left":"205px"});
+        $('.link-formset').css({"height":"1050px"});
+    });
+
 </script>
 
-
+</body>
 </html>
