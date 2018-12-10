@@ -101,13 +101,18 @@ def dashboard(request):
 
     try:
         if request.user.student:
-            dash= StudentResult.objects.filter(student__id=request.user.student.id)
+            student = get_object_or_404(Student, id=request.user.student.id)
+
+            teachers = student.teacher_set.all()
+            events = []
+
+            for teacher in teachers:
+                events.extend(teacher.test_set.all())
+
+            dash = StudentResult.objects.filter(student__id=request.user.student.id)
             percent=dash_percent(dash)
             marks=dash_marks(dash)
             tests=dash_test(dash)
-            context['percent'] = percent
-            context['marks'] = marks
-            context['tests']=tests
 
             posts = get_question()
             print(posts)
@@ -116,6 +121,7 @@ def dashboard(request):
                 'percent':percent,
                 'marks':marks,
                 'tests':tests,
+                'events':events
             }
             return render(request, 'Result_Analysis/dashboard1.html', context)
     except:
