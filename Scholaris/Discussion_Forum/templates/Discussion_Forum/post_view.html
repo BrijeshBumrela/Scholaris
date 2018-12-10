@@ -1,20 +1,21 @@
+
 {% extends "Discussion_Forum/post_list.html"  %}
 {% block content %}
 
-    <div class="infinite-container">
+    <div>
         {% for post,tags in post %}
 
 
-             <div class="card card-content infinite-item animated bounceInUp delay-4 ">
+             <div class="card card-content animated bounceInUp delay-4 ">
                 <div class="card-body" >
                     <h3 class=" text-capitalize card-title float-left">
                         <a href="{{ post.get_absolute_url }}" class="card-link">
                             {{ post.title }}
                         </a>
                     </h3>
-                    <div class="float-right">
+                    <div class="float-right" >
                         {% for tag in tags %}
-                            <span style="font-size: large"class="badge badge-pill badge-dark">{{ tag }}</span>
+                            <span class="badge badge-pill badge-dark" style="font-size: large">{{ tag }}</span>
                         {% endfor %}
                     </div><br><br>
 
@@ -23,10 +24,16 @@
                     </div>
 
 
-                    <div class="card-text text-secondary float-right">
-                        By {{ post.author }} <br> updated on {{ post.updated }}
-                    </div>
                      <br><i class="fas fa-thumbs-up "></i>  {{ post.total_upvotes }} Upvote{{ post.total_upvotes|pluralize }}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Updated on {{ post.updated }}
+
+                     <div class="card-text float-right">
+                        By <div class="badge badge-pill badge-info" style="font-size: large">
+                            <!--<img src="" alt="">-->{{ post.author }}
+                        </div>
+                    </div>
+
                 </div>
              </div>
 
@@ -39,8 +46,15 @@
         {% endfor %}
     </div>
 
+    <div style="text-align: center;">
     <ul class="pagination">
-        {% for p in posts.paginator.page_range %}
+
+        {% if posts.has_previous %}
+            <li class="page-item">
+                <a href="?page={{ posts.previous_page_number }}" class="page-link">&laquo;</a>
+            </li>
+        {% endif %}
+        {% for p in page_range %}
             {% if posts.number == p %}
                 <li class="page-item active">
                     <a href="?page={{ p }}" class="page-link">{{ p }}</a>
@@ -51,8 +65,14 @@
                 </li>
             {% endif %}
         {% endfor %}
+        {% if posts.has_next %}
+            <li class="page-item">
+                <a href="?page={{ posts.next_page_number }}" class="page-link">&raquo;</a>
+            </li>
+        {% endif %}
 
     </ul>
+    </div>
 
 
 {% endblock content %}

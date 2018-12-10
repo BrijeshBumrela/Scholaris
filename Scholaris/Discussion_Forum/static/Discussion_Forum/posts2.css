@@ -1,6 +1,6 @@
 div .card {
     margin: 40px;
-   background-color: #f4f4f4;
+    background-color: #f4f4f4;
 }
 
 div .card-link{
@@ -19,6 +19,7 @@ div .sort_by{
 
 .card-content:hover{
     background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
@@ -28,6 +29,6 @@ a .card-link{
 }
 /* heading hover color */
 .card-link:hover{
-    color:#f4c613;
+    color:#fff;
 }
 

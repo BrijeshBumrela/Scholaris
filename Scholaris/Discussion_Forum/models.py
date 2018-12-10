@@ -29,8 +29,8 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status  = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
-    # Post(title='1',body='11',tag='JS', status='published')
-
+    class Meta:
+        ordering = ['-updated']
 
     def __str__(self):
         return  self.title
@@ -52,12 +52,16 @@ class Comment(models.Model):
     content   = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     upvotes   = models.ManyToManyField(User, related_name='comment_upvotes', blank=True)
+    downvotes = models.ManyToManyField(User, related_name='comment_downvotes', blank=True)
 
     def __str__(self):
         return '{}-{}'.format(self.post.title, str(self.user.username))
 
     def total_comment_upvotes(self):
         return self.upvotes.count()
+
+    def total_comment_downvotes(self):
+        return self.downvotes.count()
 
 
 

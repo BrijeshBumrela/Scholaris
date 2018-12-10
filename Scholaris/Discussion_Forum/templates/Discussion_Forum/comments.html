@@ -18,20 +18,20 @@
                <hr>
                     <h4 class="text ml-5">{{ comments.count }} Answer{{ comments|pluralize }}</h4>
                 <hr>
-                {% for comment,upvote,is_comment_upvoted,is_teacher in up %}
+                {% for comment,upvote,is_comment_upvoted,downvote,is_comment_downvoted,is_teacher in up %}
 
                     <div class="card">
-                        {{ comment.user }}
+
                         {% if is_teacher %}
                             <div class="media">
                                 <div class="media-body">
                                     <blockquote class="blockquote" style="font-size: large">
                                         <p class="mb-0 float-left"> {{ comment.content }} </p>
                                         <div class="float-right">
+                                            By
                                             <i class="fas fa-chalkboard-teacher"></i>
-                                            <span style="font-size: large"class="badge badge-pill badge-success">{{ comment.user }}</span>
-                                        </div>
-                                        <footer class="blockquote-footer" style="font-size: medium">by <cite title="Source Title"> {{ comment.user | capfirst }}</cite></footer>
+                                            <span style="font-size: large"class="badge badge-pill badge-success">{{ comment.user | capfirst }}</span>
+                                        </div><br>
                                     </blockquote>
                                 </div>
                             </div>
@@ -40,7 +40,11 @@
                                 <div class="media-body">
                                     <blockquote class="blockquote" style="font-size: large">
                                         <p class="mb-0"> {{ comment.content }} </p>
-                                        <footer class="blockquote-footer" style="font-size: medium">by <cite title="Source Title"> {{ comment.user | capfirst }}</cite></footer>
+                                        <div class="float-right">
+                                            By
+                                            <span class="badge badge-pill badge-info">{{ comment.user | capfirst }}</span>
+                                        </div><br>
+
                                     </blockquote>
                                 </div>
                             </div>

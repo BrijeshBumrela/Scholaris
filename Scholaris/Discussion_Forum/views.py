@@ -15,7 +15,7 @@ from Result_Analysis.models import Course,Teacher
 
 # Create your views here.
 def post_list(request):
-    post_list = Post.published.all().order_by('-updated')
+    post_list = Post.published.all()
     query = request.GET.get('q')
     if query:
         post_list = Post.published.filter(
@@ -51,14 +51,32 @@ def post_list(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
+    if page is None:
+        start_index = 0
+        end_index = 7
+    else:
+        (start_index, end_index) = proper_pagination(posts, index=4)
+
+    page_range = list(paginator.page_range)[start_index:end_index]
+
     post = zip(posts, tags)
     context = {
         'post': post,
         'posts': posts,
         'courses': Course.objects.all(),
+        'page_range': page_range,
     }
 
     return render(request, 'Discussion_Forum/post_view.html', context)
+
+def proper_pagination(posts, index):
+    start_index = 0
+    end_index = 7
+
+    if posts.number > index:
+        start_index = posts.number - index
+        end_index = start_index + end_index
+    return (start_index, end_index)
 
 def question(request, id, slug):
     # user = User.objects.get(id=id)
@@ -84,7 +102,11 @@ def question(request, id, slug):
     is_teacher = []
 
     is_comment_upvoted = []
+    is_comment_downvoted = []
     total_comment_upvotes = []
+    total_comment_downvotes = []
+
+
     for comment in comments:
 
         try:
@@ -96,12 +118,23 @@ def question(request, id, slug):
 
         if comment.upvotes.filter(id=request.user.id).exists():
             is_comment_upvoted.append(True)
+            is_comment_downvoted.append(False)
+
+        elif comment.downvotes.filter(id=request.user.id).exists():
+            is_comment_upvoted.append(False)
+            is_comment_downvoted.append(True)
+
         else:
             is_comment_upvoted.append(False)
+            is_comment_downvoted.append(False)
+
 
         total_comment_upvotes.append(comment.total_comment_upvotes())
+        total_comment_downvotes.append(comment.total_comment_downvotes())
 
-    up = zip(comments,total_comment_upvotes,is_comment_upvoted,is_teacher)
+
+    up = zip(comments,total_comment_upvotes,is_comment_upvoted,total_comment_downvotes,is_comment_downvoted,is_teacher)
+    print(up)
 
 
     context = {
@@ -189,12 +222,34 @@ def post_delete(request, id):
     return redirect('forum:forum-post-list')
 
 @login_required()
-def updown_comment(request, id):
+def upvote_comment(request, id):
+
     comment = get_object_or_404(Comment, id=id)
+
     if comment.upvotes.filter(id=request.user.id).exists():
         comment.upvotes.remove(request.user)
+    elif comment.downvotes.filter(id=request.user.id).exists():
+        comment.downvotes.remove(request.user)
+        comment.upvotes.add(request.user)
     else:
         comment.upvotes.add(request.user)
+
+    return HttpResponseRedirect(comment.post.get_absolute_url())
+
+@login_required()
+def downvote_comment(request, id):
+
+    comment = get_object_or_404(Comment, id=id)
+
+    if comment.downvotes.filter(id=request.user.id).exists():
+        comment.downvotes.remove(request.user)
+    elif comment.upvotes.filter(id=request.user.id).exists():
+        comment.upvotes.remove(request.user)
+        comment.downvotes.add(request.user)
+    else:
+        comment.downvotes.add(request.user)
+
+
 
     return HttpResponseRedirect(comment.post.get_absolute_url())
 

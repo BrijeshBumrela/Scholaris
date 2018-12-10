@@ -3,7 +3,7 @@
 
     <div class="row">
 
-         <form action="{% url 'forum:updown_comment' comment.id %}" method="post">
+         <form action="{% url 'forum:upvote_comment' comment.id %}" method="post">
              {% csrf_token %}
 
              {% if  is_comment_upvoted  %}
@@ -11,11 +11,29 @@
                      <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-success mr-md-0" ><i class="fas fa-thumbs-up"></i></button>
                      <div>{{ upvote }}</div>
                  </div>
-             {% else %}
 
+             {% else %}
                  <div class="ml-md-4">
                          <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-up"></i></button>
                          <div>{{ upvote }}</div>
+                 </div>
+             {% endif %}
+
+         </form>
+
+
+        <form action="{% url 'forum:downvote_comment' comment.id %}" method="post">
+             {% csrf_token %}
+
+             {% if is_comment_downvoted  %}
+                 <div class="ml-md-4">
+                     <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-danger mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
+                     <div>{{ downvote }}</div>
+                 </div>
+             {% else %}
+                 <div class="ml-md-4">
+                         <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
+                         <div>{{ downvote }}</div>
                  </div>
              {% endif %}
 

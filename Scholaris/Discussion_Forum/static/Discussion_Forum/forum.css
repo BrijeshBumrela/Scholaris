@@ -42,7 +42,7 @@ transition: all .5s;
 
 .button-q {
   background-color: #f4f4f4;
-  color: 000;
+  color: #000000;
   border: 1px solid #fff;
 }
 
@@ -62,7 +62,7 @@ border :1px solid #f4c613;
 	background-color: #f4f4f4;
 	text-align: center;
 	padding:  120px;
-	color: #f4c613;
+	color: #f4c613;}
 
 .post_form {
     background: red;
