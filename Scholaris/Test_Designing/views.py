@@ -275,5 +275,5 @@ def edit_test(request, id):
 
     # return render(request, 'Test_Designing/edit_test.html', context)
 
-    return render(request, 'Test_Designing/test_description.html', context)
-    # return render(request, 'Test_Designing/quiz-form.html', context)
+    # return render(request, 'Test_Designing/test_description.html', context)
+    return render(request, 'Test_Designing/quiz-form.html', context)
