@@ -33,6 +33,15 @@
 
 </head>
 <body>
+	<script type="text/javascript">
+        	var percentage =  "{{percent}}";
+        	var marks ={{marks}}
+        	var test={{tests}}
+        	console.log(marks);
+        	console.log(tests);
+
+	</script>
+
     {% include 'Result_Analysis/navbar2.html' %}
 
     {% if request.user.student %}
@@ -70,7 +79,18 @@
 
 	<!-- Custom js -->
 	<script src="{% static 'Result_Analysis/dashboardjs/script.js' %}"></script>
-
+<script>
+    $('#calendar').fullCalendar({
+  events: [
+    {% for event in events %}
+    {
+      title  : '{{  event.name}}',
+      start  : '{{ event.time|date:"Y-m-d"}}'
+    },
+    {% endfor %}
+  ]
+});
+</script>
 
 </body>
 </html>

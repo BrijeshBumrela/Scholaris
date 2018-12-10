@@ -166,9 +166,9 @@ def result(request, id):
 
 
 
-#exam-taking vies ends here
+#exam-taking views ends here
 
-@login_required()
+@login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
 def list_all_test(request):
     teacher_list = Teacher.objects.filter(followers=request.user.student)
@@ -201,7 +201,7 @@ def detail(request, id):
     question_list = get_test.questionset.question_set.all()
 
     student = Student.objects.get(student=request.user)
-     
+
     timer = get_test.duration
 
     expiry_time = get_test.time + datetime.timedelta(minutes=get_test.duration)
@@ -222,6 +222,7 @@ def detail(request, id):
             'test':get_test,
             'no_of_qs': question_list.count(),
             'timer': r.seconds,
+            'expiry_time': expiry_time
         }
 
     return render(request, 'Test_Designing/t.html', context)
@@ -272,5 +273,7 @@ def edit_test(request, id):
         'q_list': question_list
     }
 
-    return render(request, 'Test_Designing/edit_test.html', context)
+    # return render(request, 'Test_Designing/edit_test.html', context)
 
+    return render(request, 'Test_Designing/test_description.html', context)
+    # return render(request, 'Test_Designing/quiz-form.html', context)
