@@ -81,7 +81,7 @@
 	<script src="{% static 'Result_Analysis/dashboardjs/script.js' %}"></script>
 <script>
     $('#calendar').fullCalendar({
-  events: [
+    events: [
     {% for event in events %}
     {
       title  : '{{  event.name}}',
