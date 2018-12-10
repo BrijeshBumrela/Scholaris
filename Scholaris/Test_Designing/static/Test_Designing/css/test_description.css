@@ -5,14 +5,16 @@
 }
 
 
-.container{
+.con1{
+    -webkit-transition: border 2s;
+    transition: border 2s;
 }
-.container:hover{
+.con1:hover{
   border: 5px solid #f4c613;
   padding-bottom: 15px;
 }
 
-.container:active{
+.con1:active{
   border: 5px solid #f4c613;
 }
 
