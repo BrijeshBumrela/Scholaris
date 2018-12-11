@@ -1,0 +1,17 @@
+{% extends 'Result_Analysis/base.html' %}
+{% block content %}
+
+	{% for message in messages %}
+                    <div class="alert alert-success">
+                        <a class="close" href="#" data-dismiss="alert">×</a>
+
+                        {{ message }}
+
+                    </div>
+     {% endfor %}
+	<form action="{% url 'result:new_pass' %}" method='POST'>
+		{% csrf_token %}
+		enter your email:<input type="email" name="email">
+		<input type="submit" name="submit">
+	</form>
+{% endblock %}

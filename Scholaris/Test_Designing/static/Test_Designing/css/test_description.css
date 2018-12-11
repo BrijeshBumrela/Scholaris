@@ -1,0 +1,169 @@
+
+.body{
+  font-family: 'Raleway';
+  background-color:#f4f4f4;
+}
+
+
+.con1{
+    -webkit-transition: border 2s;
+    transition: border 2s;
+}
+.con1:hover{
+  border: 5px solid #f4c613;
+  padding-bottom: 15px;
+}
+
+.con1:active{
+  border: 5px solid #f4c613;
+}
+
+
+.header {
+  height: 500px;
+  width: 100%;
+  font-size: 40px;
+  font-family: 'Open Sans';
+  background-color: #212226; 
+  text-align: center;
+  padding:  120px;
+  color: #f4c613
+}
+
+
+
+
+.header h1{
+  height: 300px;
+  width: 100%;
+  font-size: 60px;
+  font-family: 'Open Sans';
+  background-color: #f4c613; 
+  text-align: center;
+  padding-top:  70px;
+  padding-bottom: 30px;
+  padding-right: 70px;
+  color: white;
+  margin-bottom: 0px; 
+}
+
+.marks{
+  color: #212226;
+  background-color: white;
+
+}
+
+.desc{
+text-align: left;
+ color: #212226;
+  background-color: white;
+  border-style: dashed;
+  border-color: #f4c613;
+  border-radius: 5px;
+  margin: 30px ;
+  padding: 20px;
+  font-size: 20px;
+}
+
+
+.button {
+  border-radius: 28px;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin:0 6px;
+  padding: 12px 46px 12px 46px;
+  -webkit-trasition: all .5s;
+  transition: all .5s;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #f4c613;
+  color: #ffffff;
+  border :1px solid #f4c613;
+}
+
+
+.footer{
+  height: 200px;
+  width: 100%;
+  font-size: 40px;
+  font-family: 'Open Sans';
+  background-color: #212226; 
+  text-align: center;
+  padding:  120px;
+  color: #f4c613;
+  margin-top: 800px;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.5);
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #f4c613;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #f4c613;
+    color: white;
+}
+
+.con-clock{
+  padding-left: 331px;
+}
