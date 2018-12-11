@@ -6,11 +6,15 @@
             margin-right: 30px;
             margin-left: 30px;
         }
+        actual-css{
+
+        }
     </style>
 
 {% if request.user.student %}
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark " style="position: fixed; z-index: 99; width: 100%; padding-left: 60px;padding-right: 60px; background-color:#212226; ">
+
       <a class="navbar-brand" href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -36,11 +40,12 @@
           </li>
         </ul>
       </div>
+
     </nav>
 
 {% elif request.user.teacher %}
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark " style="position: fixed; z-index: 99; width: 100%; padding-left: 60px;padding-right: 60px; background-color:#212226; ">
         <a class="navbar-brand" href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
