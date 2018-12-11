@@ -3,24 +3,70 @@
 
     <div class="row">
 
-         <form action="{% url 'forum:updown_comment' comment.id %}" method="post">
+         <form action="{% url 'forum:upvote_comment' comment.id %}" method="post">
              {% csrf_token %}
 
-             {% if  comment_id == comment.id  %}
+             {% if  is_comment_upvoted  %}
                  <div class="ml-md-4">
                      <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-success mr-md-0" ><i class="fas fa-thumbs-up"></i></button>
-                     <div>{{ total_comment_upvotes.comment.id }}</div>
+                     <div>{{ upvote }}</div>
                  </div>
-             {% else %}
 
+             {% else %}
                  <div class="ml-md-4">
                          <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-up"></i></button>
-                         <div  class="btn btn-general mx-md-0">{{ total_comment_upvotes.commment.id }}</div>
+                         <div>{{ upvote }}</div>
+                 </div>
+             {% endif %}
+
+         </form>
+
+
+        <form action="{% url 'forum:downvote_comment' comment.id %}" method="post">
+             {% csrf_token %}
+
+             {% if is_comment_downvoted  %}
+                 <div class="ml-md-4">
+                     <button type="submit" id="comment_downvote" name="comment_id" value="{{ comment.id }}" class="btn btn-danger mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
+                     <div>{{ downvote }}</div>
+                 </div>
+             {% else %}
+                 <div class="ml-md-4">
+                         <button type="submit" id="comment_downvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
+                         <div>{{ downvote }}</div>
                  </div>
              {% endif %}
 
          </form>
     </div>
+
+    <script type="text/javascript">
+
+            $('#delete').click(function(){
+              return confirm("Are you sure to delete this post?")
+           });
+
+            document.querySele
+
+          $('#comment_upvote').on('click', function(event) {
+              event.preventDefault();
+              console.log($(this));
+              {#$.ajax({#}
+              {#    type: 'POST',#}
+              {#    url: '{% url "forum:upvote_comment" pk %}',#}
+              {#    data: {'id':pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},#}
+              {#    dataType: 'json',#}
+              {#    success: function(response){#}
+                      {#$('#upvote-section').html(response['form'])#}
+                      {#console.log($('#upvote-section').html(response['form']));#}
+              {#        console.log('done something');#}
+              {#    },#}
+              {#    error: function(rs, e) {#}
+              {#        console.log(rs.responseText);#}
+              {#    },#}
+              {# }); #}
+          });
+    </script>
 
 
 {% endif %}
