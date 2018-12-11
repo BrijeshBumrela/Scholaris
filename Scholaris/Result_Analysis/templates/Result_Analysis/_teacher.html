@@ -7,7 +7,88 @@
     {% endif %}
 </div>
 
+<section class="dash cont">
+	<div id="dash1">
+	<div class="content-box-lg">
+		<div class="container">
+			<center>
+			<h1>TEACHER DASHBOARD</h1>
+			<h2>Welcome to Scholaris</h2>
+			</center>
+		</div>
+	</div>
+</div>
 
+<div class="container-custom">
+		<br><br><br>
+
+
+		<div class="row">
+
+			<div class="col col-lg-12 col-sm-12 cont1">
+				<div id="chart-1">
+				</div>
+			</div>
+		</div>
+
+
+			<br><br>
+        <div class="row">
+			<div class="col-lg-8 col-sm-12 " >
+				<div id="calendar" class="cont1"></div>
+			</div>
+			<div class="col-lg-4 col-sm-12 ">
+				<div class="panel panel-default cont2">
+					<div class="panel-heading">
+						<center><h2 class="panel-title"> Some <span class="clr">Stats</span></h2></center>
+					</div>
+					<div class="panel-body pn1">
+                    <div class="row dash_stats">
+                        <div class="col-lg-12 stat-card">
+                            <div class="card dash-box">
+                                <h3>
+                                    {% if post_count %}
+                                        {{ post_count }}
+                                    {% else %}
+                                        0
+                                    {% endif %}
+                                </h3>
+                                <h3>Questions Asked</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 stat-card">
+                            <div class="card dash-box">
+                                <h3>
+                                    {% if post_count %}
+                                        {{ post_count }}
+                                    {% else %}
+                                        0
+                                    {% endif %}
+                                </h3>
+                                <h3>Upvotes</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 stat-card">
+                            <div class="card dash-box">
+                                <h3>
+                                    {% if post_count %}
+                                        {{ post_count }}
+                                    {% else %}
+                                        0
+                                    {% endif %}
+                                </h3>
+                                <h3>Users</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<br><br>
 
 <div class="row">
     <div class="col-lg-12 col-sm-12">
@@ -39,3 +120,5 @@
         </div>
     </div>
 </div>
+</div>
+

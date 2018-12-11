@@ -71,6 +71,9 @@
 
 </head>
 <body>
+<!--==============================================================
+	                   Nav Bar
+===============================================================	-->
 <nav>
     <div class="menu">
         {% if request.user.teacher %}
@@ -91,7 +94,7 @@
                 <li>Hi Student</li>
                 <li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px
                                      height=70px id="logo"></a></li>
-                <li><a href="{% url 'result:dashboard' %} class='menu-item'">DASHBOARD</a></li>
+                <li><a href="{% url 'result:dashboard' %}" class="menu-item">DASHBOARD</a></li>
                 <li><a href="{% url 'result:profile' %}" class="menu-item">PROFILE</a></li>
                 <li><a href="{% url 'exam:list_all_test' %}" class="menu-item">TEST-TAKING</a></li>
                 <li><a href="{% url 'result:results' %}" class="menu-item">RESULTS</a></li>
@@ -119,6 +122,10 @@
 </nav>
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
+
+<!--==============================================================
+	                   Home
+===============================================================	-->
 
 <section id="home">
     <img src="{% static 'Result_Analysis/home_images/bg.jpg' %}" id="home-bg-img">
@@ -169,11 +176,7 @@
                     <div class="col-md-6">
                         <div id="about-right">
                             <p>
-                                Yet fear of losing classroom control and creating gaps in content coverage can often
-                                cause teachers to back off and resort to a didactic teacher led approach. We’re bringing
-                                the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw
-                                Activity. The what? In jigsaws, students research, discuss and analyze subject matter as
-                                part of a novice group and then teach as part of a newly formed expert group.
+
                             </p>
                         </div>
                     </div>
@@ -181,32 +184,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="about-bottom wrapper" class="skewed">
-                            {#	<img src="{% static 'Result_Analysis/home_images/about.jpg' %}" alt="About Us" class="img-responsive">#}
-                            <div class="layer bottom">
-                                <div class="content-wrap">
-                                    <div class="content-body">
-                                        <h1>Look Sharp</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab autem consequuntur corporis culpa dignissimos harum hic illo porro similique, vero.</p>
-                                    </div>
-{#                                      <img src="{% static 'Result_Analysis/home_images/about.jpg' %}" alt="About Us">#}
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41WifNcv-iL._SX425_.jpg" alt="">
-                                </div>
-                            </div>
-
-                            <div class="layer Top">
-                                <div class="content-wrap">
-                                    <div class="content-body">
-                                        <h1>Stay Cool</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab autem consequuntur corporis culpa dignissimos harum hic illo porro similique, vero.</p>
-                                    </div>
-{#                                    <img src="{% static 'Result_Analysis/home_images/about.jpg' %}" alt="About Us">#}
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/51jGFfOFr6L._SY606_.jpg" alt="">
-                                </div>
-                            </div>
-
-                            <div class="handle">
-
-                            </div>
+                            {<img src="{% static 'Result_Analysis/home_images/about.jpg' %}" alt="About Us" class="img-responsive">}
                         </div>
                     </div>
                 </div>
@@ -232,12 +210,7 @@
                             </div>
                             <div id="about-right">
                                 <p>
-                                    Yet fear of losing classroom control and creating gaps in content coverage can often
-                                    cause teachers to back off and resort to a didactic teacher led approach. We’re
-                                    bringing the collaboration back!<br>Let’s recruit Socrative into the mix and
-                                    modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and
-                                    analyze subject matter as part of a novice group and then teach as part of a newly
-                                    formed expert group.
+                                   Create Tests with set Questions . Our easy-to-use Online Testing service keeps your data secure 24/7 with our high security hosting solution which includes incremental data back ups every hour.
                                 </p>
                             </div>
                         </div>
@@ -261,12 +234,9 @@
                             </div>
                             <div id="about-right">
                                 <p>
-                                    Yet fear of losing classroom control and creating gaps in content coverage can often
-                                    cause teachers to back off and resort to a didactic teacher led approach. We’re
-                                    bringing the collaboration back!<br>Let’s recruit Socrative into the mix and
-                                    modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and
-                                    analyze subject matter as part of a novice group and then teach as part of a newly
-                                    formed expert group.
+                                    Optionally provide individual Question feedback and overall Test feedback instantly in real time to Test takers.Break down individual and Group performance by Test, Questions and Categories with our Quiz maker tool.
+
+
                                 </p>
                             </div>
                         </div>
@@ -301,11 +271,7 @@
                         </div>
                         <div id="about-right">
                             <p>
-                                Yet fear of losing classroom control and creating gaps in content coverage can often
-                                cause teachers to back off and resort to a didactic teacher led approach. We’re bringing
-                                the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw
-                                Activity. The what? In jigsaws, students research, discuss and analyze subject matter as
-                                part of a novice group and then teach as part of a newly formed expert group.
+                                Discussion Forum in Scholaris is designed to connect students, TAs, and professors so every student can get the help they need when they need it.It warms us to think we started something that is impacting the way students learn and the way instructors teach.
                             </p>
                         </div>
                     </div>
@@ -316,38 +282,62 @@
 </div>
 </section>
 
-
+<!--==============================================================
+	                   Footer
+===============================================================	-->
 <section id="contact">
     <div class="content-box-md">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="vertical-heading">
-                        <h5>
-                            For Queries
-                        </h5>
-                        <h2><strong>Contact</strong><br>Us on</h2>
-                    </div>
-                </div>
-                <div id="about-right">
-                    <a href="https://www.facebook.com/">
-                        <div class="contact-item ">
 
-                            <i class="fab fa-facebook-square"></i>
-
-                        </div>
-                    </a>
-                </div>
-                <a href="https://twitter.com/login">
-                    <div class="contact-item ">
-                        <i class="fab fa-twitter-square"></i>
-                    </div>
-                </a>
-                <a href="https://mail.google.com/mail/u/0/#inbox">
-                    <div class="contact-item ">
-                        <i class="fas fa-envelope-square"></i>
-                    </div>
-                </a>
+                <div class="col-md-4 row wow fadeInDown" data-wow-duration="3s">
+						<center>
+							<h3>Perform 'N' Analyze</h3>
+							<p>Scholaris is a great way to know and improve. It is a great step towards helping students and teachers in conducting easy to attempt tests.</p>
+						</center>
+					</div>
+					<div class="col-md-4 wow fadeInDown" data-wow-duration="3s">
+						<center>
+							<h3>Follow Us</h3>
+							<table>
+								<tr>
+									<td class="contact-item">
+										<a href="https://www.facebook.com/">
+										<i class="fab fa-facebook-square"></i>
+										</a>
+									</td>
+									<td class="contact-item">
+										<a href="https://www.facebook.com/">
+										<i class="fab fa-instagram"></i>
+									</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="contact-item">
+										<a href="https://www.facebook.com/">
+										<i class="fab fa-twitter-square"></i>
+									</a>
+									</td>
+									<td class="contact-item">
+										<a href="https://www.facebook.com/">
+										<i class="fab fa-linkedin"></i>
+									</a>
+									</td>
+								</tr>
+							</table>
+						</center>
+					</div>
+					<div class="col-md-4 row wow fadeInDown contactus" data-wow-duration="3s">
+						<center>
+							<h3>Contact Us</h3>
+							<p>
+								<br>
+								<i class="fas fa-home"></i> &nbsp &nbsp Sricity, India<br>
+								<i class="fas fa-envelope"></i> &nbsp &nbsp scholaris@gmail.com<br>
+								<i class="fas fa-phone"></i> &nbsp &nbsp +917999676585
+							</p>
+						</center>
+					</div>
             </div>
         </div>
     </div>
