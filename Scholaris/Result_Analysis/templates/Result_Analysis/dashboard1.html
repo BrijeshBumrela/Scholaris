@@ -85,7 +85,8 @@
     {% for event in events %}
     {
       title  : '{{  event.name}}',
-      start  : '{{ event.time|date:"Y-m-d"}}'
+      start  : '{{ event.time|date:"Y-m-d"}}',
+	  url : '',
     },
     {% endfor %}
   ]

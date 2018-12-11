@@ -1,0 +1,71 @@
+.body{
+  font-family: calibri;
+
+  background-color: #fff;
+  margin-bottom: 100px;
+}
+
+.heading{
+  height: 200px;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  background-color:#212226; 
+
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  background-image: url("quespapers.jpg");
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  height: 400px; 
+  background-position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.bg-text {
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.4);
+  color: white;
+  font-weight: bold;
+  border: 3px solid #fff5cc;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+.button {
+border-radius: 28px;
+font-size: 13px;
+text-transform: uppercase;
+margin:0 6px;
+padding: 12px 46px 12px 46px;
+-webkit-trasition: all .5s;
+transition: all .5s;
+}
+
+.button-q {
+  background-color: #f4f4f4;
+  color: 000;
+  border: 1px solid #fff;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #f4c613;
+color: #ffffff;
+border :1px solid #f4c613;
+}

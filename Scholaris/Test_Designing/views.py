@@ -193,7 +193,7 @@ def list_all_test(request):
     context = {
         'test_list':test_list
     }
-    return render(request, 'Test_Designing/test_list.html', context)
+    return render(request, 'Test_Designing/quespapers.html', context)
 
 
 def detail(request, id):
