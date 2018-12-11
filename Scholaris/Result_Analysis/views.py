@@ -13,6 +13,7 @@ from django.core.mail import EmailMessage
 import random
 from django.contrib import messages
 from django.http import JsonResponse
+
 from datetime import date
 
 def age(born):
