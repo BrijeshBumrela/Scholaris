@@ -77,10 +77,10 @@
 <nav>
     <div class="menu">
         {% if request.user.teacher %}
+
             <ul>
                 {% if request.user.teacher %}
-                    <li><a class="menu-item" href="#"><img
-                            src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
+                    <li><a class="menu-item" href="#"> <img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
                     <li><a href="{% url 'result:profile2' %}" class="menu-item">PROFILE</a></li>
                     <li><a href="#" class="menu-item">FOLLOWERS</a></li>
                     <li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>
@@ -89,6 +89,7 @@
                     <li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
                 {% endif %}
             </ul>
+            </center>
         {% elif request.user.student %}
             <ul>
                 <li>Hi Student</li>
@@ -106,8 +107,7 @@
             </ul>
         {% else %}
             <ul>
-                <li><a href="#" class="icn"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}"
-                                                 id="logo"></a></li>
+                <li><a href="#" class="icn"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
                 <li><a href="#" class="menu-item">Home</a></li>
                 <li><a href="#about" class="menu-item">About</a></li>
                 <li><a href="#contact" class="menu-item">Contact</a></li>
@@ -176,7 +176,7 @@
                     <div class="col-md-6">
                         <div id="about-right">
                             <p>
-
+                                We created the Scholaris Site Builder with the user's perspective in mind. We wanted to offer a platform that would require no coding skills or design experience. We keep it simple, so users can focus on creating an amazing website that reflects their brand. Best of all - it's free. You can get online, showcase your brand, or start selling products right away.
                             </p>
                         </div>
                     </div>
