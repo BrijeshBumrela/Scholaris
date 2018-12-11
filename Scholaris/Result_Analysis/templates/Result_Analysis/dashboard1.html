@@ -86,7 +86,7 @@
     {
       title  : '{{  event.name}}',
       start  : '{{ event.time|date:"Y-m-d"}}',
-	  url : '',
+	  url : '{% url "exam:testdetail" event.id %}',
     },
     {% endfor %}
   ]
