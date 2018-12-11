@@ -4,6 +4,7 @@ from django.test import TestCase
 from Test_Designing.forms import TestCreateForm, QuestionForm
 from Result_Analysis.models import Teacher
 from django.contrib.auth.models import User
+from Discussion_Forum.models import *
 
 class ExamFormTest(TestCase):
 
