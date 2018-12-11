@@ -1,0 +1,68 @@
+#header{
+    background-color: #212226;
+}
+#header a:link{
+    color: #f4c613;
+}
+
+#header a:visited{
+    color: #f4c212;
+}
+
+.module caption, .inline-group h2
+{
+    background-color: #212226;
+}
+#content-related .module h2{
+    background-color: #212226;
+    color: #f4c613;
+}
+div.breadcrumbs{
+    background-color: #f4e657;
+    color: #212226;
+}
+div.breadcrumbs a ,a:visited{
+    color: #212226;
+}
+
+div.breadcrumbs a:hover{
+    color: #212226;
+}
+
+#changelist #toolbar{
+    background-color: #656565;
+}
+#changelist #toolbar form input[type="submit"] {
+
+    background-color: #f4f4f4;
+  border: 1px solid #fff;
+font-size: 13px;
+text-transform: uppercase;
+margin:0 6px;
+padding: 12px 46px 12px 46px;
+-webkit-trasition: all .5s;
+transition: all .5s;
+}
+
+#changelist #toolbar form input[type="submit"]:hover{
+    background-color: #f4e159;
+color: #ffffff;
+border :1px solid #f4ee74;
+}
+
+#changelist #toolbar form input[type="submit"]:focus {
+    /*background-color: #f4c613;*/
+    color: #ffffff;
+    border: 1px solid #f4c613;
+}
+#content h1{
+    color: #342714;
+    font-weight: bold;
+}
+.selector-chosen h2{
+    background-color: #212226;
+}
+
+.module{
+    background-color: #ededed;
+}
