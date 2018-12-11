@@ -116,7 +116,6 @@ function sortTable() {
 
 $('.follow-btn').click(function(e) {
     e.preventDefault();
-    const username = $(this).val();
     $.ajax({
         type: 'POST',
         url: "/follow_ajax/",

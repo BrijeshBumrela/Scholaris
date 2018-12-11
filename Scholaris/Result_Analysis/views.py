@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from .forms import *
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from .models import Student, Teacher, Course , OTP_Verify, Task
@@ -110,13 +110,16 @@ def dashboard(request):
             tests=dash_test(dash)
 
             posts = get_question()
-            print(posts)
+            tasks = request.user.task_set.all()
+            print(tasks)
+
             context = {
                 'posts':posts,
                 'percent':percent,
                 'marks':marks,
                 'tests':tests,
-                'events':events
+                'events':events,
+                'tasks':tasks
             }
             return render(request, 'Result_Analysis/dashboard1.html', context)
     except:
@@ -621,6 +624,8 @@ def average(result):
         percentage=(sum(marks)/sum(total))*100
         percentage=round(percentage,2)
     return percentage
+
+
 def test(result):
     test_ids=[]
     str1="test"
@@ -633,6 +638,7 @@ def test(result):
     if length>10:
         test_ids=test_ids[length-10:]
     return test_ids
+
 
 def results(request):
     student = Student.objects.filter(pk=request.user.student.id)
@@ -656,6 +662,7 @@ def results(request):
         context = {'students':no_courses,'results':result,'high':high,'courses':names,'no_courses':no_courses,}
         return render(request,'Result_Analysis/results.html',context)
 
+
 @login_required()
 def add_task(request):
     if request.method == 'POST':
@@ -666,14 +673,29 @@ def add_task(request):
     return redirect('result:dashboard')
 
 
+@login_required()
+def task_delete(request):
+    if request.method == 'POST':
+
+        id = request.POST['delete']
+
+        try:
+            task = get_object_or_404(Task, id=id)
+            task.delete()
+
+        except:
+            print('could not delete!')
+
+    return redirect('result:dashboard')
+
 
 def userprofile(request, id):
-    student = get_object_or_404(Student, id=id)
-    print(student)
+
+    student = get_object_or_404(Student,id=id)
+
 
     context = {
         'student': student
     }
 
     return render(request, 'Result_Analysis/userprofile.html', context)
-

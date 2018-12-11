@@ -158,84 +158,38 @@
 
             <!--Card content-->
             <div class="card-body px-lg-5 pt-0">
-                <table class="table table-striped mb-3">
+                    {% csrf_token %}
+                    <table class="table table-striped mb-3">
                         <thead>
                           <tr>
                             <th>Things left to do</th>
                           </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>complete ase project</td>
-                                <td>
-                                    <button class="mx-auto">
-                                        <div class="icon">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </div>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Write maths assignment</td>
-                                <td>
-                                    <button class="mx-auto">
-                                        <div class="icon">
-                                           <i class="fas fa-trash-alt"></i>
-                                        </div>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>study for exams</td>
-                                <td>
-                                    <button class="mx-auto">
-                                        <div class="icon">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </div>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Check your results</td>
-                                <td>
-                                    <button class="mx-auto">
-                                        <div class="icon">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </div>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Some task</td>
+                            {% for task in tasks %}
+                                <tr>
+                                    <td>{{ task.text }}</td>
                                     <td>
-                                        <button class="mx-auto">
-                                            <div class="icon">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </div>
-                                        </button>
+                                        <form action="{% url 'result:task_delete' %}" method="POST">
+                                            {% csrf_token %}
+                                                <button name="delete" value="{{ task.id }}" class="mx-auto">
+                                                    <div class="icon">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </div>
+                                                </button>
+                                        </form>
                                     </td>
-                            </tr>
-<!--
-                            <tr>
-                                <td class="px-0 col-8">
-                                    <div class="form-group my-0">
-                                        <input type="text" placeholder="Add a Task" class="form-control " id="task" >
-                                    </div>
-                                </td>
-                                <td >
-                                        <button class="btn btn-outline-info btn-rounded btn-block col-4 mx-auto" type="submit">Submit</button>
-                                </td>
-                            </tr>
-                        -->
-
-
+                                </tr>
+                            {% endfor %}
                         </tbody>
-                      </table>
+                    </table>
+                <form action="{% url 'result:task' %}" method="POST">
+                    {% csrf_token %}
                     <div class="form-group mt-0">
-                            <input type="text" placeholder="Add a Task" class="form-control " id="task" >
+                        <input type="text" placeholder="Add a Task" name="task" class="form-control " id="task" >
                     </div>
-                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0 submit-button" type="submit" >Submit</button>
-
+                    <input type="submit" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0 submit-button" value="Submit">
+                </form>
             </div>
 
             </div>

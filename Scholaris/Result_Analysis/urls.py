@@ -31,5 +31,6 @@ urlpatterns = [
     path('forget-password/',views.forget_email,name='new_pass'),
     path('otp verification/',views.otp_verification,name='new_otp'),
     path('reset_password/',views.reset_password,name='pass_reset'),
-    path('get_this/', views.get_this, name='get')
+    path('get_this/', views.get_this, name='get'),
+    path('task_delete/', views.task_delete, name='task_delete')
 ]

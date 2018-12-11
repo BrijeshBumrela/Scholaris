@@ -31,23 +31,28 @@
 {#            {% endfor %}#}
 {#    {% endif %}#}
 
-    {% if test_form.errors %}
-        Error in test form
-        {% for field, errors in test_form.errors.items %}
-            {% for error in errors %}
-                {{ error }}, {{ field }}
+    <div class="container">
+        {% if test_form.errors %}
+            {% for field, errors in test_form.errors.items %}
+                {% for error in errors %}
+                    <div class="control-group" style="background:lightblue;">
+                        {{ error }} -> {{ field }}
+                    </div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-    {% endif %}
+        {% endif %}
 
-    {% if question_formset.errors %}
-        Error in question form
-        {% for field, errors in question_formset.errors.items %}
-            {% for error in errors %}
-                {{ error }}, {{ field }}
+        {% if question_formset.errors %}
+            {% for field, errors in question_formset.errors.items %}
+                {% for error in errors %}
+                    <div class="control-group" style="background:lightblue;">
+                        {{ error }} -> {{ field }}
+                    </div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-    {% endif %}
+        {% endif %}
+
+    </div>
 
 
 
