@@ -16,9 +16,9 @@
 
 
 
-* {
+/** {
   box-sizing: border-box;
-}
+}*/
 
 .bg-image {
   background-image: url("stu.jpg");

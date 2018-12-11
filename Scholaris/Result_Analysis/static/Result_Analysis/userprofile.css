@@ -1,12 +1,10 @@
 .body{
-
-  margin-top: 100px;
   background-color: #f4f4f4;
   margin-bottom: 100px;
 }
 .profile-main{
   width: 1000px;
-  height: 1000px;
+  height: 700px;
   background-color: #fff;
   margin: 0 auto;
   border: 1px solid #aed5e2;
@@ -15,6 +13,8 @@
    -webkit-transition : border 2s;
   transition: border 1s;
   font-family: Open Sans;
+  padding-left: 10px;
+  padding-right: 100px;
 
 }
 
@@ -26,18 +26,6 @@
   border: 2px solid #f4c613;
 
 }
-.profile-header{
-  height: 300px;
-  width: 100%;
-  color: #201e1e;
-  background-color: #212226;
-  border-bottom: 2px solid #E2F3FB;
-}
-.user-detail{
-  width: 75%;
-  margin: 0 auto;
-  height: 100%;
-}
 .user-image{
   float: right;
   width: 60%;
@@ -47,143 +35,18 @@
 .user-image img{
   width: 100%;
   height: 100%;
-  margin-top: 35px;
+ 
 }
 
-.user-data p{
-  font-size: 14px;
-  font-family: Raleway ;
-  color: #eff0e1;
-}
-.msg-btn{ 
-  background: #aa630c;
-  padding: 5px 11px;
-  color: black;
-  border-style: double;
-  font-size: 13px;
-}
-.msg-btn i{ 
-  padding: 0;
-  color: black;
-  margin-right: 7px;
-}
-
-
-/*tab*/
-.tab-panel-main{
+.detail-box{
+  margin-top: 10px;
+  float: right;
   width: 100%;
-  height: 600px;
-  float: inherit;
-}
-ul.tabs{
-  margin: 5px;
-  padding: 33px;
-  display: table;
-  position: absolute;
-  top: 270px;
-  right: 340px;
-
-}
-ul.tabs li{
-  color: #222;
-  display: inline-block;
-  padding: 10px 15px;
-  border-right: 1px solid #ec8a26;
-  border-top: 2px solid #E2F3FB;
-  cursor: pointer;
-  background: #FAFBFB;
-}
-ul.tabs li:last-child{
-  border-right: 2px solid #E2F3FB;
-}
-ul.tabs li:first-child{
-  border-left: 2px solid #c37e29;
-}
-ul.tabs li.current{
-  background: #f4ab07fc;
-  color: #fff;
-  font-weight: 600;
-}
-.tab-content{
-  display: none;
-  padding: 15px 5px;
-}
-.tab-content.current{
-  display: inherit;
-}
-.skill-box{
-  border:1px solid #ededed;
-  border-radius: 3px;
-  padding: 11px 15px;
-  margin-bottom: 20px;
-}
-.skill-box ul li strong{
-  font-size: 12px;
-}
-.skill-box ul{ 
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.skill-box ul li{
-  display: inline-block;
-  font-size: 11px;
-  margin-right: 4px;
-  padding: 4px 4px;
-  border-radius: 2px;
-}
-.skill-box ul li:hover{
-  background-color: #FF6E00;
-  color: #fff ;
-}
-.skill-box ul li:first-child:hover{
-  background-color: #fff;
-  color: black ;
-}
-.skill-box ul li i{
-  margin-left: 4px;
-  margin-right: 1px;
-}
-.bio-box{
-  float: left;
-  width: 56%;
-  border:1px solid #ededed;
-  border-radius: 4px;
-}
-.detail-box{
-  float: right;
-  width: 32%;
-  border:1px solid #ededed;
+  border:0px solid #ededed;
   padding: 13px;
-  border-radius: 4px;
 }
-.bio-box .heading{
-  padding: 10px 0px 10px 10px;
-}
-.bio-box .heading p{
-  margin: 0px;
-  font-weight: 600;
-  font-size: 13px;
-}
-.bio-box .heading label{
-  float: right;
-  font-size: 9px;
-  font-weight: normal;
-  border: 1px solid #ededed;
-  border-right: none;
-  padding: 2px 1px 2px 5px;
-}
-.bio-box .desc{
-  padding: 10px 10px 10px 10px;
-  text-align: justify;
-  color: #838383;
-  font-size: 13px;
-}
-.detail-box{
-  padding: 10px;
-  font-size: 13px;
-  width: 40%;
-}
+
+
 .detail-box p{
   font-weight: 600;
   margin: 0px;
@@ -198,129 +61,3 @@ ul.tabs li.current{
   list-style: none;
   color: #767676;
 }
-#allexam{
-  height: 210px;
-  width: 1000px;
-  float: inherit;
-  padding-left: 150px;
-  padding-right: 0px;
-}
-.portfolio-box{
-  border: 1px solid #ededed;
-  border-radius: 4px;
-  padding: 0px 20px;
-  float: left;
-  height: 220px;
-}
-.portfolio-img-box{
-  width: 30%;
-  height: 145px;
-  float: left;
-  margin-right: 25px;
-  border-radius: 3px;
-}
-.portfolio-img-box:last-child{
-  margin-right: 0px;
-}
-.portfolio-img-box h3{
-  text-align: center;
-  color: #969696;
-}
-.portfolio-img-box img{
-  border:1px solid #c1c1c1;
-  width: 100%;
-  height: 100%;
-  padding: 2px;
-}
-#previousexam-detail{
-  height: 210px;
-  width: 1000px;
-  float: inherit;
-  padding-left: 150px;
-  padding-right: 0px;
-}
-.Edu-box-main h2{
-  margin: 0;
-  margin-bottom: 0px;
-  text-align: center;
-  margin-bottom: 25px;
-  color: #969696;
-}
-.Edu-box-main h2 i{
-  color: #42A8BF;
-}
-.Edu-box-main{
-  float: left;
-  border-radius: 4px;
-  border: 1px solid #ededed;
-  padding: 10px 0px;
-}
-.Edu-box{
-  width: 38%;
-  float: left;
-  margin-left: 20px;
-  margin-right: 40px;
-  margin-bottom: 10px;
-  border-radius: 3px;
-  border: 1px solid #E0E0E1;
-  padding: 10px;
-}
-.Edu-box:last-child{
-  margin-left: 0px;
-  margin-right: 20px;
-}
-.Edu-box h5{
-  margin: 0;
-  font-weight: normal;
-  font-weight: 600;
-}
-.Edu-box h5 span{
-  color: #42A8BF;
-  font-size: 15px;
-}
-.Edu-box p{
-  padding: 10px 0px 0px 0px;
-  text-align: justify;
-  font-size: 13px;
-  color: #8E8E8E;
-  margin: 0;
-}
-.footer, .footer strong{
-  background-color: 212226;
-  text-align: center;
-  float: inherit;
-  width: 1000px;
-}
-.footer p{
-  margin-bottom: 0px;
-  font-size: 20px;
-}
-.footer-box-main{
-  width: 80%;
-  background-color: red;
-  margin: 0 auto;
-}
-.footer-box{
-  height: 50px;
-  width: 50px;
-  border: 1px solid #939393;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 20px;
-}
-.footer-box:last-child{
-  margin-right: 0px;
-}
-.footer-box i{
-  line-height: 50px;
-  font-size: 20px;
-}
-
-#course-detail{
-  height: 210px;
-  width: 800px;
-  float: inherit;
-  padding-left: 150px;
-  padding-right: 0px; 
-}
-

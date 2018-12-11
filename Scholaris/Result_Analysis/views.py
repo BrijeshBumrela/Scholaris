@@ -666,13 +666,53 @@ def add_task(request):
     return redirect('result:dashboard')
 
 
+def user_course(stds):
+    number1=0
+    for std in stds:
+        number1=std.course.count()
+    print(number1)
+    return number1
+
+
+
+def user_name(no_courses,stds):
+    names1=[]
+    keys=[]
+    for j in range(0,no_courses):
+        keys.append(stds.course.values('name')[j])
+    for k in keys:
+        names1.append(k['name'])
+    return names1
+
+def marking(result):
+    test_marks=[]
+    for tests in result:
+        test_marks.append(tests.marks)
+    return test_marks
+
+def testing(result):
+    test_ids=[]
+    str1="test"
+    for x in result:
+        test_ids.append(x.test.id)
+    return test_ids
 
 def userprofile(request, id):
-    student = get_object_or_404(Student, id=id)
-    print(student)
-
+    student1 = get_object_or_404(Student, id=id)
+    subject=request.user.teacher.course
+    res= StudentResult.objects.filter(test__teacher__course__name=subject,student__id=student1.id)
+    
+    num=student1.course.count()
+    names=user_name(num,student1)
+    test_marks=marking(res)
+    testids=testing(res)
+    percent=course_percentage(res)
     context = {
-        'student': student
+        'student': student1,
+        'courses':names,
+        'test_marks':test_marks,
+        'testids':testids,
+        'percentage':percent
     }
 
     return render(request, 'Result_Analysis/userprofile.html', context)
