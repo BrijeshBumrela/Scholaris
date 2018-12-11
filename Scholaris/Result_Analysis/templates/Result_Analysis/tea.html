@@ -6,11 +6,12 @@
   <title>student list</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/stu.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/tea.css' %}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
@@ -19,7 +20,6 @@
 
 <body>
 {% include 'Result_Analysis/navbar2.html' %}
-
 
  <div class="bg-image"></div>
     <div class="bg-text">
@@ -56,7 +56,7 @@
                             <tbody id="myTable">
                                 {% for teacher,follow in follow_list %}
                                     <tr>
-                                        <td>{{ teacher.teacher.username }}</td>
+                                        <td class="teacher-username">{{ teacher.teacher.username }}</td>
                                         <td>{{ teacher.course }}</td>
                                         <td>
                                             <form method="POST">
@@ -115,6 +115,8 @@ function sortTable() {
 
 $('.follow-btn').click(function(e) {
     e.preventDefault();
+    const username = document.querySelector('.teacher-username');
+    console.log(username.textContent);
     $.ajax({
         type: 'POST',
         url: "/follow_ajax/",

@@ -14,7 +14,11 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+	
+	
+	<script  src='https://cdn.jsdelivr.net/npm/apexcharts'></script>		
 </head>
+
 <body class="body">
 
     {% include 'Result_Analysis/navbar2.html' %}
@@ -22,101 +26,51 @@
 	<div class="container-fluid">
 
 		<div class="profile-main">
-			<div class="profile-header">
 				<div class="row">
 					<div class="col-sm-4">
-						<div class="user-image">
-							<img src="{{ student.photo.url }}">
-						</div>
+						<div class="user-image">						
+						<img src="{{ student.photo.url }}">	
+						</div>					
 					</div>
-					<div class="col-sm-8">
-						<div class="user-data">
-							<br><br><br>
-							<p style="font-size: 18px">
-                                student name: {{ student.student.first_name }} {{ student.student.last_name }}<br>
-							</p>
-						</div>
-					</div>
-					<div class="tab-panel-main">
-						<ul class="tabs">
-							<li class="tab-link current" data-tab="course-detail">Basic-details </li>
-							<li class="tab-link" data-tab="previousexam-detail">Previous-exam details</li>
-							<li class="tab-link" data-tab="allexam">Previous exams Details</li>
-						</ul>
-						<div id="course-detail" class="tab-content current"><br><br><br><br><br><br><br><br>
-                            <div class="bio-box">
+              		<div class="detail-box col-sm-8">	     
+                           <ul class="ul-first">
+                                	<li>Student:</li>
+                                    <li>Firstname:</li>
+                                    <li>LastName:</li>
+                                    <li>email:</li>
+                                    <li>courses:</li>
+                            </ul>
+                            <ul class="ul-second">
+                                    <li>{{student.student.username}}</li>
 
-                                <div class="desc">
-                                    course information:
-                                </div>
-                            </div>
-                            <div class="detail-box">
-                                <p>Detail</p>
-                                <ul class="ul-first">
-                                    <li>Birth date</li>
-                                    <li>City</li>
-                                    <li>Country</li>
-                                </ul>
-                                <ul class="ul-second">
-                                    <li>8 March 1997</li>
-                                    <li>Chennai</li>
-                                    <li>India</li>
-                                </ul>
-                            </div>
-                        </div>
-							<div id="previousexam-detail" class="tab-content"><br><br><br><br><br><br><br><br>
-								<div class="Edu-box-main">
-									<h2><i class="fa fa-graduation-cap" aria-hidden="true"></i> Previous exam details</h2>
-									<div class="Edu-box">
-										<h5><span>marks scored</span> <br>
-											marks scored will be shown here.
-										</div>
-										<div class="Edu-box">
-											<h5><span>class average</span> <br>
-												class average will be shown here.
-											</div>
-										</div>
-									</div>
-									<div id="allexam" class="tab-content"><br><br><br><br><br><br><br><br>
-										<div class="portfolio-box">
-											<div class="portfolio-img-box">
-												<h3>student stats</h3>
-												<img src="graph.jpg">
-											</div>
-											<div class="portfolio-img-box">
-												<h3>exams graph</h3>
-												<img src="">
-											</div>
-											
-										</div>
-									</div>
-								</div>
-
-								<div class="footer">
-									<p><strong>contact student:</strong></p><br>
-									student contacts will be shown here.<br>
-									<i class="fa fa-address-card" aria-hidden="true"> address of the student</i><br>
-									<i class="fa fa-phone" aria-hidden="true"> phone number</i>
-								</div>
-							</div>
-						</div>
+                                    <li>{{student.student.first_name}}</li>
+                                    <li>{{student.student.last_name}}</li>
+                                    <li>{{student.student.email}}</li>
+                                   	{% for core in courses %} 
+                                   		<li>{{core}}</li>
+                                   	{% endfor %}
+							</ul>
 					</div>
+                </div>		
+				<div class="row" style="margin-top: 30px">
+                    	<div class="col-sm-6">
+			                <div id='chart1'>
+							</div>  
+						</div>  
+						<div class="col-sm-6">	
+	                    	<div id='chart2'> 
+	                    	</div>
+	          			</div>
 				</div>
-
+		</div>
+	</div>
 				<script type="text/javascript">
-					$(document).ready(function(){
-						$('ul.tabs li').click(function(){
-							var tab_id = $(this).attr('data-tab');
-
-							$('ul.tabs li').removeClass('current');
-							$('.tab-content').removeClass('current');
-
-							$(this).addClass('current');
-							$("#"+tab_id).addClass('current');
-						});
-					});
+					var percentage= "{{percentage}}";
+					var test={{testids}};
+					var marks={{test_marks}};
 				</script>
 
-
-			</body>
-			</html>
+    
+				<script src="{% static 'Result_Analysis/studentchart.js' %}"></script>
+</body>
+</html>
