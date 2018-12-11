@@ -11,7 +11,6 @@ urlpatterns = [
     path('question/<int:id>/<str:slug>/', views.question, name="forum-question"),
     path('post_create/', views.post_create, name="post_create"),
     path('like/', views.upvote_post, name="upvote_post"),
-    path('upvote/<int:id>/',views.upvote_comment, name="upvote_comment"),
-    path('downvote/<int:id>/',views.downvote_comment, name="downvote_comment"),
+    path('updown/<int:id>/',views.updown_comment, name="updown_comment"),
 
 ]
