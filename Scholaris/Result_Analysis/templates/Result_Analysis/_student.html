@@ -24,10 +24,10 @@
 
     <div class="row">
         <div class="col-lg-6 col-sm-12 cont2">
-            <div id="chart" style="box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);"></div>
+            <div id="chart" ></div>
         </div>
         <div class="col-lg-6 cont1">
-            <div id="chart-1" style="box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);">
+            <div id="chart-1" >
             </div>
         </div>
     </div>
@@ -36,11 +36,10 @@
     <br><br>
     <div class="row">
         <div class="col-lg-8 col-sm-12">
-            <div id="calendar" class="cont1"
-                 style="border: 3px solid orange;box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);">
+            <div id="calendar" class="cont1">
             </div>
         </div>
-        <div class="col-lg-4 col-sm-12" style="box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);">
+        <div class="col-lg-4 col-sm-12" >
             <div class="panel panel-default cont2">
                 <div class="panel-heading">
                     <h2 class="panel-title">Stats</h2>
@@ -124,21 +123,21 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="container cont2">
-                <div style="margin-top:30px;">
+            <div class="container cont1">
+                <!--<div style="margin-top:30px;">
                     <h3>
                         TO-<span class="clr">DO</span> Task
                     </h3>
                     <div>
                         <ul class="list-group list-group-flush">
-                            {% for task in tasks %}
+
                                 <li class="list-group-item" value="{{ task.id }}">{{ task.text }}</li>
-                            {% endfor %}
+
                         </ul>
                     </div>
                     <div class="input-group mb-3">
-                        <form action="{% url 'result:task' %}" method="POST" id="task_submit" style="width:100%;">
-                            {% csrf_token %}
+                        <form action="" method="POST" id="task_submit" style="width:100%;">
+
                             <input type="text" class="form-control" name="task" placeholder="Write Your Task"
                                    aria-label="Recipient's username" aria-describedby="button-addon2" id="frm">
                             <br>
@@ -147,7 +146,99 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div>-->
+
+                <div class="card todo" >
+
+            <h3 class="card-header py-4 ">
+
+                        TO-<span class="clr">DO</span> Task
+
+            </h3>
+
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-0">
+                <table class="table table-striped mb-3">
+                        <thead>
+                          <tr>
+                            <th>Things left to do</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>complete ase project</td>
+                                <td>
+                                    <button class="mx-auto">
+                                        <div class="icon">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </div>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Write maths assignment</td>
+                                <td>
+                                    <button class="mx-auto">
+                                        <div class="icon">
+                                           <i class="fas fa-trash-alt"></i>
+                                        </div>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>study for exams</td>
+                                <td>
+                                    <button class="mx-auto">
+                                        <div class="icon">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </div>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Check your results</td>
+                                <td>
+                                    <button class="mx-auto">
+                                        <div class="icon">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </div>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Some task</td>
+                                    <td>
+                                        <button class="mx-auto">
+                                            <div class="icon">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </div>
+                                        </button>
+                                    </td>
+                            </tr>
+<!--
+                            <tr>
+                                <td class="px-0 col-8">
+                                    <div class="form-group my-0">
+                                        <input type="text" placeholder="Add a Task" class="form-control " id="task" >
+                                    </div>
+                                </td>
+                                <td >
+                                        <button class="btn btn-outline-info btn-rounded btn-block col-4 mx-auto" type="submit">Submit</button>
+                                </td>
+                            </tr>
+                        -->
+
+
+                        </tbody>
+                      </table>
+                    <div class="form-group mt-0">
+                            <input type="text" placeholder="Add a Task" class="form-control " id="task" >
+                    </div>
+                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0 submit-button" type="submit" >Submit</button>
+
+            </div>
+
+            </div>
             </div>
         </div>
     </div>
