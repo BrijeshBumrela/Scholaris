@@ -116,8 +116,7 @@ function sortTable() {
 
 $('.follow-btn').click(function(e) {
     e.preventDefault();
-    const username = document.querySelector('.teacher-username');
-    console.log(username.textContent);
+    const username = $(this).val();
     $.ajax({
         type: 'POST',
         url: "/follow_ajax/",
