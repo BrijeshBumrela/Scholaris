@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
+from rest_framework import status
 from Discussion_Forum.models import Post
 from .serializers import PostSerializer, ResultSerializer
 from rest_framework.decorators import api_view
@@ -40,7 +41,7 @@ def post_list(request):
         return Response(serializer.errors, status=400)
 
 
-
+@api_view(['GET', 'PUT', 'DELETE', 'POST'])
 @csrf_exempt
 def post_detail(request, id):
 
@@ -52,7 +53,24 @@ def post_detail(request, id):
 
     if request.method == 'GET':
         serializer = PostSerializer(post)
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
+
+
+    if request.method == 'PUT':
+        serializer = PostSerializer(post, data=request.data)
+        if serializer.is_valid():
+            if User.objects.filter(username=serializer.validated_data['author']).exists():
+                user = User.objects.get(username=serializer.validated_data['author'])
+                serializer.validated_data['author'] = user
+                serializer.save()
+                return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+    if request.method == 'DELETE':
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 @api_view(['POST'])
