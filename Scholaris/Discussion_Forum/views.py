@@ -13,7 +13,6 @@ import copy
 from Result_Analysis.models import Course,Teacher
 
 
-# Create your views here.
 def post_list(request):
     post_list = Post.published.all()
     query = request.GET.get('q')

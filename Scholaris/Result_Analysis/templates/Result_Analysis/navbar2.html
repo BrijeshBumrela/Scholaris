@@ -17,11 +17,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item"><a href="{% url 'result:dashboard' %}" class='nav-link'"> Dashboard</a></li>
-          <li class="nav-item"><a href="{% url 'exam:list_all_test' %}" class='nav-link'"> Take Test</a></li>
-          <li class="nav-item"><a href="{% url 'result:results' %}" class='nav-link'"> Results</a></li>
-          <li class="nav-item"><a href="{% url 'forum:forum-post-list' %}" class='nav-link'"> Forum</a></li>
-          <li class="nav-item"><a href="{% url 'result:list_all_teachers_to_follow' %}" class='nav-link'"> Following</a></li>
+          <li class="nav-item"><a href="{% url 'result:dashboard' %}" class='nav-link'> Dashboard</a></li>
+          <li class="nav-item"><a href="{% url 'exam:list_all_test' %}" class='nav-link'> Take Test</a></li>
+          <li class="nav-item"><a href="{% url 'result:results' %}" class='nav-link'> Results</a></li>
+          <li class="nav-item"><a href="{% url 'forum:forum-post-list' %}" class='nav-link'> Forum</a></li>
+          <li class="nav-item"><a href="{% url 'result:list_all_teachers_to_follow' %}" class='nav-link'> Following</a></li>
 
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -47,13 +47,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="{% url 'result:dashboard' %}" class='nav-link'"> Dashboard</a></li>
-                <li class="nav-item"><a href="{% url 'exam:list_all_test' %}" class='nav-link'"> Create Test</a></li>
-                <li class="nav-item"><a href="{% url 'forum:forum-post-list' %}" class='nav-link'"> Forum</a></li>
-                <li class="nav-item"><a href="{% url 'result:list_all_students' %}" class='nav-link'"> Followers</a></li>
-                <li class="nav-item"><a href="{% url 'exam:my_test' %}" class='nav-link'"> My Test</a></li>
+                <li class="nav-item"><a href="{% url 'result:dashboard' %}" class='nav-link'> Dashboard</a></li>
+                <li class="nav-item"><a href="{% url 'exam:list_all_test' %}" class='nav-link'> Create Test</a></li>
+                <li class="nav-item"><a href="{% url 'forum:forum-post-list' %}" class='nav-link'> Forum</a></li>
+                <li class="nav-item"><a href="{% url 'result:list_all_students' %}" class='nav-link'> Followers</a></li>
+                <li class="nav-item"><a href="{% url 'exam:my_test' %}" class='nav-link'> My Test</a></li>
                 {% if not request.user.teacher.course %}
-                    <li class="nav-item"><a href="{% url 'result:choose_course_teacher' %}" class='nav-link'"> Course</a></li>
+                    <li class="nav-item"><a href="{% url 'result:choose_course_teacher' %}" class='nav-link'> Course</a></li>
                 {% endif %}
             </ul>
 

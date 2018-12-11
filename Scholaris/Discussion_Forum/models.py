@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.text import slugify
+from django.utils import timezone
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -25,7 +26,7 @@ class Post(models.Model):
     body    = models.TextField()
     tag     = models.CharField(max_length=150)
     upvotes = models.ManyToManyField(User, related_name='upvotes', blank=True)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     status  = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 

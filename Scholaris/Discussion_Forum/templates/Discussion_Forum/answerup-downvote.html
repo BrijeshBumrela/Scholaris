@@ -27,18 +27,46 @@
 
              {% if is_comment_downvoted  %}
                  <div class="ml-md-4">
-                     <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-danger mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
+                     <button type="submit" id="comment_downvote" name="comment_id" value="{{ comment.id }}" class="btn btn-danger mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
                      <div>{{ downvote }}</div>
                  </div>
              {% else %}
                  <div class="ml-md-4">
-                         <button type="submit" id="comment_upvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
+                         <button type="submit" id="comment_downvote" name="comment_id" value="{{ comment.id }}" class="btn btn-general mr-md-0" ><i class="fas fa-thumbs-down"></i></button>
                          <div>{{ downvote }}</div>
                  </div>
              {% endif %}
 
          </form>
     </div>
+
+    <script type="text/javascript">
+
+            $('#delete').click(function(){
+              return confirm("Are you sure to delete this post?")
+           });
+
+            document.querySele
+
+          $('#comment_upvote').on('click', function(event) {
+              event.preventDefault();
+              console.log($(this));
+              {#$.ajax({#}
+              {#    type: 'POST',#}
+              {#    url: '{% url "forum:upvote_comment" pk %}',#}
+              {#    data: {'id':pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},#}
+              {#    dataType: 'json',#}
+              {#    success: function(response){#}
+                      {#$('#upvote-section').html(response['form'])#}
+                      {#console.log($('#upvote-section').html(response['form']));#}
+              {#        console.log('done something');#}
+              {#    },#}
+              {#    error: function(rs, e) {#}
+              {#        console.log(rs.responseText);#}
+              {#    },#}
+              {# }); #}
+          });
+    </script>
 
 
 {% endif %}
