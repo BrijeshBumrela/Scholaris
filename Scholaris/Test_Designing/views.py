@@ -248,15 +248,27 @@ def testdetail(request, id):
         'expiry_token':expiry_token,
         'expiry_time':expiry_time,
     }
-    return render(request, 'Test_Designing/quiz-form.html', context)
+    return render(request, 'Test_Designing/test_description.html', context)
 
 @login_required()
 @user_passes_test(check_teacher, login_url='/test/error')
 def my_test(request):
     teacher = get_object_or_404(Teacher, id=request.user.teacher.id)
 
+    test_list = teacher.test_set.all()
+    is_done = []
+
+    for test in test_list:
+        if test.time < timezone.now():
+            is_done.append(True)
+        else:
+            is_done.append(False)
+
+
+    test_list_done = zip(test_list, is_done)
+
     context = {
-        'list': teacher.test_set.filter(time__gte=timezone.now())
+        'test_list': test_list_done
     }
 
     return render(request, 'Test_Designing/my_test.html', context)

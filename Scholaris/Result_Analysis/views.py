@@ -413,7 +413,7 @@ def set_course_teacher(request):
         messages.success(request, 'Course Successfully Set')
         return redirect('result:dashboard')
     else:
-        return HttpResponse('Some Error Occured')
+        return HttpResponse('You Have already selected a course')
 
 def follow(request):
     if request.method == 'POST':

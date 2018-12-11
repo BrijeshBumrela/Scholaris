@@ -3,10 +3,16 @@
 {% block content %}
     {% include 'Result_Analysis/navbar2.html' %}
 
-    {% for test in list %}
+    <div class="container">
+        <ul class="list-group">
+
+        </ul>
+    </div>
+
+    {% for test,is_done in test_list %}
 
         {{ test.name }} {{ test.time }}
-        {% if time_passed %}
+        {% if is_done %}
         {% else %}
             <a href="{% url 'exam:edit_test' test.id %}">Edit Test</a>
         {% endif %}
