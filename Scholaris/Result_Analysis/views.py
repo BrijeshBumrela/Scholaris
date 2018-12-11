@@ -419,8 +419,10 @@ def follow(request):
         for teacher in Teacher.objects.all():
             if teacher.teacher.username in selected_teacher:
                 teacher.followers.add(student)
+                student.course.add(teacher.course)
             else:
                 teacher.followers.remove(student)
+                student.course.remove(teacher.course)
             teacher.save()
 
         return redirect('result:dashboard')
@@ -439,8 +441,10 @@ def follow_ajax(request):
 
         if check_following:
             get_teacher.followers.remove(request.user.student.id)
+            request.user.student.course.remove(get_teacher.course)
             is_following = False
         else:
+            request.user.student.course.add(get_teacher.course)
             get_teacher.followers.add(request.user.student.id)
             is_following = True
 

@@ -34,7 +34,7 @@ class Post(models.Model):
         ordering = ['-updated']
 
     def __str__(self):
-        return  self.title
+        return self.title
 
     def total_upvotes(self):
         return self.upvotes.count()
