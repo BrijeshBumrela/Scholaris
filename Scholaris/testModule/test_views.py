@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from Result_Analysis.models import Student, Teacher
 from Test_Designing.models import Test, QuestionSet, Question
 from django.contrib.auth.models import User
+from Discussion_Forum.models import *
 
 # class HomePageViewTest(TestCase):
 #
@@ -73,6 +74,42 @@ class ListAllTest(TestCase):
         self.assertEqual(str(response.context['user']), 'student1')
 
         self.assertTemplateUsed(response, 'Test_Designing/test_list.html')
+
+
+class PostlistViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        user1 = User.objects.create(username='roger', email='roger@gmail.com', password='federer@20')
+
+        number_of_posts = 14
+
+        for post_id in range(number_of_posts):
+            Post.objects.create(title='mypost{post_id}',
+                                slug='mypost{post_id}',
+                                author=user1,
+                                body='for_testing{post_id}',
+                                tag='ASE',
+                                status='Published')
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get('/forum/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_url_accessible_by_name(self):
+        response = self.client.get(reverse('forum:forum-post-list'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(reverse('forum:forum-post-list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'Discussion_Forum/post_view.html')
+
+
+
+
+
+
+
 
 
 
