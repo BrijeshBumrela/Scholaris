@@ -1,0 +1,97 @@
+{% extends 'Result_Analysis/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'Result_Analysis/navbar2.html' %}
+
+
+<div class="container">
+    <div class="container">
+        {% if test_form.errors %}
+            {% for field, errors in test_form.errors.items %}
+                {% for error in errors %}
+                    <div class="control-group" style="background:lightblue;">
+                        {{ error }} -> {{ field }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {% if question_formset.errors %}
+            {% for field, errors in question_formset.errors.items %}
+                {% for error in errors %}
+                    <div class="control-group" style="background:lightblue;">
+                        {{ error }} -> {{ field }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+    <form action="{% url 'exam:edit_question' instance.id %}" method="POST">
+        {% csrf_token %}
+{#        <div class="row">#}
+{#            <div class="form-group shadow-textarea">#}
+{#                <label for="exampleFormControlTextarea6">Question</label>#}
+{#                <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" cols="100" placeholder="{{ instance.text }}"></textarea>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="form-row">#}
+{#            <div class="col">#}
+{#                <label for="id_option1">Option1:</label>#}
+{#                <input type="text" value="{{ instance.option1 }}" class="form-control" placeholder="Options" name="option1" id="id_option1" required maxlength="200">#}
+{#            </div>#}
+{#            <div class="col">#}
+{#                <label for="id_option2">Option2:</label>#}
+{#                <input type="text" value="{{ instance.option2 }}" class="form-control" placeholder="Options" name="option2" id="id_option2" required maxlength="200">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="form-row">#}
+{#            <div class="col">#}
+{#                <label for="id_option3">Option3:</label>#}
+{#                <input type="text" value="{{ instance.option3 }}" class="form-control" placeholder="Options" name="option3" id="id_option3" required maxlength="200">#}
+{#            </div>#}
+{#            <div class="col">#}
+{#                <label for="id_option1">Option4:</label>#}
+{#                <input type="text" value="{{ instance.option4 }}" class="form-control" placeholder="Options" name="option4" id="id_option4" required maxlength="200">#}
+{#            </div>#}
+{#        </div>#}
+{#        <br><br>#}
+{#        <div>#}
+{#            <label for="id_answer">Answer:</label>#}
+{##}
+{#            <select name="answer" required id="id_answer">#}
+{#                <option value="" selected>---------</option>#}
+{##}
+{#                <option value="1">option1</option>#}
+{##}
+{#                <option value="2">option2</option>#}
+{##}
+{#                <option value="3">option3</option>#}
+{##}
+{#                <option value="4">option4</option>#}
+{##}
+{#            </select>#}
+{#        </div>#}
+{##}
+{#        <div class="row">#}
+{#            <div class="col-lg-6">#}
+{#                <label for="id_mark">Mark:</label>#}
+{#                <input type="text" class="form-control" placeholder="Options" name="mark" value="1" id="id_mark" required maxlength="200">#}
+{#            </div>#}
+{#        </div>#}
+
+        {{ form.as_p }}
+
+        <div style="width:80%;margin:auto;">
+            <center>
+                <input type="submit" class="submitBtn btn btn-lg btn-primary button button-q" style="font-family: 'Raleway';background:orange; " value="Submit">
+            </center>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

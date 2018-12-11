@@ -288,4 +288,26 @@ def edit_test(request, id):
     # return render(request, 'Test_Designing/edit_test.html', context)
 
     # return render(request, 'Test_Designing/test_description.html', context)
-    return render(request, 'Test_Designing/quiz-form.html', context)
+    return render(request, 'Test_Designing/exam_edit.html', context)
+
+@login_required()
+@user_passes_test(check_teacher, login_url='/test/error')
+def edit_question(request, id):
+    instance = get_object_or_404(Question, id=id)
+    print(instance)
+    if request.method == 'POST':
+        form = QuestionForm(request.POST or None, instance=instance)
+        if form.is_valid():
+            form.save()
+
+
+            return redirect('result:dashboard')
+
+    print('no there')
+    form = QuestionForm()
+    context = {
+        'form':form,
+        'instance':instance
+    }
+    return render(request, 'Test_Designing/question_edit.html', context)
+

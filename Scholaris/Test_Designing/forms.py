@@ -27,6 +27,8 @@ class QuestionForm(forms.ModelForm):
             self.add_error('mark', 'Marks for a question can not be negative')
 
 
+
+
 class TestCreateForm(forms.ModelForm):
     class Meta:
         model = Test
@@ -46,5 +48,4 @@ class TestCreateForm(forms.ModelForm):
         if exam_duration < 0:
             print('here afieaf')
             self.add_error('duration', 'Time can not be negative')
-
 

@@ -6,18 +6,18 @@
     <div class="container">
         <ul class="list-group">
 
+            {% for test,is_done in test_list %}
+                <li class="list-group-item">
+                    {{ test.name }} {{ test.time }}
+                    {% if is_done %}
+                    {% else %}
+                        <a href="{% url 'exam:edit_test' test.id %}">Edit Test</a>
+                    {% endif %}
+                    <br>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 
-    {% for test,is_done in test_list %}
-
-        {{ test.name }} {{ test.time }}
-        {% if is_done %}
-        {% else %}
-            <a href="{% url 'exam:edit_test' test.id %}">Edit Test</a>
-        {% endif %}
-        <br>
-
-    {% endfor %}
 
 {% endblock %}
