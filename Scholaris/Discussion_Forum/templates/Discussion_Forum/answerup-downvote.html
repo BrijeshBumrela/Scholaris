@@ -40,33 +40,6 @@
          </form>
     </div>
 
-    <script type="text/javascript">
-
-            $('#delete').click(function(){
-              return confirm("Are you sure to delete this post?")
-           });
-
-
-          $('#comment_upvote').on('click', function(event) {
-              event.preventDefault();
-              console.log($(this));
-              {#$.ajax({#}
-              {#    type: 'POST',#}
-              {#    url: '{% url "forum:upvote_comment" pk %}',#}
-              {#    data: {'id':pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},#}
-              {#    dataType: 'json',#}
-              {#    success: function(response){#}
-                      {#$('#upvote-section').html(response['form'])#}
-                      {#console.log($('#upvote-section').html(response['form']));#}
-              {#        console.log('done something');#}
-              {#    },#}
-              {#    error: function(rs, e) {#}
-              {#        console.log(rs.responseText);#}
-              {#    },#}
-              {# }); #}
-          });
-    </script>
-
 
 {% endif %}
 
