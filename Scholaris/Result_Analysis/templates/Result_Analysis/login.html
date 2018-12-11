@@ -29,7 +29,7 @@
 		.btn-profile{
 			background-color : #f4f4f4;
 			color:#000;
-			border:1px solid #fff;
+			border:1px solid #f4c613;
 		}
 		.btn-profile:hover,
 		.btn-profile:focus {
@@ -39,7 +39,7 @@
 		}
 		input[type=text],input[type=password]{
 			width:250px;
-			background: transparent;
+			border-color: #f4c613;
     		border-radius: 20px;
     		height: 40px;
     		background-color: #fff;
@@ -47,8 +47,9 @@
     		color:#000;
     		font-family: Raleway;
     		font-size:20px;
+
 		}
-		.input{
+		input{
 			background-color: #fff;
 		}
 		.glyphicon {
@@ -80,6 +81,7 @@
 
 			<button class='btn-general btn-profile' type="submit">LOGIN</button>
 		</form>
+		<a href="{% url 'result:new_pass' %}">forget password?</a>
 	</div>
 </div>
 	

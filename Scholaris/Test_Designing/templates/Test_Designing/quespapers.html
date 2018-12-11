@@ -1,0 +1,171 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <title>Question Papers list</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{% static 'Test_Designing/css/quespapers.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+</head>
+
+<body class="body" style="background-color: #f4f4f4">
+
+
+
+
+
+  
+{% load static %}
+
+<style>
+    .navbar-nav > li {
+        margin-right: 30px;
+        margin-left: 30px;
+    }
+</style>
+
+{% include 'Result_Analysis/navbar2.html' %}
+
+
+
+{#	<nav>#}
+{#		<div class="menu">#}
+{#			<ul>#}
+{#				{% if request.user.student %}#}
+{#                    <li>Hi {{ request.user.username }}</li>#}
+{#					<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a></li>#}
+{#					<li><a href="{% url 'result:dashboard' %}" class='menu-item'">DASHBOARD</a></li>#}
+{#					<li><a href="{% url 'result:profile' %}" class="menu-item">PROFILE</a></li>#}
+{#			 		<li><a href="{% url 'exam:list_all_test' %}" class="menu-item">TEST-TAKING</a></li>#}
+{#					<li><a href="{% url 'result:results' %}" class="menu-item">RESULTS</a></li>#}
+{#					<li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>#}
+{#					<li><a href="{% url 'result:list_all_teachers_to_follow' %}" class="menu-item">FOLLOWING</a></li>#}
+{#					<li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>#}
+{#					<li><a href="#" id="search"><i class="fa fa-search"></i></a></li>#}
+{#				{% endif %}#}
+{#				{% if request.user.teacher %}#}
+{#                    <li>Hi {{ request.user.username }}</li>#}
+{#					<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>#}
+{#					<li><a href="{% url 'result:profile2' %}" class="menu-item">PROFILE</a></li>#}
+{#			 		<li><a href="" class="menu-item">FOLLOWERS</a></li>#}
+{#			 		<li><a href="{% url 'exam:design' %}" class="menu-item">MAKE A TEST</a></li>#}
+{#					<li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>#}
+{#                    <li><a href="{% url 'result:student_list_teacher' %}">LIST STUDENTS</a></li>#}
+{#					<li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>#}
+{#					<li><a href="#" id="search"><i class="fa fa-search"></i></a></li>#}
+{#				{% endif %}#}
+{#			</ul>#}
+{#			<div class="search-form">#}
+{#				<input type="text" name="" placeholder="search sholaris.com">#}
+{#			</div>#}
+{#			<a class="close"><i class="fa fa-times"></i></a>#}
+{#		</div>#}
+{#	</nav>#}
+<br><br>
+
+
+
+<script>
+
+$(document).ready(function(){
+      $('#search').click(function(){
+        $('.menu-item').addClass('hide-item');
+        $('.search-form').addClass('active');
+        $('.close').addClass('active');
+        $('#search').hide()
+
+      });
+      $('.close').click(function(){
+        $('.menu-item').removeClass('hide-item');
+        $('.search-form').removeClass('active');
+        $('.close').removeClass('active');
+        $('#search').show()
+      })
+  })
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="bg-image"></div>
+ <div class="bg-text">
+  <h1 style="font-size:50px;font-family: 'Raleway'">Question Papers List</h1>
+</div>
+<br><br>
+<div class="container" style="border: double; border-spacing:10px;border-color: #f1e19d;margin-top: 20px;border-width: 10px;">
+  <div class="row">
+    <div class="col-sm-12">
+      
+    </div>
+  </div><br>
+  <div class="row" align="left">
+    <div class="col-sm-12">
+      <div style="float: right;margin-right: 10px">
+       <i class="fa fa-search" aria-hidden="true" style="font-size: 24px;margin-top: 1px"></i>
+       <input class="form-control" rows="1" id="myInput" placeholder="Search..." style="font-size: 20px;float: right;width: 90%"></div>
+       
+       <table class="table table-striped" id="myTable" style="font-size: 20px;font-family: 'Open Sans';margin-top: 30px">
+        <thead>
+          <tr>
+            <th>Exam</th>
+            <th>Date</th>
+            
+          </tr>
+        </thead>
+        <tbody id="myTable">
+            {% for test in test_list %}
+          <tr>
+            <td>
+              <a href="{% url 'exam:testdetail' test.id %}" style="color: #212226;">{{ test.teacher }} - {{ test.name }}</a></td>
+            <td>{{ test.time}}</td>
+          </a>
+          </tr>
+          {% endfor %}
+          
+          
+        </tbody>
+      </table>
+
+
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+
+
+
+</script>
+
+
+</body>
+</html>

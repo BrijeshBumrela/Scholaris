@@ -41,9 +41,6 @@ section
 }
 
 
-
-
-
 #home
 {
   background: none;
@@ -301,23 +298,34 @@ section
 
 .contact-item{
   background-color: #fff;
-  padding: 75px 60px;
-    font-size: 60px;
+  padding-right: 15px;
+  padding-left: 15px;
+      font-size: 40px ;
     margin: 0;
     text-decoration: none;
     color: #212226;
 }
 
-.contact-item:hover {
-  color: #f4c613;
-  -webkit-transform: translateY(-20px);
-          transform: translateY(-20px);
-  box-shadow: 0 0 10px rgba(0,0,0, .1);
+.contact-item i{
+  text-decoration: none;
+  color: #212226;
 }
 
-.contact-item,.contact-item:hover i{
+.contact-item:hover {
+  box-shadow: 0 0 10px rgba(0,0,0, .1);
   transition: all 400ms ease-in-out;
+}
 
+.contact-item i:hover{
+  color: #f4c613;
+}
+
+.contactus i{
+  font-size: 30px;
+}
+
+.contactus p{
+  font-size: 20px;
 }
 
 nav
@@ -382,3 +390,38 @@ nav
   width: 70px;
 }
 
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 55vw;
+  overflow: hidden;
+}
+
+.layer {
+  position: absolute;
+  width: 100vw;
+  min-height: 55vw;
+  overflow: hidden;
+}
+
+.layer .content-wrap {
+  position: absolute;
+  width: 100vw;
+  min-height: 55vw;
+}
+
+.layer .content-body {
+  width: 25%;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+.layer img {
+  position: absolute;
+  width: 35%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

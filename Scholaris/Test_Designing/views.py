@@ -166,9 +166,9 @@ def result(request, id):
 
 
 
-#exam-taking vies ends here
+#exam-taking views ends here
 
-@login_required()
+@login_required(login_url='result:login')
 @user_passes_test(check_student, login_url='/test/error')
 def list_all_test(request):
     teacher_list = Teacher.objects.filter(followers=request.user.student)
@@ -193,7 +193,7 @@ def list_all_test(request):
     context = {
         'test_list':test_list
     }
-    return render(request, 'Test_Designing/test_list.html', context)
+    return render(request, 'Test_Designing/quespapers.html', context)
 
 
 def detail(request, id):
@@ -201,7 +201,7 @@ def detail(request, id):
     question_list = get_test.questionset.question_set.all()
 
     student = Student.objects.get(student=request.user)
-     
+
     timer = get_test.duration
 
     expiry_time = get_test.time + datetime.timedelta(minutes=get_test.duration)
@@ -222,6 +222,7 @@ def detail(request, id):
             'test':get_test,
             'no_of_qs': question_list.count(),
             'timer': r.seconds,
+            'expiry_time': expiry_time
         }
 
     return render(request, 'Test_Designing/t.html', context)
@@ -247,15 +248,27 @@ def testdetail(request, id):
         'expiry_token':expiry_token,
         'expiry_time':expiry_time,
     }
-    return render(request, 'Test_Designing/quiz-form.html', context)
+    return render(request, 'Test_Designing/test_description.html', context)
 
 @login_required()
 @user_passes_test(check_teacher, login_url='/test/error')
 def my_test(request):
     teacher = get_object_or_404(Teacher, id=request.user.teacher.id)
 
+    test_list = teacher.test_set.all()
+    is_done = []
+
+    for test in test_list:
+        if test.time < timezone.now():
+            is_done.append(True)
+        else:
+            is_done.append(False)
+
+
+    test_list_done = zip(test_list, is_done)
+
     context = {
-        'list': teacher.test_set.all()
+        'test_list': test_list_done
     }
 
     return render(request, 'Test_Designing/my_test.html', context)
@@ -267,9 +280,34 @@ def edit_test(request, id):
     test = get_object_or_404(Test, id=id)
     question_list = test.questionset.question_set.all()
 
+
     context = {
         'q_list': question_list
     }
 
-    return render(request, 'Test_Designing/edit_test.html', context)
+    # return render(request, 'Test_Designing/edit_test.html', context)
+
+    # return render(request, 'Test_Designing/test_description.html', context)
+    return render(request, 'Test_Designing/exam_edit.html', context)
+
+@login_required()
+@user_passes_test(check_teacher, login_url='/test/error')
+def edit_question(request, id):
+    instance = get_object_or_404(Question, id=id)
+    print(instance)
+    if request.method == 'POST':
+        form = QuestionForm(request.POST or None, instance=instance)
+        if form.is_valid():
+            form.save()
+
+
+            return redirect('result:dashboard')
+
+    print('no there')
+    form = QuestionForm()
+    context = {
+        'form':form,
+        'instance':instance
+    }
+    return render(request, 'Test_Designing/question_edit.html', context)
 

@@ -26,13 +26,29 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/dashboardcss/style.css' %}">
 
 
-	<script src="{% static 'Result_Analysis/dashboardjs/jquery.min.js' %}"></script>
+
 	<script src="{% static 'Result_Analysis/dashboardjs/moment.min.js' %}"></script>
 	<script src="{% static 'Result_Analysis/dashboardjs/fullcalendar.js' %}"></script>
 
 
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
 </head>
 <body>
+	<script type="text/javascript">
+        	var percentage =  "{{percent}}"
+        	var marks = {{marks}}
+        	var test= {{tests}}
+        	console.log(marks);
+        	console.log(tests);
+
+	</script>
+
     {% include 'Result_Analysis/navbar2.html' %}
 
     {% if request.user.student %}
@@ -45,12 +61,7 @@
 
     {% endif %}
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-
-
+	
 	<!-- 	Moment js CDN   -->
 	<script src="{% static 'Result_Analysis/dashboardjs/moment.min.js' %}"></script>
 
@@ -70,7 +81,19 @@
 
 	<!-- Custom js -->
 	<script src="{% static 'Result_Analysis/dashboardjs/script.js' %}"></script>
-
+<script>
+    $('#calendar').fullCalendar({
+    events: [
+    {% for event in events %}
+    {
+      title  : '{{  event.name}}',
+      start  : '{{ event.time|date:"Y-m-d"}}',
+	  url : '{% url "exam:testdetail" event.id %}',
+    },
+    {% endfor %}
+  ]
+});
+</script>
 
 </body>
 </html>

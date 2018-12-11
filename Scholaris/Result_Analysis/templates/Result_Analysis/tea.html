@@ -6,21 +6,21 @@
   <title>student list</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/stu.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'Result_Analysis/tea.css' %}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{#  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 </head>
 
-<body class="body">
+<body>
 {% include 'Result_Analysis/navbar2.html' %}
-
 
  <div class="bg-image"></div>
     <div class="bg-text">
@@ -57,8 +57,8 @@
                             <tbody id="myTable">
                                 {% for teacher,follow in follow_list %}
                                     <tr>
-                                        <td>{{ teacher.teacher.username }}</td>
-                                        <td>{{ teacher.teacher.email }}</td>
+                                        <td class="teacher-username">{{ teacher.teacher.username }}</td>
+                                        <td>{{ teacher.course }}</td>
                                         <td>
                                             <form method="POST">
                                                 {% csrf_token %}
@@ -117,7 +117,6 @@ function sortTable() {
 $('.follow-btn').click(function(e) {
     e.preventDefault();
     const username = $(this).val();
-
     $.ajax({
         type: 'POST',
         url: "/follow_ajax/",
@@ -127,15 +126,16 @@ $('.follow-btn').click(function(e) {
         },
         dataType: 'json',
         success: function(data) {
+            const teacher_selected = data.teacher_id;
+            selectedBtn = document.querySelector(`[value=${CSS.escape(teacher_selected)}]`);
             if(data.is_following === true) {
-                $('.follow-btn').html('Unfollow');
-                $('.follow-btn').addClass('btn-danger');
+                $('button[value="' + teacher_selected + '"]').html('Unfollow').addClass('btn-danger').removeClass('btn-success');
+                /*    $('.follow-btn').addClass('btn-danger');
                 $('.follow-btn').removeClass('btn-success');
+            }*/
             }
             else {
-                $('.follow-btn').html('Follow');
-                $('.follow-btn').addClass('btn-success');
-                $('.follow-btn').removeClass('btn-danger');
+                $('button[value="' + teacher_selected + '"]').html('Follow').addClass('btn-success').removeClass('btn-danger');
             }
         }
     })

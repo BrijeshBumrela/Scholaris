@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>description </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{% static 'Test_Designing/css/test_description.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+</head>
+
+<body class="body">
+
+  <div class="header">
+    <div style="width: 100%;">
+      <h1>
+        {{ test.name }}
+<br><br>
+        <div class="row" style="font-size: 30px" >
+          <div class="col-sm-6" >
+      Duration of exam :{{ test.duration }} m
+    </div>
+      <div class="col-sm-6" >
+      maximum marks :{{ test.total_marks }}
+    </div>
+  </div>
+      </h1>
+       
+      <div class="marks">
+        <br>DESCRIPTION:
+        <br>
+        <div class="desc">
+
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        <b>Exam Date:</b> {{time}}<br>
+        <br><i class="fa fa-arrow-right" aria-hidden="true"></i>
+        {{test.description}}<br>
+        <br><i class="fa fa-arrow-right" aria-hidden="true"></i>
+        <b>Exam ends at:</b>{{ expiry_time }}
+      </div>
+        <div class="row" >
+          
+    <!-- <div class="col-sm-12" style="margin-bottom: 20px;font-size: 30px" >
+      Exam is starts at :<br>  {{time}}
+    </div> -->
+
+  </div>
+
+
+  {% if expiry_token %}
+  <h3>Sorry!exam is expired</h3>
+  {% elif entry_token %}
+  <div class="row" >
+    <div class="col-sm-12">
+      
+    <a href="{% url 'exam:detail' test.id %}" style="text-decoration: none">
+      <button class="button button-q" id="myBtn" style="font-family: 'Raleway'">Take the Test</button>
+    </a>      
+        
+    </div>
+  </div>
+  {% else %}
+        <!-- Display the countdown timer in an element -->
+        <div class="exam-time">
+            <p>Exam starts in </p>
+            <!-- <p id="demo"></p> -->
+            <div class="container con-clock" style="width:50%;margin:auto;">
+                <br>
+                <div class="your-clock"></div>
+            </div>
+        </div>
+  {% endif %}
+  
+
+
+  <script>
+  // var timer =10;
+  //     var clock = $('.your-clock').FlipClock(timer, {
+  //     countdown: true
+  //     });
+  </script>
+  
+        <br><br><br>
+</div>
+</div>
+
+</div>
+<br><br>
+
+<!-- exam taking javascript -->
+<script>
+  
+  //var ran = Date.parse("{{ time.isoformat }}")
+  //to get current time
+  var n =new Date().getTime();
+  
+  //getting exam-start time and end-time
+  var exam_date = new Date("{{ time.isoformat }}").getTime()
+  var expiry_time = new Date("{{ expiry_time.isoformat }}").getTime()
+  
+  var len = expiry_time - n;
+  if(len > 0){
+    setTimeout(function (){
+      location.reload();
+    },len)
+  }
+  //console.log(len)
+  var distance = exam_date - n;
+  if(distance > 0){
+    setTimeout(function (){
+      location.reload();
+    },distance)
+  }
+  //console.log(distance%1000)
+  // var x = setInterval(function() {
+  
+  //   // Get todays date and time
+  //   var now = new Date().getTime();
+  
+  
+  //   //now = now.toISOString();
+  //   var distance = exam_date - now;
+  
+  //   // Time calculations for days, hours, minutes and seconds
+  //     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+  //   document.getElementById("demo").innerHTML = days + "d " +hours + "h "
+  //   + minutes + "m " + seconds + "s ";
+  
+  //   if (distance < 1) {
+  //     clearInterval(x);
+  //     location.reload();
+  //     console.log("Expired");
+  //     //document.getElementById("demo").innerHTML = "EXPIRED";
+  //   }
+  // }, 1000);
+  if(distance > 0){
+    var clock = $('.your-clock').FlipClock(distance/1000, {
+        countdown: true
+    });
+  }
+  </script>
+</body>
+</html>

@@ -27,14 +27,14 @@
 					<H6 style="color: #f4c613">student</H6><hr style="border-color:#f4c613">
 				{% endif %}
 				<span style="color: #f4c613">Firstname</span>
-				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-				<span style="color: #f4f4f4">{{user.first_name}}</span><br><br>
+				<span style="color: #f4f4f4; margin-left:100px">{{user.first_name}}</span><br><br>
 				<span style="color: #f4c613">Lastname</span>
-				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-				<span style="color: #f4f4f4">{{user.last_name}}</span><br><br>
+				<span style="color: #f4f4f4; margin-left:100px">{{user.last_name}}</span><br><br>
 				<span style="color: #f4c613">Email</span>
-				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-				<span  style="color: #f4f4f4">{{user.email}}</span><br><br>
+				<span  style="color: #f4f4f4; margin-left:125px">{{user.email}}</span><br><br>
+				<!--<span style="color: #f4c613">age</span>
+				<span  style="color: #f4f4f4; margin-left:125px">{{age}}yrs</span><br><br>-->
+				
 				<button class='btn-general btn-profile' onclick="proedit()">EDIT PROFILE</button>
 			</div>
 
@@ -49,50 +49,21 @@
 
 			<div  class="col-sm-8" id="edit2">
 				<H4 style="color: #f4c613">UPDATE PROFILE</H4><hr style="border-color:#f4c613">
-				{% if request.user.teacher %}
 				<form method="POST" enctype="multipart/form-data">
-					{% csrf_token %}
-
-						<span style="color: #f4c613">FirstName:</span>
-						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-						{{u1_form.first_name}}<br><br>
-						<span style="color: #f4c613">LastName:</span>
-						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-						{{u1_form.last_name}}<br><br>
-						<span style="color: #f4c613">DateOfBirth:</span>
-						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-						{{p1_form.dob}}<br><br>
-						<span  style="color: #f4c613">
-						{{p1_form.photo}}<br></span>
-					<button class='btn-general btn-profile' class="reg" type="submit">Update</button><br><br>
-
-				{% endif %}
-
-					{% if request.user.student %}
-					<form method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
 						<span style="color: #f4c613">FirstName  :</span>
-						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-						{{u_form.first_name}}<br><br>
+						<span style="color: #f4f4f4; margin-left:100px">{{u_form.first_name}}</span><br><br>
 						<span style="color: #f4c613">LastName   :</span>
-						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-						{{u_form.last_name}}<br><br>
+						<span style="color: #f4f4f4; margin-left:100px">{{u_form.last_name}}</span><br><br>
 						<span style="color: #f4c613">DateOfBirth:</span>
-						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-						{{p_form.dob}}<br><br>
+						<span style="margin-left:100px"><input type="date" name="dob" id="id_dob"></span><br><br>
 						<span  style="color: #f4c613">
+                            <br>
 						{{p_form.photo}}<br></span>
+                        <br>
 					<button class='btn-general btn-profile' class="reg" type="submit">Update</button><br><br>
-
-					{% endif %}
-
 				</form>
-				{% if request.user.student %}
-				<button class='btn-general btn-profile'><a style="text-decoration: none;" href="{% url 'result:changepassword'%}">CHANGE PASSWORD</a></button>
-				{% endif %}
-				{% if request.user.teacher %}
-				<button class='btn-general btn-profile'><a style="text-decoration: none;" href="{% url 'result:changepassword'%}">CHANGE PASSWORD</a></button>
-				{% endif %}
+					<button class='btn-general btn-profile'><a style="text-decoration: none;" href="{% url 'result:changepassword'%}">CHANGE PASSWORD</a></button>
 			</div>
 		</div>
 		
@@ -100,11 +71,3 @@
 </div>
 
 {% endblock %}
-<!--
-		<div class="row" style="background:#f4c613;height:50px;border-radius: 10px">
-			<div class="col-sm-12"  >
-
-			</div>
-			
-		</div>
-		-->	

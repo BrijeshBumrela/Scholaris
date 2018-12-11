@@ -20,7 +20,7 @@ $(function(){
 
     //function for next button
     $("#next").click(function(){
-        if(get_current() != 10) {
+        if(get_current() != number) {
             $('.carousel').carousel('next');
             mrev(0);
         }
@@ -31,7 +31,7 @@ $(function(){
 
     //function for review & next
     $("#mnext").click(function(){
-        if(get_current() != 10) {
+        if(get_current() != number) {
             mrev(1);//adding class review
             $('.carousel').carousel('next');
             mrev(0);
@@ -114,7 +114,7 @@ function create(num){
 }
 
 
-
+/*
 var x = setInterval(function(){
 	timer_no--;
 
@@ -130,7 +130,7 @@ var x = setInterval(function(){
         document.getElementById("demo1").innerHTML = "EXPIRED";
     }
 },1000);
-
+*/
 
  function progress(num) {
     $(".progress-bar").css("width",''+num+'%');

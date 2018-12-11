@@ -61,77 +61,88 @@
 
 </head>
 <body>
-	    <body>
-	<nav>
-		<div class="menu">
-            {% if request.user.teacher %}
-                <ul>
-                    {% if request.user.teacher %}
-                        <li><a class="menu-item" href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
-                        <li><a href="{% url 'result:profile2' %}" class="menu-item">PROFILE</a></li>
-                        <li><a href="#" class="menu-item">FOLLOWERS</a></li>
-                        <li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>
-                        <li><a href="{% url 'result:list_all_teachers_to_follow' %}" class="menu-item">STUDENTS</a></li>
-                        <li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>
-                        <li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
-                    {% endif %}
-                </ul>
-            {% elif request.user.student %}
-                <ul>
-                    <li>Hi Student</li>
-					<li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px height=70px id="logo"></a></li>
-					<li><a href="{% url 'result:dashboard' %} class='menu-item'">DASHBOARD</a></li>
-					<li><a href="{% url 'result:profile' %}" class="menu-item">PROFILE</a></li>
-			 		<li><a href="{% url 'exam:list_all_test' %}" class="menu-item">TEST-TAKING</a></li>
-					<li><a href="{% url 'result:results' %}" class="menu-item">RESULTS</a></li>
-					<li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">Forum</a></li>
-					<li><a href="#" class="menu-item">FOLLOWING</a></li>
-					<li><a href="{% url 'result:list_all_students' %}" class="menu-item">List Students</a></li>
-					<li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>
-					<li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
-				</ul>
-            {% else %}
-                <ul>
-                    <li><a href="#" class="icn"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
-                    <li ><a href="#" class="menu-item">Home</a></li>
-                    <li><a href="#about" class="menu-item">About</a></li>
-                    <li><a href="#contact" class="menu-item">Contact</a></li>
-                    <li><a href="#about-023" class="menu-item">Discussion</a></li>
-                    <li><a href="{% url 'result:login' %}" class="menu-item">Login</a></li>
-                    <li><a href="{% url 'result:register' %}" class="menu-item">Register</a></li>
-                </ul>
 
-            {% endif %}
+<!--==============================================================
+	                   Nav Bar
+===============================================================	-->
+<nav>
+    <div class="menu">
+        {% if request.user.teacher %}
 
-		</div>
-	</nav>
-	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+            <ul>
+                {% if request.user.teacher %}
+                    <li><a class="menu-item" href="#"> <img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
+                    <li><a href="{% url 'result:profile2' %}" class="menu-item">PROFILE</a></li>
+                    <li><a href="#" class="menu-item">FOLLOWERS</a></li>
+                    <li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">FORUM</a></li>
+                    <li><a href="{% url 'result:list_all_teachers_to_follow' %}" class="menu-item">STUDENTS</a></li>
+                    <li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>
+                    <li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
+                {% endif %}
+            </ul>
+            </center>
+        {% elif request.user.student %}
+            <ul>
+                <li>Hi Student</li>
+                <li><a href="#"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" width=70px
+                                     height=70px id="logo"></a></li>
+                <li><a href="{% url 'result:dashboard' %}" class="menu-item">DASHBOARD</a></li>
+                <li><a href="{% url 'result:profile' %}" class="menu-item">PROFILE</a></li>
+                <li><a href="{% url 'exam:list_all_test' %}" class="menu-item">TEST-TAKING</a></li>
+                <li><a href="{% url 'result:results' %}" class="menu-item">RESULTS</a></li>
+                <li><a href="{% url 'forum:forum-post-list' %}" class="menu-item">Forum</a></li>
+                <li><a href="#" class="menu-item">FOLLOWING</a></li>
+                <li><a href="{% url 'result:list_all_students' %}" class="menu-item">List Students</a></li>
+                <li><a href="{% url 'result:logout' %}" class="menu-item">LOGOUT</a></li>
+                <li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
+            </ul>
+        {% else %}
+            <ul>
+                <li><a href="#" class="icn"><img src="{% static 'Result_Analysis/home_images/logo-light.png' %}" id="logo"></a></li>
+                <li><a href="#" class="menu-item">Home</a></li>
+                <li><a href="#about" class="menu-item">About</a></li>
+                <li><a href="#contact" class="menu-item">Contact</a></li>
+                <li><a href="#about-023" class="menu-item">Discussion</a></li>
+                <li><a href="{% url 'result:login' %}" class="menu-item">Login</a></li>
+                <li><a href="{% url 'result:register' %}" class="menu-item">Register</a></li>
+            </ul>
 
-		 <section id="home">
-		 	<img src="{% static 'Result_Analysis/home_images/bg.jpg' %}" id="home-bg-img">
-		 	<!--overlay-->
-		 	<div id="home-overlay"></div>
-		 	<div id="home-content">
-		 		<div id="home-content-inner" class="text-center">
-		 			<div id="home-heading">
-		 				<h1 id="home-heading-1" class="animated fadeInDown">
-		 					Scholaris
-		 				</h1>
-		 				<h1 id="home-heading-2">
-		 					<span class="txt-type" data-wait="3000" data-words='["Result analyzer", "Guide", "Test Taker"]'>&nbsp;</span>
-		 				</h1>
+        {% endif %}
 
-		 			</div>
-		 			<div id="home-text">
-		 				<p>Your classroom website for fun, effective engagement and on-the-fly assessments.</p>
+    </div>
+</nav>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
 
-		 			</div>
-		 			<div id="home-btn">
-		 				<a class="btn btn-general btn-home" href="#about" title="Start Now" role="button"> Start Now</a>
-		 			</div>
-		 		</div>
-		 	</div>	
-			</section>
+<!--==============================================================
+	                   Home
+===============================================================	-->
+
+<section id="home">
+    <img src="{% static 'Result_Analysis/home_images/bg.jpg' %}" id="home-bg-img">
+    <!--overlay-->
+    <div id="home-overlay"></div>
+    <div id="home-content">
+        <div id="home-content-inner" class="text-center">
+            <div id="home-heading">
+                <h1 id="home-heading-1" class="animated fadeInDown">
+                    Scholaris
+                </h1>
+                <h1 id="home-heading-2">
+                    <span class="txt-type" data-wait="3000" data-words='["Result analyzer", "Guide", "Test Taker"]'>&nbsp;</span>
+                </h1>
+
+            </div>
+            <div id="home-text">
+                <p>Your classroom website for fun, effective engagement and on-the-fly assessments.</p>
+
+            </div>
+            <div id="home-btn">
+                <a class="btn btn-general btn-home" href="#about" title="Start Now" role="button"> Start Now</a>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- Home ends-->
 
 
@@ -139,167 +150,193 @@
 	                   About
 ===============================================================	-->
 <section id="about">
-	<div id="about-01">
-		<div class="content-box-lg">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-					<div id="about-left">
-						<div class="vertical-heading">
-							<h5>
-								Who we are
-							</h5>
-							<h2>A <strong>Story</strong><br>About Us</h2>
-						</div>
-					</div>
-					</div>
-					<div class="col-md-6">
-						<div id="about-right">
-							<p>
-								Yet fear of losing classroom control and creating gaps in content coverage can often cause teachers to back off and resort to a didactic teacher led approach.  We’re bringing the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and analyze subject matter as part of a novice group and then teach as part of a newly formed expert group.
-							</p>
-
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div id="about-bottom">
-							<img src="{% static 'Result_Analysis/home_images/about.jpg' %}" alt="About Us" class="img-responsive">
-						</div>
-					</div>
-				</div>
-			</div>			
-		</div>
-	</div>
-
-
-<div id="about-021">
-	<div class="content-box-md">
-		<div class="container">
-			<div class="row">
-				
-				<div class="col-md-7">
-					<div class="row wow fadeIn" data-wow-duration="3s">
-					<img src="{% static 'Result_Analysis/home_images/screenshots/screen1.jpg' %}" class="scrn">
-					</div>
-			</div>
-				<div class="col-md-5">
-					<div class="row wow fadeInLeft" data-wow-duration="3s">
-					<div class="vertical-heading">
-							<h2> <strong>Test</strong> Taking</h2><br>
-						</div>
-						<div id="about-right">
-							<p>
-								Yet fear of losing classroom control and creating gaps in content coverage can often cause teachers to back off and resort to a didactic teacher led approach.  We’re bringing the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and analyze subject matter as part of a novice group and then teach as part of a newly formed expert group.
-							</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+    <div id="about-01">
+        <div class="content-box-lg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="about-left">
+                            <div class="vertical-heading">
+                                <h5>
+                                    Who we are
+                                </h5>
+                                <h2>A <strong>Story</strong><br>About Us</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="about-right">
+                            <p>
+                                We created the Scholaris Site Builder with the user's perspective in mind. We wanted to offer a platform that would require no coding skills or design experience. We keep it simple, so users can focus on creating an amazing website that reflects their brand. Best of all - it's free. You can get online, showcase your brand, or start selling products right away.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="about-bottom wrapper" class="skewed">
+                            {<img src="{% static 'Result_Analysis/home_images/about.jpg' %}" alt="About Us" class="img-responsive">}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-<div id="about-022">
-	<div class="content-box-md">
-		<div class="container">
-			<div class="row">
-				
-				<div class="col-md-5">
-					<div class="row wow fadeInRight" data-wow-duration="3s">
-					<div class="vertical-heading">
-							
-							<h2> <strong>Result</strong> Analysis</h2><br>
-						</div>
-						<div id="about-right">
-							<p>
-								Yet fear of losing classroom control and creating gaps in content coverage can often cause teachers to back off and resort to a didactic teacher led approach.  We’re bringing the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and analyze subject matter as part of a novice group and then teach as part of a newly formed expert group.
-							</p>
-						</div>
-					</div>
-				</div>
-			
-				
-					<div class="col-md-6">
-						<div class="row wow fadeIn" data-wow-duration="3s">
-						<img src="{% static 'Result_Analysis/home_images/screenshots/screen2.jpg' %}" class="scrn">
-					</div>
-					</div>
-				
-			</div>
-		</div>
-	</div>
-</div>
+<section>
+    <div id="about-021">
+        <div class="content-box-md">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-7">
+                        <div class="row wow fadeIn" data-wow-duration="3s">
+                            <img src="{% static 'Result_Analysis/home_images/screenshots/screen1.jpg' %}" class="scrn">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row wow fadeInLeft" data-wow-duration="3s">
+                            <div class="vertical-heading">
+                                <h2><strong>Test</strong> Taking</h2><br>
+                            </div>
+                            <div id="about-right">
+                                <p>
+                                   Create Tests with set Questions . Our easy-to-use Online Testing service keeps your data secure 24/7 with our high security hosting solution which includes incremental data back ups every hour.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+<section>
+    <div id="about-022">
+        <div class="content-box-md">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <div class="row wow fadeInRight" data-wow-duration="3s">
+                            <div class="vertical-heading">
+
+                                <h2><strong>Result</strong> Analysis</h2><br>
+                            </div>
+                            <div id="about-right">
+                                <p>
+                                    Optionally provide individual Question feedback and overall Test feedback instantly in real time to Test takers.Break down individual and Group performance by Test, Questions and Categories with our Quiz maker tool.
+
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="row wow fadeIn" data-wow-duration="3s">
+                            <img src="{% static 'Result_Analysis/home_images/screenshots/screen2.jpg' %}" class="scrn">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 <div id="about-023">
-	<div class="content-box-md">
-		<div class="container">
-			<div class="row">
+    <div class="content-box-md">
+        <div class="container">
+            <div class="row">
 
-				<div class="col-md-7">
-					<div class="row wow fadeIn" data-wow-duration="3s">
-					<img src="{% static 'Result_Analysis/home_images/screenshots/screen3.jpg' %}" class="scrn">
-				</div>
-				</div>	
-				<div class="col-md-5">
-					<div class="row wow fadeInLeft" data-wow-duration="3s">
-					<div class="vertical-heading">
-							
-							<h2> <strong>Discussion</strong> Forum</h2><br>
-						</div>
-						<div id="about-right">
-							<p>
-								Yet fear of losing classroom control and creating gaps in content coverage can often cause teachers to back off and resort to a didactic teacher led approach.  We’re bringing the collaboration back!<br>Let’s recruit Socrative into the mix and modernize the Jigsaw Activity. The what? In jigsaws, students research, discuss and analyze subject matter as part of a novice group and then teach as part of a newly formed expert group.
-							</p>
-				</div>
-				</div>
-			</div>
-			</div>
-		</div>
-	</div>
+                <div class="col-md-7">
+                    <div class="row wow fadeIn" data-wow-duration="3s">
+                        <img src="{% static 'Result_Analysis/home_images/screenshots/screen3.jpg' %}" class="scrn">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="row wow fadeInLeft" data-wow-duration="3s">
+                        <div class="vertical-heading">
+
+                            <h2><strong>Discussion</strong> Forum</h2><br>
+                        </div>
+                        <div id="about-right">
+                            <p>
+                                Discussion Forum in Scholaris is designed to connect students, TAs, and professors so every student can get the help they need when they need it.It warms us to think we started something that is impacting the way students learn and the way instructors teach.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </section>
 
+<!--==============================================================
+	                   Footer
+===============================================================	-->
+<section id="contact">
+    <div class="content-box-md">
+        <div class="container">
+            <div class="row">
 
-
-
-    </section>
-    <section id="contact">
-		<div class="content-box-md">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="vertical-heading">
-							<h5>
-								For Queries
-							</h5>
-							<h2><strong>Contact</strong><br>Us on</h2>
-						</div>
+                <div class="col-md-4 row wow fadeInDown" data-wow-duration="3s">
+						<center>
+							<h3>Perform 'N' Analyze</h3>
+							<p>Scholaris is a great way to know and improve. It is a great step towards helping students and teachers in conducting easy to attempt tests.</p>
+						</center>
 					</div>
-						<div id="about-right">
-							<a href="https://www.facebook.com/">
-								<div class="contact-item ">
-
-									<i class="fab fa-facebook-square"></i>
-									
-								</div>
-							</a>
-							</div>
-							<a href="https://twitter.com/login">
-								<div class="contact-item ">
-								<i class="fab fa-twitter-square"></i>
-							</div>
-						</a>
-								<a href="https://mail.google.com/mail/u/0/#inbox">
-								<div class="contact-item ">
-									<i class="fas fa-envelope-square"></i>
-								</div>
-								</a>
+					<div class="col-md-4 wow fadeInDown" data-wow-duration="3s">
+						<center>
+							<h3>Follow Us</h3>
+							<table>
+								<tr>
+									<td class="contact-item">
+										<a href="https://www.facebook.com/">
+										<i class="fab fa-facebook-square"></i>
+										</a>
+									</td>
+									<td class="contact-item">
+										<a href="https://www.facebook.com/">
+										<i class="fab fa-instagram"></i>
+									</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="contact-item">
+										<a href="https://www.facebook.com/">
+										<i class="fab fa-twitter-square"></i>
+									</a>
+									</td>
+									<td class="contact-item">
+										<a href="https://www.facebook.com/">
+										<i class="fab fa-linkedin"></i>
+									</a>
+									</td>
+								</tr>
+							</table>
+						</center>
 					</div>
-				</div>		
-		</div>
-				<script src="{% static 'Result_Analysis/home_js/main.js' %}" ></script>
-				 <!-- WOW JS -->
-    			<script src="{% static 'Result_Analysis/home_js/wow/wow.min.js' %}"></script>
+					<div class="col-md-4 row wow fadeInDown contactus" data-wow-duration="3s">
+						<center>
+							<h3>Contact Us</h3>
+							<p>
+								<br>
+								<i class="fas fa-home"></i> &nbsp &nbsp Sricity, India<br>
+								<i class="fas fa-envelope"></i> &nbsp &nbsp scholaris@gmail.com<br>
+								<i class="fas fa-phone"></i> &nbsp &nbsp +917999676585
+							</p>
+						</center>
+					</div>
+            </div>
+        </div>
+    </div>
+</section>
+    <script src="{% static 'Result_Analysis/home_js/main.js' %}"></script>
+    <!-- WOW JS -->
+    <script src="{% static 'Result_Analysis/home_js/wow/wow.min.js' %}"></script>
+>>>>>>> RA_Manasa
 </body>
 </html>
 
