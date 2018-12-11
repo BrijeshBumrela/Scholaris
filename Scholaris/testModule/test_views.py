@@ -69,7 +69,7 @@ class ListAllTest(TestCase):
         self.client.login(username='student1', password='student1234')
         response = self.client.get(reverse('exam:list_all_test'))
 
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(str(response.context['user']), 'student1')
 
         self.assertTemplateUsed(response, 'Test_Designing/test_list.html')
