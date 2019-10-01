@@ -57,6 +57,8 @@ def post_list(request):
         'courses': Course.objects.all(),
     }
 
+    print('context is',context)
+
     return render(request, 'Discussion_Forum/post_view.html', context)
 
 def question(request, id, slug):
