@@ -11,5 +11,4 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = ('created')
 
 
-admin.site.register(Post, PostAdmin)
-admin.site.register(Comment)
+admin.site.register([Post, PostAdmin,Comment])
