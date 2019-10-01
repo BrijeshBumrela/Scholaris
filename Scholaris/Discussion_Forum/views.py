@@ -114,6 +114,8 @@ def question(request, id, slug):
         'comments':comments,
         'up': up,
     }
+
+    print('context is',context)
     if request.is_ajax():
         html = render_to_string('Discussion_Forum/comments.html', context, request=request)
         return JsonResponse({'form': html})
